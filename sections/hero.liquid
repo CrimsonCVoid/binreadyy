@@ -1,0 +1,94 @@
+{%- assign product = all_products[section.settings.product] -%}
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- LEFT: Product stage -->
+      <div class="product-stage">
+        <div class="product-frame">
+          {%- if product.featured_image -%}
+            <img
+              class="product-img"
+              src="{{ product.featured_image | image_url: width: 1200 }}"
+              srcset="
+                {{ product.featured_image | image_url: width: 640 }} 640w,
+                {{ product.featured_image | image_url: width: 1200 }} 1200w
+              "
+              sizes="(max-width: 820px) 84vw, 44vw"
+              alt="{{ product.featured_image.alt | default: product.title }}"
+              width="{{ product.featured_image.width }}"
+              height="{{ product.featured_image.height }}"
+              loading="eager"
+              fetchpriority="high"
+            />
+          {%- else -%}
+            <img
+              class="product-img"
+              src="{{ 'OrangeEddy-1200.jpg' | asset_url }}"
+              srcset="{{ 'OrangeEddy-640.jpg' | asset_url }} 640w, {{ 'OrangeEddy-1200.jpg' | asset_url }} 1200w"
+              sizes="(max-width: 820px) 84vw, 44vw"
+              alt="{{ section.settings.heading | default: 'Ready Eddie' }}"
+              width="1024"
+              height="1536"
+              loading="eager"
+              fetchpriority="high"
+            />
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- RIGHT: Buy panel -->
+      <div class="buy-panel">
+        {%- if section.settings.kicker != blank -%}
+          <span class="kicker">{{ section.settings.kicker }}</span>
+        {%- endif -%}
+
+        <h1 id="hero-title">{{ section.settings.heading }}</h1>
+
+        {%- if section.settings.lede != blank -%}
+          <p class="lede">{{ section.settings.lede }}</p>
+        {%- endif -%}
+
+        {% render 'buy-button', product: product %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker (small text above heading)",
+      "default": "A small, simple gadget. A big convenience."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Know when your bin has been emptied."
+    },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Description",
+      "default": "Flip Ready Eddie up on collection day. When the truck empties your bin, gravity flips Eddie down. One glance from the house — done. No apps, no batteries, no wondering, no unnecessary trips."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

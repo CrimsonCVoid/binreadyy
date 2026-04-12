@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "help": {
+      "type": "help",
+      "settings": {
+        "kicker": "We're a tiny team",
+        "heading": "Get in touch.",
+        "subheading": "Send us a note. Chris reads every message himself."
+      }
+    }
+  },
+  "order": ["help"]
+}

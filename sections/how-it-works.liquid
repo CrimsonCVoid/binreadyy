@@ -1,0 +1,80 @@
+<section class="how" id="how" aria-labelledby="how-title">
+  <div class="container">
+    <div class="how-head">
+      <h2 id="how-title" class="reveal">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="reveal reveal-d1">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+    <div class="how-grid">
+      <div class="scene-wrap reveal" id="scene-wrap">
+        <div class="scene-label" aria-hidden="true">
+          <span class="label-full">Bin is full</span>
+          <span class="label-empty">Bin is empty</span>
+        </div>
+        <div class="scene-frame">
+          {% render 'svg-animation' %}
+        </div>
+      </div>
+
+      <ol class="how-steps">
+        {%- for block in section.blocks -%}
+          <li class="reveal{% if forloop.index > 1 %} reveal-d{{ forloop.index | minus: 1 }}{% endif %}" {{ block.shopify_attributes }}>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.description }}</p>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How it works",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Three steps. No electronics."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Mechanical. Boring. Exactly what you want it to be."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "Flip Ready Eddie up"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step description",
+          "default": "On collection day, flip Ready Eddie upright on your bin handle. Done."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How it works",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Flip Ready Eddie up", "description": "On collection day, flip Ready Eddie upright on your bin handle. Done." } },
+        { "type": "step", "settings": { "title": "The truck empties the bin", "description": "Gravity does its thing and flips Eddie down." } },
+        { "type": "step", "settings": { "title": "Glance from the house", "description": "If Eddie is down, it's done. That's it." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

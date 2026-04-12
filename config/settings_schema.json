@@ -1,0 +1,89 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Ready Eddie",
+    "theme_version": "1.0.0",
+    "theme_author": "Ready Eddie",
+    "theme_documentation_url": "",
+    "theme_support_url": "mailto:hello@readyeddieshop.com"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      },
+      {
+        "type": "text",
+        "id": "founder_name",
+        "label": "Founder name",
+        "default": "Chris Krebs"
+      },
+      {
+        "type": "text",
+        "id": "founder_role",
+        "label": "Founder title",
+        "default": "Maker, Ready Eddie"
+      }
+    ]
+  },
+  {
+    "name": "Shipping & trust",
+    "settings": [
+      {
+        "type": "text",
+        "id": "shipping_line",
+        "label": "Shipping promise",
+        "default": "Ships in 2 business days"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_note",
+        "label": "Free shipping note",
+        "default": "Free shipping on orders $40+"
+      },
+      {
+        "type": "text",
+        "id": "returns_line",
+        "label": "Returns promise",
+        "default": "30-day returns"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent color",
+        "default": "#F5612A"
+      },
+      {
+        "type": "color",
+        "id": "accent_color_deep",
+        "label": "Accent hover",
+        "default": "#D94F1E"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Page background",
+        "default": "#FAF8F2"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#1A1A17"
+      }
+    ]
+  }
+]

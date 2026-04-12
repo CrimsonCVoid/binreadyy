@@ -1,0 +1,44 @@
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand" aria-label="{{ shop.name }} home">
+      {%- if settings.logo -%}
+        <img class="brand-mark" src="{{ settings.logo | image_url: width: 360 }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" />
+      {%- else -%}
+        <img class="brand-mark" src="{{ 'Logo-240.png' | asset_url }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" />
+      {%- endif -%}
+    </a>
+    <nav class="nav" aria-label="Primary">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+      {%- if section.settings.show_buy_button -%}
+        <a href="#buy" class="btn btn-primary btn-sm">Buy &mdash; {{ all_products[section.settings.product].price | money | default: '$12' }}</a>
+      {%- endif -%}
+    </nav>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product (for Buy button price)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buy_button",
+      "label": "Show Buy button in nav",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

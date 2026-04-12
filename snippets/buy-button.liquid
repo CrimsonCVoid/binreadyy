@@ -1,0 +1,52 @@
+{%- comment -%}
+  Add-to-cart form. Requires `product` in scope.
+  Renders the pricing picker (variant radio buttons) + submit button.
+  JS in theme.js handles AJAX submission.
+{%- endcomment -%}
+
+{%- assign product = all_products[section.settings.product] | default: product -%}
+{%- if product == blank -%}
+  <p>Select a product in the theme customizer.</p>
+{%- else -%}
+  <form class="js-add-to-cart" action="/cart/add" method="post">
+    <div class="pricing-picker" role="radiogroup" aria-label="Pick your pack">
+      <span class="pricing-heading">Pick your pack</span>
+
+      {%- for variant in product.variants -%}
+        <label class="price-option">
+          <input
+            type="radio"
+            name="id"
+            value="{{ variant.id }}"
+            data-price="{{ variant.price | money }}"
+            {% if forloop.first %}checked{% endif %}
+          />
+          <div class="po-top">
+            <span class="po-name">{{ variant.title }}</span>
+            {%- if variant.compare_at_price > variant.price -%}
+              <span class="po-save">Save {{ variant.compare_at_price | minus: variant.price | money }}</span>
+            {%- elsif forloop.first and product.variants.size > 1 -%}
+              <span class="po-save">Save $4</span>
+            {%- endif -%}
+          </div>
+          <div class="po-price">{{ variant.price | money }}</div>
+          {%- if variant.metafields.custom.short_description -%}
+            <div class="po-desc">{{ variant.metafields.custom.short_description }}</div>
+          {%- elsif forloop.first -%}
+            <div class="po-desc">One for trash, one for recycling.</div>
+          {%- else -%}
+            <div class="po-desc">Just the one.</div>
+          {%- endif -%}
+        </label>
+      {%- endfor -%}
+    </div>
+
+    <input type="hidden" name="id" class="js-variant-id" value="{{ product.selected_or_first_available_variant.id }}" />
+
+    <button type="submit" class="btn btn-primary btn-buy">
+      {{ 'general.add_to_cart' | t }} &mdash; <span class="buy-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+    </button>
+  </form>
+
+  {% render 'reassure-list' %}
+{%- endif -%}

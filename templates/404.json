@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "hero",
+      "settings": {
+        "kicker": "Page not found",
+        "heading": "This page doesn't exist.",
+        "lede": "Maybe the truck already emptied it. Head back to the homepage and take another look."
+      }
+    }
+  },
+  "order": ["main"]
+}

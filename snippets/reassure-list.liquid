@@ -1,0 +1,18 @@
+{%- comment -%}
+  Reassurance list: ships / free shipping threshold / returns.
+  Pulls from theme settings. Used in hero + final-buy sections.
+{%- endcomment -%}
+<ul class="reassure">
+  <li>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7.5l3 3 5-6" stroke="{{ settings.accent_color }}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    {{ settings.shipping_line }}
+  </li>
+  <li>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7.5l3 3 5-6" stroke="{{ settings.accent_color }}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    {{ settings.free_shipping_note }}
+  </li>
+  <li>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7.5l3 3 5-6" stroke="{{ settings.accent_color }}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    {{ settings.returns_line }}
+  </li>
+</ul>

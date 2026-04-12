@@ -1,0 +1,58 @@
+<section class="story" id="story">
+  <div class="container">
+    <details>
+      <summary class="story-toggle">
+        {%- if section.settings.kicker != blank -%}
+          <span class="kicker">{{ section.settings.kicker }}</span>
+        {%- endif -%}
+        <span class="story-toggle-hint">{{ section.settings.toggle_label }}</span>
+      </summary>
+      <div class="story-body">
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {{ section.settings.story_text }}
+        <div class="story-sig">
+          &mdash;&nbsp;&nbsp;<strong>{{ settings.founder_name }}</strong>&nbsp;&nbsp;{{ settings.founder_role }}
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Our story",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Made by one guy · in a garage · in North Carolina"
+    },
+    {
+      "type": "text",
+      "id": "toggle_label",
+      "label": "Toggle label",
+      "default": "Read our story"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Story heading",
+      "default": "Born on a muggy afternoon, at the end of a long driveway."
+    },
+    {
+      "type": "richtext",
+      "id": "story_text",
+      "label": "Story body",
+      "default": "<p>Ready Eddie was built in a garage by <strong>Chris Krebs</strong> — a criminologist who lives in North Carolina with his wife, his kids, and a small menagerie of animals. Solving problems is his job. It's also his hobby.</p><p>One hot, muggy day, Chris walked all the way down his driveway to check the bin. Still full. That flicker of annoyance became an idea. He thought about his older neighbors. Families with long driveways snaking through the woods. Surely other people hated not knowing, too. This was a problem worth solving.</p><p>Back in the garage, the first prototype was born — a Frankenstein's monster of scrap metal, screws, and wire. Ugly enough to be beautiful. When he tested it the next morning, it worked flawlessly.</p><p>Energized, Chris taught himself CAD and started sending designs to a friend with a 3D printer. The new models looked right but failed in practice — breaking, falling off, working only half the time. The garage became a graveyard of failed attempts. Each one taught him something. After countless late nights and design overhauls, a version emerged that was simple, durable, and reliable. That's the Ready Eddie you see now.</p><p>Born from a sweltering afternoon and the stubborn belief that there's almost always a better, easier way.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our story"
+    }
+  ]
+}
+{% endschema %}

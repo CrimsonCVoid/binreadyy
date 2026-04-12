@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ page_title }}{% unless page_title contains shop.name %} — {{ shop.name }}{% endunless %}</title>
+  {% if page_description %}<meta name="description" content="{{ page_description | escape }}" />{% endif %}
+  <meta name="theme-color" content="{{ settings.background_color | default: '#FAF8F2' }}" />
+
+  {% if settings.favicon %}
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | image_url: width: 32 }}" />
+    <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}" />
+  {% else %}
+    <link rel="icon" type="image/png" sizes="64x64" href="{{ 'WebsiteLogo-64.png' | asset_url }}" />
+    <link rel="apple-touch-icon" href="{{ 'WebsiteLogo-128.png' | asset_url }}" />
+  {% endif %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  {{ content_for_header }}
+</head>
+<body>
+
+  {% section 'header' %}
+
+  <main>
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

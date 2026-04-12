@@ -1,0 +1,12 @@
+{
+  "general": {
+    "add_to_cart": "Add to cart",
+    "adding": "Adding\u2026",
+    "added": "Added \u2713",
+    "error": "Error \u2014 try again",
+    "send_message": "Send message"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  }
+}

@@ -1,0 +1,100 @@
+<section class="help" id="help" aria-labelledby="help-title">
+  <div class="container">
+    <div class="help-head">
+      {%- if section.settings.kicker != blank -%}
+        <span class="kicker reveal">{{ section.settings.kicker }}</span>
+      {%- endif -%}
+      <h2 id="help-title" class="reveal reveal-d1">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="reveal reveal-d2">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+    <div class="help-grid">
+      <div class="help-col reveal">
+        <h3>{{ section.settings.policy_title }}</h3>
+        <div>{{ section.settings.policy_text }}</div>
+      </div>
+      <div class="help-col reveal reveal-d1">
+        <h3>{{ section.settings.contact_title }}</h3>
+        {%- form 'contact', id: 'contact-form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="contact-status is-shown" role="status">
+              Thanks! We got your message. {{ settings.founder_name }} will get back to you within one business day.
+            </div>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <div class="contact-status is-shown" role="alert">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+
+          <div class="contact-form">
+            <label>
+              Your name
+              <input type="text" name="contact[name]" autocomplete="name" required maxlength="80" value="{{ form.name }}" />
+            </label>
+            <label>
+              Your email
+              <input type="email" name="contact[email]" autocomplete="email" required maxlength="120" value="{{ form.email }}" />
+            </label>
+            <label>
+              What's on your mind?
+              <textarea name="contact[body]" required maxlength="1500">{{ form.body }}</textarea>
+            </label>
+            <button type="submit" class="btn btn-primary">{{ 'general.send_message' | t }}</button>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Help & contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "We're a tiny team"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Questions, returns, or anything else."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Send us a note. Chris reads every message himself."
+    },
+    {
+      "type": "text",
+      "id": "policy_title",
+      "label": "Policy title",
+      "default": "Return policy"
+    },
+    {
+      "type": "richtext",
+      "id": "policy_text",
+      "label": "Policy text",
+      "default": "<p>We stand behind every purchase. We think you'll love Ready Eddie, but if you don't, items may be returned within <strong>30 days of delivery</strong> in original condition with all packaging. Refunds are processed within 5–7 business days of receipt.</p><p>Return shipping costs are your responsibility. To initiate a return or ask questions, please contact us at <a href=\"mailto:returns@readyeddieshop.com\">returns@readyeddieshop.com</a>.</p>"
+    },
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Contact title",
+      "default": "Contact us"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Help & contact"
+    }
+  ]
+}
+{% endschema %}

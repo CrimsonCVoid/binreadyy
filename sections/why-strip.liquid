@@ -1,0 +1,41 @@
+<div class="why-strip" role="region" aria-label="Benefits">
+  <div class="container">
+    {%- for block in section.blocks -%}
+      <span class="why-item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Benefits strip",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Benefit text",
+          "default": "No batteries"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits strip",
+      "blocks": [
+        { "type": "benefit", "settings": { "text": "No batteries" } },
+        { "type": "benefit", "settings": { "text": "No app" } },
+        { "type": "benefit", "settings": { "text": "No WiFi" } },
+        { "type": "benefit", "settings": { "text": "No wondering" } },
+        { "type": "benefit", "settings": { "text": "Installs in seconds" } },
+        { "type": "benefit", "settings": { "text": "Weatherproof" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

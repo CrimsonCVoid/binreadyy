@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "why-strip": {
+      "type": "why-strip",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "text": "No batteries" } },
+        "b2": { "type": "benefit", "settings": { "text": "No app" } },
+        "b3": { "type": "benefit", "settings": { "text": "Weatherproof" } }
+      },
+      "block_order": ["b1", "b2", "b3"]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "heading": "Questions?",
+        "subheading": ""
+      },
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "Will it fit my bin?", "answer": "Yes. Eddie clips onto the molded pull-handle found on virtually every standard curbside trash and recycling bin in the U.S." } },
+        "q2": { "type": "faq", "settings": { "question": "What if I don't love it?", "answer": "Send it back within 30 days for a full refund. No questions, no restocking fee, no hoops." } }
+      },
+      "block_order": ["q1", "q2"]
+    }
+  },
+  "order": ["hero", "why-strip", "faq"]
+}

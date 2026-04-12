@@ -1,0 +1,92 @@
+<section class="testimonials" id="reviews" aria-labelledby="testimonials-title">
+  <div class="container">
+    <div class="testimonial-head">
+      {%- if section.settings.kicker != blank -%}
+        <span class="kicker reveal">{{ section.settings.kicker }}</span>
+      {%- endif -%}
+      <h2 id="testimonials-title" class="reveal reveal-d1">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="reveal reveal-d2">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+    <div class="testimonial-grid">
+      {%- for block in section.blocks -%}
+        <blockquote class="{% if block.settings.featured %}feature {% endif %}reveal{% if forloop.index > 1 %} reveal-d{{ forloop.index | minus: 1 | at_most: 4 }}{% endif %}" {{ block.shopify_attributes }}>
+          <p>{{ block.settings.quote }}</p>
+          <cite>{{ block.settings.name }} <span>&middot;</span> {{ block.settings.location }}</cite>
+        </blockquote>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Real quotes · names changed"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "From the people who actually use it."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "These are real words from real customers. We swapped the names for privacy."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Customer"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "NC"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Make this the featured (large) quote",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "testimonial", "settings": { "quote": "The best surprise? It's great for the kids. They actually remember their chores — they come home, see the little guy is down, and can't make excuses anymore.", "name": "Marcus B.", "location": "Greensboro, NC", "featured": true } },
+        { "type": "testimonial", "settings": { "quote": "I didn't think it'd be that useful, honestly. But now I really appreciate being able to glance from the house to see if trash or recycling has been picked up.", "name": "Sarah M.", "location": "Raleigh, NC", "featured": false } },
+        { "type": "testimonial", "settings": { "quote": "Quality product — easy to use and really functional. I can see it from our second-story window, and since our trash and recycling trucks come at different times, I'd normally have no idea. Saves a walk in the rain.", "name": "Mike T.", "location": "Asheville, NC", "featured": false } },
+        { "type": "testimonial", "settings": { "quote": "So convenient to just look outside and know if the truck came. And our daughters have loved setting up the little guy each week when we put the can at the curb.", "name": "Amanda R.", "location": "Chapel Hill, NC", "featured": false } },
+        { "type": "testimonial", "settings": { "quote": "Really helpful — prevents an unnecessary trip down the driveway. I could see it being a lifesaver for anyone with mobility issues, or during a summer heat wave.", "name": "David K.", "location": "Charlotte, NC", "featured": false } },
+        { "type": "testimonial", "settings": { "quote": "With our long driveway this thing is a lifesaver. I'm planning to get one for my mom — she's older and it'd be perfect for her.", "name": "Jen P.", "location": "Wilmington, NC", "featured": false } },
+        { "type": "testimonial", "settings": { "quote": "It's like having a flag on the mailbox.", "name": "Tom H.", "location": "Durham, NC", "featured": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}

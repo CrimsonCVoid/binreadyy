@@ -1,0 +1,46 @@
+{%- assign product = all_products[section.settings.product] -%}
+
+<section class="final-buy" id="buy" aria-labelledby="final-title">
+  <div class="container">
+    <h2 id="final-title" class="reveal">{{ section.settings.heading }}</h2>
+    {%- if section.settings.subheading != blank -%}
+      <p class="sub reveal reveal-d1">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    {%- if product -%}
+      <div class="reveal reveal-d2">
+        {% render 'buy-button', product: product %}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Final buy",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Stop wondering."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Pick a pack, be done with trash day forever."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Final buy"
+    }
+  ]
+}
+{% endschema %}
