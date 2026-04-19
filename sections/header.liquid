@@ -8,9 +8,9 @@
       {%- endif -%}
     </a>
     <nav class="nav" aria-label="Primary">
-      {%- for link in section.settings.menu.links -%}
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      {%- endfor -%}
+      <a href="#how">How it works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
       {%- if section.settings.show_buy_button -%}
         <a href="#buy" class="btn btn-primary btn-sm">Buy &mdash; {{ all_products[section.settings.product].price | money | default: '$12' }}</a>
       {%- endif -%}
@@ -22,12 +22,6 @@
 {
   "name": "Header",
   "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "Navigation menu",
-      "default": "main-menu"
-    },
     {
       "type": "product",
       "id": "product",
