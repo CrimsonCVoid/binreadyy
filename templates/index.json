@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -11,59 +20,212 @@
     "why-strip": {
       "type": "why-strip",
       "blocks": {
-        "b1": { "type": "benefit", "settings": { "text": "No batteries" } },
-        "b2": { "type": "benefit", "settings": { "text": "No app" } },
-        "b3": { "type": "benefit", "settings": { "text": "No WiFi" } },
-        "b4": { "type": "benefit", "settings": { "text": "No wondering" } },
-        "b5": { "type": "benefit", "settings": { "text": "Installs in seconds" } },
-        "b6": { "type": "benefit", "settings": { "text": "Weatherproof" } }
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "text": "No batteries"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "text": "No app"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "text": "No WiFi"
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "text": "No wondering"
+          }
+        },
+        "b5": {
+          "type": "benefit",
+          "settings": {
+            "text": "Installs in seconds"
+          }
+        },
+        "b6": {
+          "type": "benefit",
+          "settings": {
+            "text": "Weatherproof"
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"]
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ],
+      "settings": {}
     },
     "how-it-works": {
       "type": "how-it-works",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Flip Ready Eddie up",
+            "description": "On collection day, flip Ready Eddie upright on your bin handle. Done."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "The truck empties the bin",
+            "description": "Gravity does its thing and flips Eddie down."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Glance from the house",
+            "description": "If Eddie is down, it's done. That's it."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
       "settings": {
         "heading": "Three steps. No electronics.",
         "subheading": "Mechanical. Boring. Exactly what you want it to be."
-      },
-      "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Flip Ready Eddie up", "description": "On collection day, flip Ready Eddie upright on your bin handle. Done." } },
-        "s2": { "type": "step", "settings": { "title": "The truck empties the bin", "description": "Gravity does its thing and flips Eddie down." } },
-        "s3": { "type": "step", "settings": { "title": "Glance from the house", "description": "If Eddie is down, it's done. That's it." } }
-      },
-      "block_order": ["s1", "s2", "s3"]
+      }
     },
     "testimonials": {
       "type": "testimonials",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The best surprise? It's great for the kids. They actually remember their chores — they come home, see the little guy is down, and can't make excuses anymore.",
+            "name": "Marcus B.",
+            "location": "Greensboro, NC",
+            "featured": true
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I didn't think it'd be that useful, honestly. But now I really appreciate being able to glance from the house to see if trash or recycling has been picked up.",
+            "name": "Sarah M.",
+            "location": "Raleigh, NC",
+            "featured": false
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Quality product — easy to use and really functional. I can see it from our second-story window, and since our trash and recycling trucks come at different times, I'd normally have no idea. Saves a walk in the rain.",
+            "name": "Mike T.",
+            "location": "Asheville, NC",
+            "featured": false
+          }
+        },
+        "t4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "So convenient to just look outside and know if the truck came. And our daughters have loved setting up the little guy each week when we put the can at the curb.",
+            "name": "Amanda R.",
+            "location": "Chapel Hill, NC",
+            "featured": false
+          }
+        },
+        "t5": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Really helpful — prevents an unnecessary trip down the driveway. I could see it being a lifesaver for anyone with mobility issues, or during a summer heat wave.",
+            "name": "David K.",
+            "location": "Charlotte, NC",
+            "featured": false
+          }
+        },
+        "t6": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "With our long driveway this thing is a lifesaver. I'm planning to get one for my mom — she's older and it'd be perfect for her.",
+            "name": "Jen P.",
+            "location": "Wilmington, NC",
+            "featured": false
+          }
+        },
+        "t7": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "It's like having a flag on the mailbox.",
+            "name": "Tom H.",
+            "location": "Durham, NC",
+            "featured": false
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6",
+        "t7"
+      ],
       "settings": {
         "kicker": "Real quotes · names changed",
         "heading": "From the people who actually use it.",
         "subheading": "These are real words from real customers. We swapped the names for privacy."
-      },
-      "blocks": {
-        "t1": { "type": "testimonial", "settings": { "quote": "The best surprise? It's great for the kids. They actually remember their chores — they come home, see the little guy is down, and can't make excuses anymore.", "name": "Marcus B.", "location": "Greensboro, NC", "featured": true } },
-        "t2": { "type": "testimonial", "settings": { "quote": "I didn't think it'd be that useful, honestly. But now I really appreciate being able to glance from the house to see if trash or recycling has been picked up.", "name": "Sarah M.", "location": "Raleigh, NC", "featured": false } },
-        "t3": { "type": "testimonial", "settings": { "quote": "Quality product — easy to use and really functional. I can see it from our second-story window, and since our trash and recycling trucks come at different times, I'd normally have no idea. Saves a walk in the rain.", "name": "Mike T.", "location": "Asheville, NC", "featured": false } },
-        "t4": { "type": "testimonial", "settings": { "quote": "So convenient to just look outside and know if the truck came. And our daughters have loved setting up the little guy each week when we put the can at the curb.", "name": "Amanda R.", "location": "Chapel Hill, NC", "featured": false } },
-        "t5": { "type": "testimonial", "settings": { "quote": "Really helpful — prevents an unnecessary trip down the driveway. I could see it being a lifesaver for anyone with mobility issues, or during a summer heat wave.", "name": "David K.", "location": "Charlotte, NC", "featured": false } },
-        "t6": { "type": "testimonial", "settings": { "quote": "With our long driveway this thing is a lifesaver. I'm planning to get one for my mom — she's older and it'd be perfect for her.", "name": "Jen P.", "location": "Wilmington, NC", "featured": false } },
-        "t7": { "type": "testimonial", "settings": { "quote": "It's like having a flag on the mailbox.", "name": "Tom H.", "location": "Durham, NC", "featured": false } }
-      },
-      "block_order": ["t1", "t2", "t3", "t4", "t5", "t6", "t7"]
+      }
     },
     "faq": {
       "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "Will it fit my bin?",
+            "answer": "Yes. Eddie clips onto the molded pull-handle found on virtually every standard curbside trash and recycling bin in the U.S."
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "What if it's windy or rainy?",
+            "answer": "Weighted to stay put in normal weather. Built to handle rain, snow, sun, and heat year-round. No electronics to fry."
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "Does the garbage truck have to do anything different?",
+            "answer": "Nope. The natural motion of your bin being lifted and emptied flips Ready Eddie down on its own. The driver might not even notice, but Ready Eddie can also tell the driver that your bin needs emptying, reducing the likelihood that they miss your bin."
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I don't love it?",
+            "answer": "Send it back within 30 days for a full refund. No questions, no restocking fee, no hoops."
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
       "settings": {
         "heading": "Questions?",
         "subheading": "The short ones first. Email us if you want the long ones."
-      },
-      "blocks": {
-        "q1": { "type": "faq", "settings": { "question": "Will it fit my bin?", "answer": "Yes. Eddie clips onto the molded pull-handle found on virtually every standard curbside trash and recycling bin in the U.S." } },
-        "q2": { "type": "faq", "settings": { "question": "What if it's windy or rainy?", "answer": "Weighted to stay put in normal weather. Built to handle rain, snow, sun, and heat year-round. No electronics to fry." } },
-        "q3": { "type": "faq", "settings": { "question": "Does the garbage truck have to do anything different?", "answer": "Nope. The natural motion of your bin being lifted and emptied flips Ready Eddie down on its own. The driver might not even notice, but Ready Eddie can also tell the driver that your bin needs emptying, reducing the likelihood that they miss your bin." } },
-        "q4": { "type": "faq", "settings": { "question": "What if I don't love it?", "answer": "Send it back within 30 days for a full refund. No questions, no restocking fee, no hoops." } }
-      },
-      "block_order": ["q1", "q2", "q3", "q4"]
+      }
     },
     "final-buy": {
       "type": "final-buy",
