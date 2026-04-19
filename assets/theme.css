@@ -25,7 +25,9 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 88px; }
+    :target, .how, .testimonials, .faq, .final-buy, .help, .story { scroll-margin-top: 88px; }
+    @media (max-width: 720px) { html { scroll-padding-top: 72px; } .how, .testimonials, .faq, .final-buy, .help, .story { scroll-margin-top: 72px; } }
     body {
       margin: 0;
       font-family: var(--font-sans);
@@ -439,6 +441,11 @@
     }
     .reassure li { display: inline-flex; align-items: center; gap: 6px; }
     .reassure svg { flex-shrink: 0; }
+    .reassure-patent, .story-patent, .footer-patent {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      margin-top: 10px;
+    }
 
     /* Mobile hero */
     @media (max-width: 820px) {

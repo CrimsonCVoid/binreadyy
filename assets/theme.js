@@ -18,6 +18,80 @@
     onScroll();
   }
 
+  /* ─── Smooth tweened scroll for hash links (nav + in-page anchors) ─── */
+  function headerOffset() {
+    return header ? header.getBoundingClientRect().height + 8 : 88;
+  }
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+  function tweenScrollTo(targetY, duration) {
+    var startY = window.pageYOffset || document.documentElement.scrollTop;
+    var delta = targetY - startY;
+    if (Math.abs(delta) < 2) { window.scrollTo(0, targetY); return; }
+    var start = performance.now();
+    var cancelled = false;
+    function cancel() { cancelled = true; cleanup(); }
+    function cleanup() {
+      window.removeEventListener('wheel', cancel, { passive: true });
+      window.removeEventListener('touchstart', cancel, { passive: true });
+      window.removeEventListener('keydown', cancel);
+    }
+    window.addEventListener('wheel', cancel, { passive: true });
+    window.addEventListener('touchstart', cancel, { passive: true });
+    window.addEventListener('keydown', cancel);
+    function tick(now) {
+      if (cancelled) return;
+      var t = Math.min((now - start) / duration, 1);
+      window.scrollTo(0, startY + delta * easeInOutCubic(t));
+      if (t < 1) requestAnimationFrame(tick);
+      else cleanup();
+    }
+    requestAnimationFrame(tick);
+  }
+  function resolveHashTarget(href) {
+    if (!href) return null;
+    var hashIdx = href.indexOf('#');
+    if (hashIdx === -1) return null;
+    var hash = href.slice(hashIdx + 1);
+    if (!hash) return null;
+    var pathOnly = href.slice(0, hashIdx);
+    if (pathOnly && pathOnly !== location.pathname && pathOnly !== location.pathname + location.search) {
+      try {
+        var url = new URL(href, location.href);
+        if (url.pathname !== location.pathname) return null;
+      } catch (e) { return null; }
+    }
+    try { return document.getElementById(hash) || document.querySelector('#' + CSS.escape(hash)); }
+    catch (e) { return document.getElementById(hash); }
+  }
+  document.addEventListener('click', function (ev) {
+    if (ev.defaultPrevented || ev.button !== 0 || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+    var a = ev.target.closest && ev.target.closest('a[href]');
+    if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+    var target = resolveHashTarget(a.getAttribute('href'));
+    if (!target) return;
+    ev.preventDefault();
+    var y = target.getBoundingClientRect().top + window.pageYOffset - headerOffset();
+    var maxY = document.documentElement.scrollHeight - window.innerHeight;
+    y = Math.max(0, Math.min(y, maxY));
+    if (prefersReduced) { window.scrollTo(0, y); }
+    else { tweenScrollTo(y, 700); }
+    if (history.replaceState) history.replaceState(null, '', '#' + target.id);
+    if (target.tabIndex < 0) target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+  });
+
+  /* Honor initial hash on page load with header offset */
+  if (location.hash && location.hash.length > 1) {
+    window.addEventListener('load', function () {
+      var target = document.getElementById(location.hash.slice(1));
+      if (!target) return;
+      var y = target.getBoundingClientRect().top + window.pageYOffset - headerOffset();
+      window.scrollTo(0, Math.max(0, y));
+    });
+  }
+
   /* ─── Reveal-on-scroll ─── */
   if (!prefersReduced && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
