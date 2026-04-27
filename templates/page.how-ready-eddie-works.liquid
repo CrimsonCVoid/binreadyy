@@ -253,6 +253,21 @@ img { max-width: 100%; display: block; }
   transition: transform 0.4s ease;
 }
 
+.demo-controls { display: block; }
+
+@media (min-width: 640px) {
+  .demo .wrap {
+    max-width: 880px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .demo-stage { margin-bottom: 0; aspect-ratio: 4/5; }
+  .demo-controls { display: flex; flex-direction: column; gap: 14px; }
+  .demo-controls .demo-caption { text-align: left; margin-top: 0; }
+}
+
 .demo-caption {
   margin-top: 18px;
   text-align: center;
@@ -556,11 +571,13 @@ footer .small {
         <span class="text-up">Bin not emptied</span>
       </div>
     </div>
-    <button class="demo-button" id="toggle" type="button">
-      <span class="arrow">&darr;</span>
-      <span class="label">Tap to send the truck</span>
-    </button>
-    <p class="demo-caption">Tap a few times. That&rsquo;s the whole interaction in real life.</p>
+    <div class="demo-controls">
+      <button class="demo-button" id="toggle" type="button">
+        <span class="arrow">&darr;</span>
+        <span class="label">Tap to send the truck</span>
+      </button>
+      <p class="demo-caption">Tap a few times. That&rsquo;s the whole interaction in real life.</p>
+    </div>
   </div>
 </section>
 
