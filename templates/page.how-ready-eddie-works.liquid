@@ -551,8 +551,8 @@ footer .small {
 <section class="demo">
   <div class="wrap">
     <div class="demo-stage" id="stage" data-state="down">
-      <img src="{{ 'cuff-attached.jpeg' | asset_url }}" alt="Eddie hanging in the down position on a green bin" class="down" loading="eager" />
-      <img src="{{ 'eddie-flipped-up.jpeg' | asset_url }}" alt="Eddie flipped up with arm raised after pickup" class="up" loading="eager" />
+      <img src="{{ 'EddyFlippedDown.jpeg' | asset_url }}" alt="Eddie hanging in the down position on a green bin" class="down" loading="eager" />
+      <img src="{{ 'EddyFlippedUp.jpeg' | asset_url }}" alt="Eddie flipped up with arm raised after pickup" class="up" loading="eager" />
       <div class="demo-state-label">
         <span class="dot"></span>
         <span class="text-down">Bin not emptied</span>
@@ -610,7 +610,7 @@ footer .small {
   <div class="wrap">
     <div class="mech-card">
       <div class="photo">
-        <img src="{{ 'cuff-installed-empty.jpeg' | asset_url }}" alt="Close-up of the orange cuff seated on the hinge bar" loading="lazy" />
+        <img src="{{ 'cuff-attached.jpeg' | asset_url }}" alt="Close-up of the orange cuff seated on the hinge bar" loading="lazy" />
       </div>
       <div class="body">
         <div class="eyebrow">What&rsquo;s actually inside</div>
@@ -626,11 +626,11 @@ footer .small {
 <section class="bins">
   <div class="bins-inner">
     <div class="eyebrow">Pick the right cuff</div>
-    <h2 class="display">Two flavors of bin.</h2>
-    <p class="lead">Look at your bin from the side and match it. The pack ships with both cuffs so you don&rsquo;t have to guess at the store.</p>
+    <h2 class="display">Match your bin.</h2>
+    <p class="lead">Look at your bin from the side. The pack ships with the right cuff so you don&rsquo;t have to guess at the store.</p>
 
     <div class="bin a">
-      <div class="photo"><img src="{{ 'bin-a-lid-raised.jpeg' | asset_url }}" alt="Bin A side profile, lid sits higher than the handle" loading="lazy" /></div>
+      <div class="photo"><img src="{{ 'RaisedBin.jpeg' | asset_url }}" alt="Bin A side profile, lid sits higher than the handle" loading="lazy" /></div>
       <div class="body">
         <span class="tag">BIN A</span>
         <h3>Lid sits higher than the handle</h3>
@@ -638,6 +638,10 @@ footer .small {
         <div class="pick"><span class="cuff-swatch gray"></span> Use the gray cuff</div>
       </div>
     </div>
+
+    {%- comment -%}
+      BIN B card hidden until a flush-lid bin profile photo is available.
+      Restore this block and add assets/bin-b-lid-level.jpeg to bring it back.
 
     <div class="bin b">
       <div class="photo"><img src="{{ 'bin-b-lid-level.jpeg' | asset_url }}" alt="Bin B side profile, lid sits flush with the handle" loading="lazy" /></div>
@@ -648,6 +652,7 @@ footer .small {
         <div class="pick"><span class="cuff-swatch black"></span> Use the black cuff</div>
       </div>
     </div>
+    {%- endcomment -%}
   </div>
 </section>
 
