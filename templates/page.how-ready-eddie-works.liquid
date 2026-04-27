@@ -206,11 +206,11 @@ img { max-width: 100%; display: block; }
   background: var(--ink-soft);
   border-radius: 50%;
 }
-.demo-stage[data-state="up"] .demo-state-label {
+.demo-stage[data-state="down"] .demo-state-label {
   background: var(--orange);
   color: var(--cream);
 }
-.demo-stage[data-state="up"] .demo-state-label .dot {
+.demo-stage[data-state="down"] .demo-state-label .dot {
   background: var(--cream);
   box-shadow: 0 0 0 0 rgba(251,241,222, 0.7);
   animation: pulse 1.6s infinite;
@@ -251,9 +251,6 @@ img { max-width: 100%; display: block; }
 .demo-button .arrow {
   display: inline-block;
   transition: transform 0.4s ease;
-}
-.demo-stage[data-state="up"] ~ .demo-button .arrow {
-  transform: rotate(180deg);
 }
 
 .demo-caption {
@@ -543,14 +540,14 @@ footer .small {
     <h1 class="display">
       It&rsquo;s a <span class="accent">trash-day</span> <span class="it">signal.</span>
     </h1>
-    <p>Eddie clips onto the hinge of your bin. When the truck flips your bin to dump it, Eddie flips up. You can see him from the porch. That&rsquo;s the whole product.</p>
+    <p>Eddie clips onto the hinge of your bin. You flip him up before pickup; the truck flips him flat when it empties the bin. A glance from the porch tells you which is which.</p>
   </div>
 </section>
 
 <!-- INTERACTIVE DEMO -->
 <section class="demo">
   <div class="wrap">
-    <div class="demo-stage" id="stage" data-state="down">
+    <div class="demo-stage" id="stage" data-state="up">
       <img src="{{ 'EddyFlippedDown.jpeg' | asset_url }}" alt="Eddie hanging in the down position on a green bin" class="down" loading="eager" />
       <img src="{{ 'EddyFlippedUp.jpeg' | asset_url }}" alt="Eddie flipped up with arm raised after pickup" class="up" loading="eager" />
       <div class="demo-state-label">
@@ -616,7 +613,7 @@ footer .small {
         <div class="eyebrow">What&rsquo;s actually inside</div>
         <h3>A cuff. A pivot. A stop.</h3>
         <p>The cuff snaps onto the hinge bar of the bin and grips with a foam insert. Eddie&rsquo;s foot ring slips around the cuff and rotates freely.</p>
-        <p>When the lid hits a steep enough angle during pickup, Eddie passes over the pivot point and falls into the up position. A small ledge on the cuff catches him there. No springs. No magnets. Nothing to wear out.</p>
+        <p>When the lid hits a steep enough angle during pickup, Eddie passes over the pivot point and falls flat on top of the lid. A small ledge on the cuff catches him there. No springs. No magnets. Nothing to wear out.</p>
       </div>
     </div>
   </div>
@@ -686,12 +683,12 @@ footer .small {
       var current = stage.getAttribute('data-state');
       if (current === 'down') {
         stage.setAttribute('data-state', 'up');
-        label.textContent = 'Tap to put it back';
-        arrow.innerHTML = '&uarr;';
-      } else {
-        stage.setAttribute('data-state', 'down');
         label.textContent = 'Tap to send the truck';
         arrow.innerHTML = '&darr;';
+      } else {
+        stage.setAttribute('data-state', 'down');
+        label.textContent = 'Tap to put it back';
+        arrow.innerHTML = '&uarr;';
       }
     });
   })();
