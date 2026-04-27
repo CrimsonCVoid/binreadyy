@@ -582,7 +582,7 @@
     }
 
     /* Hero SVG animation styles */
-    #dump-group { transform-origin: 20px 200px; will-change: transform; }
+    #dump-group { transform-origin: 20px 200px; will-change: transform; transform: scale(0.82); }
     #bin-lid    { transform-origin: 86px 190px; will-change: transform; }
     #bin-flag   { transform-origin: 67px 200px; will-change: transform; }
     #indicator-text-up, #indicator-check { transition: opacity 0.5s var(--ease); }

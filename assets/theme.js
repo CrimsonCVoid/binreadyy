@@ -204,10 +204,11 @@
     var FLAG_RISE_DURATION    = 300;
     var LOOP_PAUSE            = 2500;
 
-    var DUMP_ANGLE       = -110;
-    var LID_OPEN_ANGLE   = -80;
+    var DUMP_ANGLE       = -130;
+    var LID_OPEN_ANGLE   = -170;
     var FLAG_HANG_ANGLE  = -70;
     var FLAG_DOWN_ANGLE  = -180;
+    var BIN_SCALE        = 0.82;
 
     var loopTimeout = null;
 
@@ -223,7 +224,7 @@
     function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
 
     function setDumpGroup(angle) {
-      dumpGroup.style.transform = 'rotate(' + angle + 'deg)';
+      dumpGroup.style.transform = 'rotate(' + angle + 'deg) scale(' + BIN_SCALE + ')';
       if (binShadow) {
         var progress = Math.abs(angle / DUMP_ANGLE);
         binShadow.setAttribute('rx', String(95 - 50 * progress));
