@@ -1,0 +1,698 @@
+{% layout 'none' %}
+{%- comment -%}
+  Ready Eddie - How It Works
+  --------------------------
+  Standalone Shopify page template. Reached via QR code on
+  in-store packaging or shelf signage. Single page, scannable, with one
+  interactive moment that demonstrates what the product does.
+
+  Setup
+  -----
+  1. Place this file at: templates/page.how-ready-eddie-works.liquid
+  2. Place these images in your theme's /assets folder (already named):
+       cuff-attached.jpeg        - Eddie hanging in DOWN position
+       eddie-flipped-up.jpeg     - Eddie in UP position (arm raised)
+       cuff-installed-empty.jpeg - Cuff hardware close-up
+       bin-a-lid-raised.jpeg     - Bin A side profile (lid sits high)
+       bin-b-lid-level.jpeg      - Bin B side profile (lid sits flush)
+  3. In Shopify admin -> Pages -> create/edit a page and set
+     "Theme template" to: how-ready-eddie-works
+  4. The {% layout 'none' %} directive above bypasses theme.liquid so
+     this page renders as a standalone HTML document.
+{%- endcomment -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#FF5A1F" />
+<title>{{ page.title | default: 'How Ready Eddie works' }}</title>
+{%- if page.content != blank -%}
+  <meta name="description" content="{{ page.content | strip_html | truncate: 160 | escape }}" />
+{%- else -%}
+  <meta name="description" content="Ready Eddie clips onto the hinge of your bin. When the truck flips your bin, Eddie flips up. See him from the porch. That's the whole product." />
+{%- endif -%}
+
+<link rel="canonical" href="{{ shop.url }}{{ page.url }}" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+
+{{ content_for_header }}
+
+<style>
+:root {
+  --cream: #FBF1DE;
+  --cream-deep: #F5E6C7;
+  --orange: #FF5A1F;
+  --orange-deep: #D63E0A;
+  --bin-green: #3F584A;
+  --ink: #1A1612;
+  --ink-soft: #4A4138;
+  --rule: #DCC9A6;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+img { max-width: 100%; display: block; }
+
+.wrap { max-width: 560px; margin: 0 auto; padding: 0 22px; }
+
+.display {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+  font-variation-settings: "wdth" 95;
+}
+.serif {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ---------- TOP BAR ---------- */
+.top {
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--rule);
+  background: var(--cream);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.top-logo {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.top-mark {
+  width: 22px; height: 22px;
+  background: var(--orange);
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+}
+.top-mark::after {
+  content: '';
+  position: absolute;
+  top: -8px; left: 50%;
+  width: 3px; height: 11px;
+  background: var(--orange);
+  transform: translateX(-50%) rotate(20deg);
+  border-radius: 2px;
+}
+.top-tag {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  padding: 54px 0 30px;
+  text-align: left;
+}
+.hero .eyebrow { margin-bottom: 18px; }
+.hero h1 {
+  font-size: clamp(46px, 12vw, 64px);
+  margin-bottom: 22px;
+}
+.hero h1 .accent { color: var(--orange); }
+.hero h1 .it {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+.hero p {
+  font-size: 19px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  max-width: 460px;
+}
+
+/* ---------- DEMO ---------- */
+.demo {
+  padding: 40px 0 50px;
+}
+.demo-stage {
+  position: relative;
+  aspect-ratio: 4/5;
+  background: var(--bin-green);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 50px -20px rgba(26,22,18,0.4);
+  margin-bottom: 22px;
+}
+.demo-stage img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.demo-stage img.up { opacity: 0; }
+.demo-stage[data-state="up"] img.down { opacity: 0; }
+.demo-stage[data-state="up"] img.up { opacity: 1; }
+
+.demo-state-label {
+  position: absolute;
+  top: 18px; left: 18px;
+  background: var(--cream);
+  padding: 10px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.4s ease;
+}
+.demo-state-label .dot {
+  width: 8px; height: 8px;
+  background: var(--ink-soft);
+  border-radius: 50%;
+}
+.demo-stage[data-state="up"] .demo-state-label {
+  background: var(--orange);
+  color: var(--cream);
+}
+.demo-stage[data-state="up"] .demo-state-label .dot {
+  background: var(--cream);
+  box-shadow: 0 0 0 0 rgba(251,241,222, 0.7);
+  animation: pulse 1.6s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(251,241,222, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(251,241,222, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(251,241,222, 0); }
+}
+
+.demo-state-label .text-down,
+.demo-state-label .text-up { display: none; }
+.demo-stage[data-state="down"] .demo-state-label .text-down { display: inline; }
+.demo-stage[data-state="up"] .demo-state-label .text-up { display: inline; }
+
+.demo-button {
+  width: 100%;
+  background: var(--ink);
+  color: var(--cream);
+  border: none;
+  padding: 22px 24px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  border-radius: 100px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+.demo-button:hover, .demo-button:active {
+  background: var(--orange);
+  transform: translateY(-1px);
+}
+.demo-button .arrow {
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+.demo-stage[data-state="up"] ~ .demo-button .arrow {
+  transform: rotate(180deg);
+}
+
+.demo-caption {
+  margin-top: 18px;
+  text-align: center;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-soft);
+}
+
+/* ---------- BIG STATEMENT ---------- */
+.statement {
+  padding: 60px 0 70px;
+  background: var(--cream-deep);
+  margin: 0 -100vw;
+  padding-left: calc(100vw + 22px);
+  padding-right: calc(100vw + 22px);
+}
+.statement-inner { max-width: 560px; margin: 0 auto; }
+.statement p {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.statement p .hl {
+  background: linear-gradient(transparent 65%, rgba(255,90,31,0.4) 65%);
+  padding: 0 4px;
+}
+.statement p + p { margin-top: 20px; }
+
+/* ---------- HOW IT WORKS ---------- */
+.steps {
+  padding: 60px 0 30px;
+}
+.steps h2 {
+  font-size: clamp(36px, 9vw, 48px);
+  margin-bottom: 36px;
+}
+.step {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 18px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 56px;
+  line-height: 0.85;
+  color: var(--orange);
+  letter-spacing: -0.04em;
+  font-variation-settings: "wdth" 75;
+}
+.step h3 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  line-height: 1.15;
+}
+.step p {
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ---------- MECHANISM ---------- */
+.mech {
+  padding: 50px 0 60px;
+}
+.mech-card {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.mech-card .photo {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.mech-card .photo img { width: 100%; height: 100%; object-fit: cover; }
+.mech-card .body { padding: 28px 26px 32px; }
+.mech-card .eyebrow {
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+.mech-card h3 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+.mech-card p {
+  color: rgba(251,241,222,0.85);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.mech-card p + p { margin-top: 12px; }
+
+/* ---------- BINS ---------- */
+.bins {
+  padding: 60px 0 50px;
+  background: var(--bin-green);
+  color: var(--cream);
+  margin: 0 -100vw;
+  padding-left: calc(100vw + 22px);
+  padding-right: calc(100vw + 22px);
+}
+.bins-inner { max-width: 560px; margin: 0 auto; }
+.bins .eyebrow { color: rgba(251,241,222,0.6); margin-bottom: 16px; }
+.bins h2 {
+  font-size: clamp(36px, 9vw, 48px);
+  margin-bottom: 14px;
+  color: var(--cream);
+}
+.bins .lead {
+  color: rgba(251,241,222,0.85);
+  font-size: 17px;
+  margin-bottom: 32px;
+}
+
+.bin {
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.bin .photo {
+  aspect-ratio: 5/3;
+  overflow: hidden;
+}
+.bin .photo img { width: 100%; height: 100%; object-fit: cover; }
+.bin .body { padding: 22px 22px 26px; }
+.bin .tag {
+  display: inline-block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+.bin.b .tag { background: var(--orange); }
+.bin h3 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+.bin .test {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-soft);
+  padding-left: 14px;
+  border-left: 3px solid var(--orange);
+  margin-bottom: 18px;
+  line-height: 1.4;
+}
+.bin .pick {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 15px;
+}
+.cuff-swatch {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid var(--rule);
+}
+.cuff-swatch.gray { background: #6E6F71; }
+.cuff-swatch.black { background: #1A1612; }
+
+/* ---------- OUTRO ---------- */
+.outro {
+  padding: 70px 0 90px;
+  text-align: center;
+}
+.outro h2 {
+  font-size: clamp(36px, 9vw, 50px);
+  margin-bottom: 18px;
+}
+.outro h2 .it {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.outro p {
+  color: var(--ink-soft);
+  font-size: 17px;
+  margin-bottom: 32px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.outro .links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 24px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 100px;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+.btn-primary { background: var(--orange); color: var(--cream); border-color: var(--orange); }
+.btn-primary:hover { background: var(--orange-deep); border-color: var(--orange-deep); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--cream); }
+
+/* ---------- FOOTER ---------- */
+footer {
+  background: var(--ink);
+  color: rgba(251,241,222,0.6);
+  padding: 30px 22px;
+  text-align: center;
+  font-size: 13px;
+}
+footer .foot-logo {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+footer .small {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  margin-top: 12px;
+  color: rgba(251,241,222,0.4);
+}
+
+/* Subtle entry animation for hero */
+.hero h1, .hero p, .hero .eyebrow {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+.hero .eyebrow { animation-delay: 0.05s; }
+.hero h1 { animation-delay: 0.15s; }
+.hero p { animation-delay: 0.3s; }
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP -->
+<div class="top">
+  <div class="top-logo"><span class="top-mark"></span>Ready Eddie</div>
+  <div class="top-tag">How it works</div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">You scanned the box. Hi.</div>
+    <h1 class="display">
+      It&rsquo;s a <span class="accent">trash-day</span> <span class="it">signal.</span>
+    </h1>
+    <p>Eddie clips onto the hinge of your bin. When the truck flips your bin to dump it, Eddie flips up. You can see him from the porch. That&rsquo;s the whole product.</p>
+  </div>
+</section>
+
+<!-- INTERACTIVE DEMO -->
+<section class="demo">
+  <div class="wrap">
+    <div class="demo-stage" id="stage" data-state="down">
+      <img src="{{ 'cuff-attached.jpeg' | asset_url }}" alt="Eddie hanging in the down position on a green bin" class="down" loading="eager" />
+      <img src="{{ 'eddie-flipped-up.jpeg' | asset_url }}" alt="Eddie flipped up with arm raised after pickup" class="up" loading="eager" />
+      <div class="demo-state-label">
+        <span class="dot"></span>
+        <span class="text-down">Bin not emptied</span>
+        <span class="text-up">Bin emptied</span>
+      </div>
+    </div>
+    <button class="demo-button" id="toggle" type="button">
+      <span class="arrow">&darr;</span>
+      <span class="label">Tap to send the truck</span>
+    </button>
+    <p class="demo-caption">Tap a few times. That&rsquo;s the whole interaction in real life.</p>
+  </div>
+</section>
+
+<!-- BIG STATEMENT -->
+<section class="statement">
+  <div class="statement-inner">
+    <p>You&rsquo;re standing at the front window <span class="hl">squinting at a closed lid</span>, trying to figure out if the truck came yet.</p>
+    <p class="serif" style="color: var(--ink-soft);">Eddie ends that.</p>
+  </div>
+</section>
+
+<!-- HOW (3 STEPS) -->
+<section class="steps">
+  <div class="wrap">
+    <div class="eyebrow" style="margin-bottom: 14px;">The mechanism</div>
+    <h2 class="display">No batteries. <span class="serif">No app.</span></h2>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div>
+        <h3>Bin sits at the curb</h3>
+        <p>Eddie hangs in the down position. Low profile. Easy to miss from the house, which is the point.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div>
+        <h3>Truck flips the bin</h3>
+        <p>The lid swings past vertical during the dump. Eddie rotates around his cuff and lands on top of the lid as it falls back closed.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div>
+        <h3>Bin lands. Eddie stays up.</h3>
+        <p>You see an orange figure with his arm in the air from 60 feet away. Push him down with one finger when you wheel the bin back. Repeat forever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MECHANISM CARD -->
+<section class="mech">
+  <div class="wrap">
+    <div class="mech-card">
+      <div class="photo">
+        <img src="{{ 'cuff-installed-empty.jpeg' | asset_url }}" alt="Close-up of the orange cuff seated on the hinge bar" loading="lazy" />
+      </div>
+      <div class="body">
+        <div class="eyebrow">What&rsquo;s actually inside</div>
+        <h3>A cuff. A pivot. A stop.</h3>
+        <p>The cuff snaps onto the hinge bar of the bin and grips with a foam insert. Eddie&rsquo;s foot ring slips around the cuff and rotates freely.</p>
+        <p>When the lid hits a steep enough angle during pickup, Eddie passes over the pivot point and falls into the up position. A small ledge on the cuff catches him there. No springs. No magnets. Nothing to wear out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BINS -->
+<section class="bins">
+  <div class="bins-inner">
+    <div class="eyebrow">Pick the right cuff</div>
+    <h2 class="display">Two flavors of bin.</h2>
+    <p class="lead">Look at your bin from the side and match it. The pack ships with both cuffs so you don&rsquo;t have to guess at the store.</p>
+
+    <div class="bin a">
+      <div class="photo"><img src="{{ 'bin-a-lid-raised.jpeg' | asset_url }}" alt="Bin A side profile, lid sits higher than the handle" loading="lazy" /></div>
+      <div class="body">
+        <span class="tag">BIN A</span>
+        <h3>Lid sits higher than the handle</h3>
+        <div class="test">Visible gap between the closed lid and the handle bar below it.</div>
+        <div class="pick"><span class="cuff-swatch gray"></span> Use the gray cuff</div>
+      </div>
+    </div>
+
+    <div class="bin b">
+      <div class="photo"><img src="{{ 'bin-b-lid-level.jpeg' | asset_url }}" alt="Bin B side profile, lid sits flush with the handle" loading="lazy" /></div>
+      <div class="body">
+        <span class="tag">BIN B</span>
+        <h3>Lid sits level with the handle</h3>
+        <div class="test">Closed lid lines up flush with the top of the handle. No gap.</div>
+        <div class="pick"><span class="cuff-swatch black"></span> Use the black cuff</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTRO -->
+<section class="outro">
+  <div class="wrap">
+    <h2 class="display">That&rsquo;s <span class="it">Eddie.</span></h2>
+    <p>Take him home. He&rsquo;ll be doing his job by next pickup.</p>
+    <div class="links">
+      <a href="{{ shop.url }}" class="btn btn-primary">See the full site</a>
+      <a href="/pages/install" class="btn btn-ghost">Install instructions</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">Ready Eddie</div>
+  <div>Designed and printed in Apex, NC.</div>
+  <div class="small">&copy; {{ 'now' | date: '%Y' }} &middot; Patent pending</div>
+</footer>
+
+<script>
+  (function() {
+    var stage = document.getElementById('stage');
+    var btn = document.getElementById('toggle');
+    var label = btn.querySelector('.label');
+    var arrow = btn.querySelector('.arrow');
+
+    btn.addEventListener('click', function() {
+      var current = stage.getAttribute('data-state');
+      if (current === 'down') {
+        stage.setAttribute('data-state', 'up');
+        label.textContent = 'Tap to put it back';
+        arrow.innerHTML = '&uarr;';
+      } else {
+        stage.setAttribute('data-state', 'down');
+        label.textContent = 'Tap to send the truck';
+        arrow.innerHTML = '&darr;';
+      }
+    });
+  })();
+</script>
+
+{{ content_for_footer }}
+
+</body>
+</html>
