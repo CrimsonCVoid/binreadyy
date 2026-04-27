@@ -12,6 +12,7 @@
     "hero": {
       "type": "hero",
       "settings": {
+        "product": "ready-eddie",
         "kicker": "A small, simple gadget. a big convenience.",
         "heading": "Know when your bin has been emptied.",
         "lede": "Flip Ready Eddie up on collection day. When the truck empties your bin, gravity flips Eddie down. One glance from the house — done. No apps, no batteries, no wondering, no unnecessary trips."
@@ -230,6 +231,7 @@
     "final-buy": {
       "type": "final-buy",
       "settings": {
+        "product": "",
         "heading": "Stop wondering.",
         "subheading": "Pick a pack, be done with trash day forever."
       }
@@ -239,20 +241,26 @@
       "settings": {
         "kicker": "We're a tiny team",
         "heading": "Questions, returns, or anything else.",
-        "subheading": "Send us a note. Chris reads every message himself."
+        "subheading": "Send us a note. Chris reads every message himself.",
+        "policy_title": "Return policy",
+        "policy_text": "<p>We stand behind every purchase. We think you'll love Ready Eddie, but if you don't, items may be returned within <strong>30 days of delivery</strong> in original condition with all packaging. Refunds are processed within 5–7 business days of receipt.</p><p>Return shipping costs are your responsibility. To initiate a return or ask questions, please contact us at <a href=\"mailto:returns@readyeddieshop.com\">returns@readyeddieshop.com</a>.</p>",
+        "contact_title": "Contact us"
       }
     },
     "story": {
       "type": "story",
       "settings": {
         "kicker": "Made by one guy · in a garage · in North Carolina",
-        "toggle_label": "Read our story"
+        "toggle_label": "Read our story",
+        "heading": "Born on a muggy afternoon, at the end of a long driveway.",
+        "story_text": "<p>Ready Eddie was built in a garage by <strong>Chris Krebs</strong> — a criminologist who lives in North Carolina with his wife, his kids, and a small menagerie of animals. Solving problems is his job. It's also his hobby.</p><p>One hot, muggy day, Chris walked all the way down his driveway to check the bin. Still full. That flicker of annoyance became an idea. He thought about his older neighbors. Families with long driveways snaking through the woods. Surely other people hated not knowing, too. This was a problem worth solving.</p><p>Back in the garage, the first prototype was born — a Frankenstein's monster of scrap metal, screws, and wire. Ugly enough to be beautiful. When he tested it the next morning, it worked flawlessly.</p><p>Energized, Chris taught himself CAD and started sending designs to a friend with a 3D printer. The new models looked right but failed in practice — breaking, falling off, working only half the time. The garage became a graveyard of failed attempts. Each one taught him something. After countless late nights and design overhauls, a version emerged that was simple, durable, and reliable. That's the Ready Eddie you see now.</p><p>Born from a sweltering afternoon and the stubborn belief that there's almost always a better, easier way.</p>"
       }
     }
   },
   "order": [
     "hero",
     "why-strip",
+    "how-it-works",
     "testimonials",
     "faq",
     "final-buy",
