@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "accent_color": "#F5612A",
@@ -8,6 +17,14 @@
     "founder_role": "Maker, Ready Eddie",
     "shipping_line": "Ships in 2 business days",
     "free_shipping_note": "Free shipping on orders $40+",
-    "returns_line": "30-day returns"
+    "returns_line": "30-day returns",
+    "content_for_index": [],
+    "blocks": {
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   }
 }
