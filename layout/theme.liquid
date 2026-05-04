@@ -7,6 +7,13 @@
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}" />{% endif %}
   <meta name="theme-color" content="{{ settings.background_color | default: '#FAF8F2' }}" />
 
+  {%- if settings.google_site_verification != blank -%}
+    <meta name="google-site-verification" content="{{ settings.google_site_verification | escape }}" />
+  {%- endif -%}
+  {%- if settings.msvalidate_token != blank -%}
+    <meta name="msvalidate.01" content="{{ settings.msvalidate_token | escape }}" />
+  {%- endif -%}
+
   {% if settings.favicon %}
     <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | image_url: width: 32 }}" />
     <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}" />

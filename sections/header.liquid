@@ -9,18 +9,31 @@
     <div class="container">
       <a href="/" class="brand" aria-label="{{ shop.name }} home">
         {%- if settings.logo -%}
-          <img class="brand-mark" src="{{ settings.logo | image_url: width: 360 }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" />
+          <img class="brand-mark" src="{{ settings.logo | image_url: width: 240 }}" width="240" height="160" alt="{{ shop.name }}" decoding="async" />
         {%- else -%}
-          <img class="brand-mark" src="{{ 'Logo-240.png' | asset_url }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" />
+          <img class="brand-mark" src="{{ 'Logo-240.png' | asset_url }}" width="240" height="160" alt="{{ shop.name }}" decoding="async" />
         {%- endif -%}
       </a>
-      <nav class="nav" aria-label="Primary">
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        aria-label="Open menu"
+      >
+        <span class="nav-toggle-bars" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+      <nav class="nav" id="primary-nav" aria-label="Primary">
         <a href="/pages/how-ready-eddie-works">How it works</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#faq">FAQ</a>
-        <a href="#help">Contact us</a>
+        <a href="/#reviews">Reviews</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#help">Contact us</a>
         {%- if section.settings.show_buy_button -%}
-          <a href="#buy" class="btn btn-primary btn-sm">Buy &mdash; {{ all_products[section.settings.product].price | money | default: '$12' }}</a>
+          <a href="/#buy" class="btn btn-primary btn-sm nav-buy">Buy &mdash; {{ all_products[section.settings.product].price | money | default: '$12' }}</a>
         {%- endif -%}
       </nav>
     </div>

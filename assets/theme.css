@@ -130,8 +130,91 @@
       transition: color 0.3s var(--ease), background 0.3s var(--ease);
     }
     .nav a:not(.btn):hover { color: var(--ink); background: rgba(21,21,19,0.04); }
+
+    /* Mobile hamburger toggle */
+    .nav-toggle {
+      display: none;
+      appearance: none;
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      padding: 0;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+    }
+    .nav-toggle:hover { border-color: var(--ink); }
+    .nav-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .nav-toggle-bars {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 18px;
+      height: 12px;
+    }
+    .nav-toggle-bars span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+    }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(1) {
+      transform: translateY(5px) rotate(45deg);
+    }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(3) {
+      transform: translateY(-5px) rotate(-45deg);
+    }
+
     @media (max-width: 720px) {
-      .nav a:not(.btn) { display: none; }
+      .nav-toggle { display: inline-flex; }
+      .site-header .container { gap: 12px; }
+      .nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 16px 16px;
+        background: rgba(250, 248, 242, 0.98);
+        backdrop-filter: saturate(180%) blur(16px);
+        -webkit-backdrop-filter: saturate(180%) blur(16px);
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 16px 28px -22px rgba(21,21,19,0.25);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: max-height 0.35s var(--ease), opacity 0.25s var(--ease), padding 0.3s var(--ease);
+      }
+      .nav.is-open {
+        max-height: 80vh;
+        opacity: 1;
+        pointer-events: auto;
+        padding: 10px 16px 16px;
+      }
+      .nav a:not(.btn) {
+        font-size: 1rem;
+        padding: 14px 6px;
+        border-radius: 8px;
+        border-bottom: 1px solid var(--line);
+        min-height: 48px;
+      }
+      .nav a:not(.btn):last-of-type { border-bottom: none; }
+      .nav .nav-buy {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+      }
     }
 
     /* ───────── Buttons ───────── */
@@ -735,71 +818,59 @@
       border-top: 1px solid var(--line);
       position: relative;
     }
-    /* Cuff-pick install rules at the very top of the section */
-    .install-rules {
-      max-width: 880px;
-      margin: 0 auto 40px;
-      padding: 22px 24px 24px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      box-shadow:
-        0 1px 0 rgba(255,255,255,0.7) inset,
-        0 18px 40px -28px rgba(21,21,19,0.18);
+    /* Cuff-pick step (step 01 of How it Works) */
+    .how-step--cuff .cuff-pick-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
     }
-    .install-rules-eyebrow {
+    @media (max-width: 720px) {
+      .how-step--cuff .cuff-pick-grid { grid-template-columns: 1fr; }
+    }
+    .cuff-pick {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 12px;
+      padding: 10px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .cuff-pick-thumb {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: var(--bg-deep);
+    }
+    .cuff-pick-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .cuff-pick-tag {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-family: var(--font-mono);
       font-size: 0.6875rem;
       font-weight: 500;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 14px;
-    }
-    .install-rules-eyebrow::before {
-      content: '';
-      width: 26px;
-      height: 1px;
-      background: var(--accent);
-    }
-    .install-rules-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px 24px;
-    }
-    @media (max-width: 720px) {
-      .install-rules-grid { grid-template-columns: 1fr; gap: 14px; }
-    }
-    .install-rule {
-      display: grid;
-      grid-template-columns: 28px 1fr;
-      column-gap: 14px;
-      align-items: start;
-      padding: 4px 0;
-    }
-    .install-rule p {
-      font-size: 0.9375rem;
-      line-height: 1.5;
       color: var(--ink-soft);
-      margin: 0;
     }
-    .install-rule-swatch {
-      grid-column: 1;
-      width: 26px;
-      height: 26px;
+    .cuff-pick-swatch {
+      width: 14px;
+      height: 14px;
       border-radius: 999px;
-      margin-top: 1px;
-      border: 1.5px solid rgba(0,0,0,0.18);
-      box-shadow:
-        0 0 0 4px rgba(0,0,0,0.04),
-        0 6px 14px -8px rgba(0,0,0,0.2);
+      border: 1.5px solid rgba(0,0,0,0.2);
       flex-shrink: 0;
     }
-    .install-rule-swatch--gray  { background: #6E6F71; }
-    .install-rule-swatch--black { background: #1A1612; }
+    .cuff-pick-swatch--gray  { background: #6E6F71; }
+    .cuff-pick-swatch--black { background: #1A1612; }
+    .cuff-pick p {
+      margin: 0;
+      font-size: 0.875rem;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
 
     .how-head {
       text-align: center;

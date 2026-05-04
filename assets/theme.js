@@ -18,6 +18,27 @@
     onScroll();
   }
 
+  /* ─── Mobile hamburger nav ─── */
+  var navToggle = document.querySelector('.nav-toggle');
+  var primaryNav = document.getElementById('primary-nav');
+  if (navToggle && primaryNav) {
+    function setNavOpen(open) {
+      primaryNav.classList.toggle('is-open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+    navToggle.addEventListener('click', function () {
+      setNavOpen(!primaryNav.classList.contains('is-open'));
+    });
+    primaryNav.addEventListener('click', function (ev) {
+      var a = ev.target.closest && ev.target.closest('a');
+      if (a && primaryNav.classList.contains('is-open')) setNavOpen(false);
+    });
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && primaryNav.classList.contains('is-open')) setNavOpen(false);
+    });
+  }
+
   /* ─── Smooth tweened scroll for hash links (nav + in-page anchors) ─── */
   function headerOffset() {
     return header ? header.getBoundingClientRect().height + 8 : 88;

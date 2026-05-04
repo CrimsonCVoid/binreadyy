@@ -1,1 +1,33 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Ready Eddie",
+    "theme_version": "1.0.0",
+    "theme_author": "Ready Eddie Shop"
+  },
+  {
+    "name": "SEO & Verification",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Google Search Console"
+      },
+      {
+        "type": "text",
+        "id": "google_site_verification",
+        "label": "Verification token",
+        "info": "Paste only the content value from the <meta name=google-site-verification content=...> tag Search Console gives you."
+      },
+      {
+        "type": "header",
+        "content": "Bing Webmaster Tools"
+      },
+      {
+        "type": "text",
+        "id": "msvalidate_token",
+        "label": "Bing verification token",
+        "info": "Optional. Paste the content value from the msvalidate.01 meta tag."
+      }
+    ]
+  }
+]

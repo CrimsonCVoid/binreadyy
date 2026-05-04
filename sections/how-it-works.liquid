@@ -1,23 +1,5 @@
 <section class="how" id="how" aria-labelledby="how-title">
   <div class="container">
-    {%- if section.settings.show_install_rules -%}
-      <aside class="install-rules reveal" aria-label="Choose your cuff">
-        {%- if section.settings.install_rules_label != blank -%}
-          <span class="install-rules-eyebrow">{{ section.settings.install_rules_label }}</span>
-        {%- endif -%}
-        <div class="install-rules-grid">
-          <div class="install-rule">
-            <span class="install-rule-swatch install-rule-swatch--gray" aria-hidden="true"></span>
-            <p>{{ section.settings.install_rule_gray }}</p>
-          </div>
-          <div class="install-rule">
-            <span class="install-rule-swatch install-rule-swatch--black" aria-hidden="true"></span>
-            <p>{{ section.settings.install_rule_black }}</p>
-          </div>
-        </div>
-      </aside>
-    {%- endif -%}
-
     <div class="how-head">
       <h2 id="how-title" class="reveal">{{ section.settings.heading }}</h2>
       {%- if section.settings.subheading != blank -%}
@@ -37,8 +19,52 @@
 
       <div class="how-right">
         <ol class="how-steps">
+          {%- if section.settings.show_install_rules -%}
+            <li class="reveal how-step--cuff">
+              <h3>{{ section.settings.install_rules_label | default: 'Pick your cuff' }}</h3>
+              <div class="cuff-pick-grid">
+                <div class="cuff-pick">
+                  <img
+                    class="cuff-pick-thumb"
+                    src="{{ 'RaisedBin.jpeg' | asset_url }}"
+                    width="120" height="120"
+                    alt="Bin profile with lid sitting above the handle"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="cuff-pick-body">
+                    <span class="cuff-pick-tag">
+                      <span class="cuff-pick-swatch cuff-pick-swatch--gray" aria-hidden="true"></span>
+                      Gray cuff
+                    </span>
+                    <p>{{ section.settings.install_rule_gray }}</p>
+                  </div>
+                </div>
+                <div class="cuff-pick">
+                  <img
+                    class="cuff-pick-thumb"
+                    src="{{ 'LidLevel.jpeg' | asset_url }}"
+                    width="120" height="120"
+                    alt="Bin profile with lid level with the handle"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="cuff-pick-body">
+                    <span class="cuff-pick-tag">
+                      <span class="cuff-pick-swatch cuff-pick-swatch--black" aria-hidden="true"></span>
+                      Black cuff
+                    </span>
+                    <p>{{ section.settings.install_rule_black }}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          {%- endif -%}
+
           {%- for block in section.blocks -%}
-            <li class="reveal{% if forloop.index > 1 %} reveal-d{{ forloop.index | minus: 1 }}{% endif %}" {{ block.shopify_attributes }}>
+            {%- assign delay_idx = forloop.index -%}
+            {%- if section.settings.show_install_rules -%}{%- assign delay_idx = forloop.index | plus: 1 -%}{%- endif -%}
+            <li class="reveal{% if delay_idx > 1 %} reveal-d{{ delay_idx | minus: 1 | at_most: 4 }}{% endif %}" {{ block.shopify_attributes }}>
               <h3>{{ block.settings.title }}</h3>
               <p>{{ block.settings.description }}</p>
             </li>
