@@ -197,6 +197,59 @@
     syncSelection();
   });
 
+  /* ─── Mobile sticky shop bar ─── */
+  (function () {
+    var bar = document.querySelector('[data-mobile-shop-bar]');
+    if (!bar) return;
+    /* Match the CSS breakpoint — only behave on phone widths. */
+    var mq = window.matchMedia('(max-width: 720px)');
+
+    var hero = document.querySelector('.hero');
+    var buyPanel = document.querySelector('.final-buy') || document.querySelector('.buy-panel');
+    var heroVisible = true;
+    var buyVisible = false;
+
+    function update() {
+      if (!mq.matches) {
+        bar.hidden = true;
+        bar.classList.remove('is-visible');
+        return;
+      }
+      bar.hidden = false;
+      /* Show after the user has scrolled past the hero, hide once the
+         final-buy picker is on screen (no need for a sticky shortcut
+         when the real CTA is visible). */
+      var show = !heroVisible && !buyVisible;
+      bar.classList.toggle('is-visible', show);
+    }
+
+    if ('IntersectionObserver' in window) {
+      if (hero) {
+        new IntersectionObserver(function (entries) {
+          heroVisible = entries[0].isIntersecting;
+          update();
+        }, { threshold: 0.05 }).observe(hero);
+      } else {
+        heroVisible = false;
+      }
+      if (buyPanel) {
+        new IntersectionObserver(function (entries) {
+          buyVisible = entries[0].isIntersecting;
+          update();
+        }, { threshold: 0.2 }).observe(buyPanel);
+      }
+    } else {
+      /* Fallback: just show after 400px of scroll */
+      window.addEventListener('scroll', function () {
+        heroVisible = window.scrollY < 400;
+        update();
+      }, { passive: true });
+    }
+
+    mq.addEventListener('change', update);
+    update();
+  })();
+
   /* ─── Contact form: inline submit, no page reload ─── */
   document.querySelectorAll('.js-contact-form').forEach(function (form) {
     var shell = form.closest('[data-contact-shell]') || form.parentElement;

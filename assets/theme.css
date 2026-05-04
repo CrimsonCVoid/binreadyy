@@ -1622,6 +1622,91 @@
       .final-pricing { grid-template-columns: 1fr; }
     }
 
+    /* ───────── Mobile sticky shop bar ───────── */
+    .mobile-shop-bar {
+      display: none;
+    }
+    @media (max-width: 720px) {
+      .mobile-shop-bar {
+        display: block;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 60;
+        padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+        background: rgba(250, 248, 242, 0.96);
+        backdrop-filter: saturate(180%) blur(18px);
+        -webkit-backdrop-filter: saturate(180%) blur(18px);
+        border-top: 1px solid var(--line);
+        box-shadow: 0 -10px 28px -18px rgba(21,21,19,0.25);
+        transform: translateY(120%);
+        transition: transform 0.45s var(--ease), opacity 0.3s var(--ease);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .mobile-shop-bar.is-visible {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .mobile-shop-bar[hidden] { display: none !important; }
+      .msb-inner {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+      .msb-meta {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        line-height: 1.15;
+      }
+      .msb-name {
+        font-family: var(--font-display);
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: var(--ink);
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .msb-price {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--ink-soft);
+        letter-spacing: 0.04em;
+        margin-top: 2px;
+        font-variant-numeric: tabular-nums;
+      }
+      .msb-cta {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 12px 18px;
+        background: var(--accent);
+        color: var(--bg);
+        font-family: inherit;
+        font-weight: 600;
+        font-size: 0.9375rem;
+        text-decoration: none;
+        border-radius: 999px;
+        box-shadow:
+          0 1px 0 rgba(255,255,255,0.4) inset,
+          0 12px 24px -12px rgba(245,97,42,0.55);
+        transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+      }
+      .msb-cta:active { transform: scale(0.97); }
+      .msb-cta svg { display: block; }
+      /* Make sure the bar doesn't cover the very last bit of footer */
+      footer { padding-bottom: calc(40px + env(safe-area-inset-bottom) + 56px); }
+    }
+
     /* ───────── Footer ───────── */
     footer {
       padding: 32px 0 40px;

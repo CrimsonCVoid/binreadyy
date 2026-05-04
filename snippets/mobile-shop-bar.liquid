@@ -1,0 +1,36 @@
+{%- comment -%}
+  Sticky bottom shop bar for mobile only. Requires `product` in scope.
+  Hides on desktop and when the user is already looking at a buy panel
+  (handled by JS via IntersectionObserver). Tapping the CTA smooth-scrolls
+  to the final-buy section anchor (#buy) where the picker lives.
+{%- endcomment -%}
+
+{%- assign product = product | default: all_products[section.settings.product] -%}
+{%- if product != blank -%}
+  {%- assign default_variant = product.selected_or_first_available_variant -%}
+  <aside
+    class="mobile-shop-bar"
+    data-mobile-shop-bar
+    aria-label="Quick shop"
+    hidden
+  >
+    <div class="msb-inner">
+      <div class="msb-meta">
+        <span class="msb-name">{{ product.title }}</span>
+        <span class="msb-price">
+          {%- if product.price_varies -%}
+            From {{ product.price_min | money }}
+          {%- else -%}
+            {{ default_variant.price | money }}
+          {%- endif -%}
+        </span>
+      </div>
+      <a href="#buy" class="msb-cta" data-msb-cta>
+        Add to cart
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M3 7h8m-3-3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </aside>
+{%- endif -%}
