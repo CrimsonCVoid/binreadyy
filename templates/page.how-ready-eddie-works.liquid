@@ -453,6 +453,10 @@ img { max-width: 100%; display: block; }
   letter-spacing: -0.02em;
   line-height: 1.1;
   margin-bottom: 14px;
+  /* Force cream against the dark mech-card background — overrides
+     theme.css global h1/h2/h3 { color: var(--ink) } that leaks in
+     when this page renders under the default page template. */
+  color: var(--cream);
 }
 .mech-card p {
   color: rgba(251,241,222,0.85);
@@ -722,22 +726,22 @@ footer .small {
     <div class="step">
       <div class="step-num">01</div>
       <div>
-        <h3>Bin sits at the curb</h3>
-        <p>Eddie hangs in the down position. Low profile. Easy to miss from the house, which is the point.</p>
+        <h3>Eddie up. Bin to the curb.</h3>
+        <p>Flip Ready Eddie up before you wheel the bin out. The orange figure with his arm in the air is your &ldquo;still full&rdquo; signal &mdash; visible from 60 feet, hard to miss.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">02</div>
       <div>
         <h3>Truck flips the bin</h3>
-        <p>The lid swings past vertical during the dump. Eddie rotates around his cuff and lands on top of the lid as it falls back closed.</p>
+        <p>The lid swings past vertical during the dump. Eddie rotates around his cuff and lands flat on top of the lid as it falls back closed.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">03</div>
       <div>
-        <h3>Bin lands. Eddie stays up.</h3>
-        <p>You see an orange figure with his arm in the air from 60 feet away. Push him down with one finger when you wheel the bin back. Repeat forever.</p>
+        <h3>Eddie&rsquo;s down. It&rsquo;s done.</h3>
+        <p>Glance at the curb &mdash; no more orange arm in the air means the truck has come and gone. Push Eddie back up with one finger before next collection day. Repeat forever.</p>
       </div>
     </div>
   </div>
@@ -798,7 +802,6 @@ footer .small {
     <p>Take him home. He&rsquo;ll be doing his job by next pickup.</p>
     <div class="links">
       <a href="{{ shop.url }}" class="btn btn-primary">See the full site</a>
-      <span class="btn btn-ghost is-disabled" aria-disabled="true" role="button" tabindex="-1">Install instructions <small>(coming soon)</small></span>
     </div>
   </div>
 </section>
