@@ -10,15 +10,16 @@
           {%- if product.featured_image -%}
             <img
               class="product-img"
-              src="{{ product.featured_image | image_url: width: 900 }}"
+              src="{{ product.featured_image | image_url: width: 720 }}"
               srcset="
-                {{ product.featured_image | image_url: width: 360 }} 360w,
-                {{ product.featured_image | image_url: width: 540 }} 540w,
+                {{ product.featured_image | image_url: width: 320 }} 320w,
+                {{ product.featured_image | image_url: width: 420 }} 420w,
+                {{ product.featured_image | image_url: width: 520 }} 520w,
                 {{ product.featured_image | image_url: width: 720 }} 720w,
                 {{ product.featured_image | image_url: width: 900 }} 900w,
                 {{ product.featured_image | image_url: width: 1200 }} 1200w
               "
-              sizes="(max-width: 820px) 84vw, 36vw"
+              sizes="(max-width: 480px) 84vw, (max-width: 820px) 70vw, 36vw"
               alt="{{ product.featured_image.alt | default: product.title }}"
               width="{{ product.featured_image.width }}"
               height="{{ product.featured_image.height }}"

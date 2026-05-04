@@ -29,5 +29,17 @@
         "info": "Optional. Paste the content value from the msvalidate.01 meta tag."
       }
     ]
+  },
+  {
+    "name": "Performance",
+    "settings": [
+      {
+        "type": "text",
+        "id": "lcp_product_handle",
+        "label": "Homepage LCP product handle",
+        "default": "ready-eddie-1",
+        "info": "Used to preload the homepage hero image (cuts LCP). Match the handle of the product pinned to the Hero section."
+      }
+    ]
   }
 ]
