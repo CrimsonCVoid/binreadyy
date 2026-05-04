@@ -1,5 +1,23 @@
 <section class="how" id="how" aria-labelledby="how-title">
   <div class="container">
+    {%- if section.settings.show_install_rules -%}
+      <aside class="install-rules reveal" aria-label="Choose your cuff">
+        {%- if section.settings.install_rules_label != blank -%}
+          <span class="install-rules-eyebrow">{{ section.settings.install_rules_label }}</span>
+        {%- endif -%}
+        <div class="install-rules-grid">
+          <div class="install-rule">
+            <span class="install-rule-swatch install-rule-swatch--gray" aria-hidden="true"></span>
+            <p>{{ section.settings.install_rule_gray }}</p>
+          </div>
+          <div class="install-rule">
+            <span class="install-rule-swatch install-rule-swatch--black" aria-hidden="true"></span>
+            <p>{{ section.settings.install_rule_black }}</p>
+          </div>
+        </div>
+      </aside>
+    {%- endif -%}
+
     <div class="how-head">
       <h2 id="how-title" class="reveal">{{ section.settings.heading }}</h2>
       {%- if section.settings.subheading != blank -%}
@@ -60,6 +78,34 @@
       "id": "subheading",
       "label": "Subheading",
       "default": "Mechanical. Boring. Exactly what you want it to be."
+    },
+    {
+      "type": "header",
+      "content": "Install rules (above the heading)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_install_rules",
+      "label": "Show cuff-pick rules at the top",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "install_rules_label",
+      "label": "Eyebrow label",
+      "default": "Pick your cuff"
+    },
+    {
+      "type": "textarea",
+      "id": "install_rule_gray",
+      "label": "Gray-cuff rule",
+      "default": "If the top of your bin lid is above your bin handle, put the GRAY cuff on your handle, and wrap Ready Eddie around it."
+    },
+    {
+      "type": "textarea",
+      "id": "install_rule_black",
+      "label": "Black-cuff rule",
+      "default": "If the top of your bin lid is level with the top of your bin handle, use the BLACK cuff."
     },
     {
       "type": "header",
