@@ -25,7 +25,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#FF5A1F" />
+<meta name="theme-color" content="#F5612A" />
 <title>{{ page.title | default: 'How Ready Eddie works' }}</title>
 {%- if page.content != blank -%}
   <meta name="description" content="{{ page.content | strip_html | truncate: 160 | escape }}" />
@@ -42,14 +42,19 @@
 
 <style>
 :root {
-  --cream: #FBF1DE;
-  --cream-deep: #F5E6C7;
-  --orange: #FF5A1F;
-  --orange-deep: #D63E0A;
-  --bin-green: #3F584A;
-  --ink: #1A1612;
-  --ink-soft: #4A4138;
-  --rule: #DCC9A6;
+  /* Brand palette — kept in sync with assets/theme.css so the
+     standalone how-it-works page reads as the same brand. */
+  --cream: #FAF8F2;
+  --cream-deep: #F1EDE0;
+  --orange: #F5612A;
+  --orange-deep: #D94F1E;
+  --orange-soft: #FEEFE6;
+  --bin-green: #3D6B4F;
+  --ink: #1A1A17;
+  --ink-soft: #44443F;
+  --ink-muted: #64645C;
+  --rule: #E3DFCF;
+  --rule-strong: #C8C3AE;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -85,75 +90,139 @@ img { max-width: 100%; display: block; }
   letter-spacing: -0.01em;
 }
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink-soft);
 }
+.eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 1px;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+.bins .eyebrow::before { background: var(--cream); opacity: 0.55; }
 
-/* ---------- TOP BAR ---------- */
+/* ---------- TOP BAR (mirrors the homepage site-header treatment) ---------- */
 .top {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(251, 241, 222, 0.94);
-  backdrop-filter: saturate(180%) blur(10px);
-  -webkit-backdrop-filter: saturate(180%) blur(10px);
-  border-bottom: 1px solid var(--rule);
+  background: rgba(250, 248, 242, 0.86);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.4s ease, border-color 0.4s ease, padding 0.4s ease;
+}
+.top.scrolled {
+  background: rgba(250, 248, 242, 0.95);
+  border-bottom-color: var(--rule);
 }
 .top-inner {
-  max-width: 1080px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 10px 22px;
+  padding: 14px 28px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+.top-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  transition: color 0.3s ease, background 0.3s ease;
+  white-space: nowrap;
+}
+.top-back:hover,
+.top-back:focus-visible {
+  color: var(--ink);
+  background: rgba(21,21,19,0.04);
+  outline: none;
+}
+.top-back .top-back-arrow {
+  font-size: 15px;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+.top-back:hover .top-back-arrow { transform: translateX(-2px); }
+
+.top-nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 60px;
+  justify-content: center;
+  gap: 4px;
 }
-.top-cta {
+.top-nav a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 8px;
+  line-height: 1;
+  transition: color 0.3s ease, background 0.3s ease;
+}
+.top-nav a:hover,
+.top-nav a:focus-visible {
+  color: var(--ink);
+  background: rgba(21,21,19,0.04);
+  outline: none;
+}
+
+.top-buy {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 11px 18px;
-  border-radius: 999px;
+  padding: 11px 20px;
+  border-radius: 10px;
+  background: var(--orange);
+  color: var(--cream);
   font-family: 'DM Sans', sans-serif;
   font-weight: 600;
   font-size: 14px;
+  letter-spacing: -0.005em;
   line-height: 1;
   text-decoration: none;
-  border: 1.5px solid transparent;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
   white-space: nowrap;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.35) inset,
+    0 10px 24px -12px rgba(245,97,42,0.55);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
-.top-cta-back {
-  color: var(--ink);
-  border-color: var(--rule);
-  background: transparent;
-}
-.top-cta-back:hover,
-.top-cta-back:focus-visible {
-  border-color: var(--ink);
-  background: rgba(26,22,18,0.04);
-  outline: none;
-}
-.top-cta-buy {
-  background: var(--orange);
-  color: var(--cream);
-  box-shadow: 0 6px 18px -8px rgba(255,90,31,0.65);
-}
-.top-cta-buy:hover,
-.top-cta-buy:focus-visible {
+.top-buy:hover,
+.top-buy:focus-visible {
   background: var(--orange-deep);
   transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.4) inset,
+    0 16px 30px -14px rgba(217,79,30,0.6);
   outline: none;
 }
-@media (max-width: 480px) {
-  .top-inner { padding: 8px 14px; gap: 8px; min-height: 54px; }
-  .top-cta { padding: 10px 14px; font-size: 13px; }
-  .top-cta-back .top-cta-back-long { display: none; }
+
+@media (max-width: 720px) {
+  .top-inner { grid-template-columns: auto auto; padding: 12px 18px; }
+  .top-nav { display: none; }
+}
+@media (max-width: 420px) {
+  .top-back .top-back-label { display: none; }
+  .top-back { padding: 9px 10px; }
+  .top-buy { padding: 10px 16px; }
 }
 
 /* ---------- HERO ---------- */
@@ -602,13 +671,30 @@ footer .small {
 <!-- TOP -->
 <header class="top">
   <div class="top-inner">
-    <a href="/" class="top-cta top-cta-back" aria-label="Return to front page">
-      <span aria-hidden="true">&larr;</span>
-      <span>Return to <span class="top-cta-back-long">front page</span></span>
+    <a href="/" class="top-back" aria-label="Return to front page">
+      <span class="top-back-arrow" aria-hidden="true">&larr;</span>
+      <span class="top-back-label">Front page</span>
     </a>
-    <a href="/#buy" class="top-cta top-cta-buy">Buy</a>
+    <nav class="top-nav" aria-label="Site sections">
+      <a href="/#reviews">Reviews</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#help">Contact us</a>
+    </nav>
+    <a href="/#buy" class="top-buy">Buy</a>
   </div>
 </header>
+<script>
+  (function () {
+    var top = document.querySelector('.top');
+    if (!top) return;
+    function onScroll() {
+      if (window.scrollY > 8) top.classList.add('scrolled');
+      else top.classList.remove('scrolled');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
 
 <!-- HERO -->
 <section class="hero">
