@@ -1,0 +1,151 @@
+{%- liquid
+  assign heading = section.settings.heading | default: 'Your cart'
+  assign empty_heading = section.settings.empty_heading | default: 'Your cart is empty'
+  assign empty_sub = section.settings.empty_subheading
+  assign empty_label = section.settings.empty_cta_label | default: 'Continue shopping'
+  assign empty_link = section.settings.empty_cta_link | default: '/'
+  assign show_note = section.settings.show_note
+  assign note_label = section.settings.note_label | default: 'Order note'
+-%}
+
+<section class="cart-page" aria-labelledby="cart-title">
+  <div class="container cart-container">
+
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-empty">
+        <h1 id="cart-title" class="cart-empty-title">{{ empty_heading }}</h1>
+        {%- if empty_sub != blank -%}
+          <p class="cart-empty-sub">{{ empty_sub }}</p>
+        {%- endif -%}
+        <a class="btn btn-primary btn-buy" href="{{ empty_link }}">{{ empty_label }}</a>
+      </div>
+    {%- else -%}
+      <div class="cart-head">
+        <h1 id="cart-title" class="cart-title">{{ heading }}</h1>
+        <p class="cart-count" data-cart-count>
+          {{ cart.item_count }} {%- if cart.item_count == 1 -%} item {%- else -%} items {%- endif -%}
+        </p>
+      </div>
+
+      <form action="/cart" method="post" novalidate class="cart-form" data-cart-root>
+        <div class="cart-error" data-cart-error hidden role="alert"></div>
+
+        <ul class="cart-lines" role="list">
+          {%- for item in cart.items -%}
+            <li class="cart-line" data-line-row data-line-key="{{ item.key }}" data-line-index="{{ forloop.index }}">
+              <a href="{{ item.url }}" class="cart-line-media" tabindex="-1" aria-hidden="true">
+                {%- if item.image -%}
+                  <img
+                    src="{{ item.image | image_url: width: 240 }}"
+                    srcset="{{ item.image | image_url: width: 240 }} 1x, {{ item.image | image_url: width: 480 }} 2x"
+                    width="120" height="120"
+                    alt="{{ item.image.alt | escape | default: item.product.title }}"
+                    loading="lazy"
+                  />
+                {%- else -%}
+                  <div class="cart-line-placeholder" aria-hidden="true"></div>
+                {%- endif -%}
+              </a>
+
+              <div class="cart-line-body">
+                <div class="cart-line-head">
+                  <a href="{{ item.url }}" class="cart-line-title">{{ item.product.title }}</a>
+                  {%- unless item.product.has_only_default_variant -%}
+                    <p class="cart-line-variant">{{ item.variant.title }}</p>
+                  {%- endunless -%}
+                  {%- if item.selling_plan_allocation -%}
+                    <p class="cart-line-variant">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                  {%- endif -%}
+                  {%- if item.properties.size > 0 -%}
+                    <ul class="cart-line-props" role="list">
+                      {%- for p in item.properties -%}
+                        {%- assign first_char = p.first | slice: 0 -%}
+                        {%- if p.last == blank or first_char == '_' -%}{%- continue -%}{%- endif -%}
+                        <li><span>{{ p.first }}:</span> {{ p.last }}</li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+
+                <div class="cart-line-controls">
+                  <div class="qty-stepper" role="group" aria-label="Quantity">
+                    <button type="button" class="qty-btn" data-line-action="dec" aria-label="Decrease quantity">&minus;</button>
+                    <span class="qty-value" data-line-qty-value aria-live="polite">{{ item.quantity }}</span>
+                    <input
+                      type="number"
+                      class="qty-input"
+                      data-line-qty-input
+                      name="updates[]"
+                      value="{{ item.quantity }}"
+                      min="0"
+                      inputmode="numeric"
+                      aria-label="{{ item.product.title }} quantity"
+                    />
+                    <button type="button" class="qty-btn" data-line-action="inc" aria-label="Increase quantity">+</button>
+                  </div>
+
+                  <button type="button" class="cart-line-remove" data-line-action="remove">Remove</button>
+                </div>
+              </div>
+
+              <div class="cart-line-price">
+                {%- if item.original_line_price != item.final_line_price -%}
+                  <span class="cart-line-compare">{{ item.original_line_price | money }}</span>
+                {%- endif -%}
+                <span class="cart-line-total" data-line-total>{{ item.final_line_price | money }}</span>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if show_note -%}
+          <div class="cart-note" data-cart-note-form>
+            <label class="cart-note-label" for="CartNote">{{ note_label }}</label>
+            <textarea id="CartNote" name="note" rows="3" class="cart-note-field" placeholder="Optional">{{ cart.note }}</textarea>
+          </div>
+        {%- endif -%}
+
+        <div class="cart-summary">
+          <div class="cart-summary-row">
+            <span class="cart-summary-label">Subtotal</span>
+            <span class="cart-summary-value" data-cart-subtotal>{{ cart.items_subtotal_price | money }}</span>
+          </div>
+
+          {%- if cart.cart_level_discount_applications.size > 0 -%}
+            {%- for d in cart.cart_level_discount_applications -%}
+              <div class="cart-summary-row cart-summary-discount">
+                <span class="cart-summary-label">{{ d.title }}</span>
+                <span class="cart-summary-value">&minus; {{ d.total_allocated_amount | money }}</span>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+
+          <p class="cart-summary-note">Shipping &amp; taxes calculated at checkout.</p>
+
+          <div class="cart-actions">
+            <button type="submit" name="checkout" class="btn btn-primary btn-buy">
+              Check out &middot; <span class="buy-price">{{ cart.total_price | money }}</span>
+            </button>
+            <a href="/" class="cart-continue">&larr; Keep shopping</a>
+          </div>
+        </div>
+      </form>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your cart" },
+    { "type": "text", "id": "empty_heading", "label": "Empty cart heading", "default": "Your cart is empty" },
+    { "type": "text", "id": "empty_subheading", "label": "Empty cart subheading", "default": "Pick up a Ready Eddie below." },
+    { "type": "text", "id": "empty_cta_label", "label": "Empty cart button label", "default": "Back to Ready Eddie" },
+    { "type": "url", "id": "empty_cta_link", "label": "Empty cart button link", "default": "/" },
+    { "type": "checkbox", "id": "show_note", "label": "Show order note field", "default": true },
+    { "type": "text", "id": "note_label", "label": "Order note label", "default": "Add a note (delivery instructions, gift, etc.)" }
+  ]
+}
+{% endschema %}

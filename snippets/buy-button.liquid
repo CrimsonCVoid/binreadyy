@@ -1,6 +1,6 @@
 {%- comment -%}
-  Add-to-cart form. Requires `product` in scope.
-  Renders the pricing picker (variant radio buttons) + submit button.
+  Add-to-cart CTAs. Requires `product` in scope.
+  Renders one button per variant (up to two, side by side).
   JS in theme.js handles AJAX submission.
 {%- endcomment -%}
 
@@ -8,55 +8,53 @@
 {%- if product == blank -%}
   <p>Select a product in the theme customizer.</p>
 {%- else -%}
-  {%- assign default_variant = product.selected_or_first_available_variant -%}
-  {%- assign has_choices = false -%}
-  {%- if product.variants.size > 1 -%}{%- assign has_choices = true -%}{%- endif -%}
+  {%- assign variants = product.variants -%}
+  {%- assign primary = variants[0] -%}
+  {%- assign secondary = variants[1] -%}
 
-  <form class="js-add-to-cart" action="/cart/add" method="post">
-    {%- if has_choices -%}
-      <div class="pricing-picker" role="radiogroup" aria-label="Pick your pack">
-        <span class="pricing-heading">Pick your pack</span>
+  <div class="buy-options" data-variant-count="{{ variants.size }}">
+    {%- for variant in variants limit: 2 -%}
+      <form class="js-add-to-cart buy-option {% if forloop.first %}buy-option-primary{% else %}buy-option-secondary{% endif %}" action="/cart/add" method="post">
+        <input type="hidden" name="id" value="{{ variant.id }}" />
+        <input type="hidden" name="quantity" value="1" />
 
-        {%- for variant in product.variants -%}
-          {%- assign is_default = false -%}
-          {%- if variant.id == default_variant.id -%}{%- assign is_default = true -%}{%- endif -%}
-          <label class="price-option">
-            <input
-              type="radio"
-              name="id"
-              value="{{ variant.id }}"
-              data-price="{{ variant.price | money }}"
-              {% if is_default %}checked{% endif %}
-              {% unless variant.available %}disabled{% endunless %}
-            />
-            <div class="po-top">
-              <span class="po-name">{{ variant.title }}</span>
-              {%- if variant.compare_at_price > variant.price -%}
-                <span class="po-save">Save {{ variant.compare_at_price | minus: variant.price | money }}</span>
-              {%- endif -%}
-            </div>
-            <div class="po-price">
-              {{ variant.price | money }}
-              {%- unless variant.available %} <span class="po-soldout">Sold out</span>{%- endunless -%}
-            </div>
-            {%- if variant.metafields.custom.short_description -%}
-              <div class="po-desc">{{ variant.metafields.custom.short_description }}</div>
+        <div class="buy-option-meta">
+          <span class="buy-option-name">{{ variant.title | default: 'Ready Eddie' }}</span>
+          {%- if variant.compare_at_price > variant.price -%}
+            <span class="buy-option-save">Save {{ variant.compare_at_price | minus: variant.price | money }}</span>
+          {%- elsif forloop.last and variants.size > 1 -%}
+            {%- assign per_unit_primary = primary.price -%}
+            {%- assign assumed_units = 2 -%}
+            {%- assign expected = per_unit_primary | times: assumed_units -%}
+            {%- if variant.price < expected -%}
+              {%- assign diff = expected | minus: variant.price -%}
+              <span class="buy-option-save">Save {{ diff | money }}</span>
             {%- endif -%}
-          </label>
-        {%- endfor -%}
-      </div>
-    {%- else -%}
-      <input type="hidden" name="id" value="{{ default_variant.id }}" data-price="{{ default_variant.price | money }}" />
-    {%- endif -%}
+          {%- endif -%}
+        </div>
 
-    <button type="submit" class="btn btn-primary btn-buy" {% unless default_variant.available %}disabled{% endunless %}>
-      {%- if default_variant.available -%}
-        {{ 'general.add_to_cart' | t }} &mdash; <span class="buy-price">{{ default_variant.price | money }}</span>
-      {%- else -%}
-        Sold out
-      {%- endif -%}
-    </button>
-  </form>
+        <button
+          type="submit"
+          class="btn btn-primary btn-buy {% unless forloop.first %}btn-buy-alt{% endunless %}"
+          {% unless variant.available %}disabled{% endunless %}
+        >
+          {%- if variant.available -%}
+            <span class="btn-buy-label">
+              {%- if forloop.first -%}
+                Add to cart
+              {%- else -%}
+                Buy 2-pack
+              {%- endif -%}
+            </span>
+            <span class="btn-buy-divider" aria-hidden="true">&middot;</span>
+            <span class="buy-price">{{ variant.price | money }}</span>
+          {%- else -%}
+            Sold out
+          {%- endif -%}
+        </button>
+      </form>
+    {%- endfor -%}
+  </div>
 
   {% render 'reassure-list' %}
 {%- endif -%}

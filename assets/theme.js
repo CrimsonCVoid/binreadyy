@@ -159,32 +159,119 @@
     });
   });
 
-  /* ─── Variant picker sync (hero ↔ final-buy) ─── */
-  var radios = document.querySelectorAll('.pricing-picker input[type="radio"]');
-  function syncVariant(sourceRadio) {
-    var variantId = sourceRadio
-      ? sourceRadio.value
-      : (document.querySelector('.pricing-picker input[type="radio"]:checked') || {}).value;
-    if (!variantId) return;
+  /* ─── Cart page: qty controls, remove, AJAX update ─── */
+  initCartPage();
 
-    radios.forEach(function (r) {
-      if (r.disabled) return;
-      r.checked = (r.value === variantId);
+  function initCartPage() {
+    var cartRoot = document.querySelector('[data-cart-root]');
+    if (!cartRoot) return;
+
+    function fmtMoney(cents) {
+      var sign = cents < 0 ? '-' : '';
+      var n = Math.abs(cents) / 100;
+      return sign + '$' + n.toFixed(2);
+    }
+
+    function setBusy(busy) {
+      cartRoot.classList.toggle('is-busy', !!busy);
+    }
+
+    function showError(msg) {
+      var el = cartRoot.querySelector('[data-cart-error]');
+      if (!el) return;
+      el.textContent = msg || '';
+      el.hidden = !msg;
+    }
+
+    function updateLine(line, quantity) {
+      setBusy(true);
+      showError('');
+      return fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ line: line, quantity: quantity })
+      })
+        .then(function (res) {
+          return res.json().then(function (data) {
+            if (!res.ok) throw new Error((data && (data.description || data.message)) || 'Could not update cart');
+            return data;
+          });
+        })
+        .then(function (cart) {
+          renderCart(cart);
+        })
+        .catch(function (err) {
+          showError(err.message || 'Could not update cart');
+        })
+        .then(function () { setBusy(false); });
+    }
+
+    function renderCart(cart) {
+      if (cart.item_count === 0) {
+        window.location.reload();
+        return;
+      }
+      cartRoot.querySelectorAll('[data-line-row]').forEach(function (row) {
+        var key = row.getAttribute('data-line-key');
+        var match = (cart.items || []).find(function (it) { return it.key === key; });
+        if (!match) {
+          row.remove();
+          return;
+        }
+        var qty = row.querySelector('[data-line-qty-value]');
+        var lineTotal = row.querySelector('[data-line-total]');
+        if (qty) qty.textContent = match.quantity;
+        if (lineTotal) lineTotal.textContent = fmtMoney(match.final_line_price);
+        row.querySelectorAll('[data-line-qty-input]').forEach(function (input) { input.value = match.quantity; });
+      });
+      var subtotal = cartRoot.querySelector('[data-cart-subtotal]');
+      if (subtotal) subtotal.textContent = fmtMoney(cart.items_subtotal_price);
+      var count = cartRoot.querySelector('[data-cart-count]');
+      if (count) count.textContent = cart.item_count + (cart.item_count === 1 ? ' item' : ' items');
+    }
+
+    cartRoot.addEventListener('click', function (ev) {
+      var btn = ev.target.closest('[data-line-action]');
+      if (!btn) return;
+      ev.preventDefault();
+      var row = btn.closest('[data-line-row]');
+      if (!row) return;
+      var line = parseInt(row.getAttribute('data-line-index'), 10);
+      var current = parseInt(row.querySelector('[data-line-qty-value]').textContent, 10) || 0;
+      var action = btn.getAttribute('data-line-action');
+      if (action === 'inc') updateLine(line, current + 1);
+      else if (action === 'dec') updateLine(line, Math.max(0, current - 1));
+      else if (action === 'remove') updateLine(line, 0);
     });
 
-    /* Update price label inside each form's buy button using its own checked radio */
-    document.querySelectorAll('.js-add-to-cart').forEach(function (form) {
-      var checked = form.querySelector('.pricing-picker input[type="radio"]:checked');
-      if (!checked) return;
-      var price = checked.getAttribute('data-price');
-      var label = form.querySelector('.buy-price');
-      if (label && price) label.textContent = price;
+    cartRoot.addEventListener('change', function (ev) {
+      var input = ev.target.closest('[data-line-qty-input]');
+      if (!input) return;
+      var row = input.closest('[data-line-row]');
+      if (!row) return;
+      var line = parseInt(row.getAttribute('data-line-index'), 10);
+      var n = Math.max(0, parseInt(input.value, 10) || 0);
+      updateLine(line, n);
     });
+
+    var noteForm = cartRoot.querySelector('[data-cart-note-form]');
+    if (noteForm) {
+      var noteField = noteForm.querySelector('textarea[name="note"]');
+      var saveTimer;
+      if (noteField) {
+        noteField.addEventListener('input', function () {
+          clearTimeout(saveTimer);
+          saveTimer = setTimeout(function () {
+            fetch('/cart/update.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({ note: noteField.value })
+            }).catch(function () { /* silent */ });
+          }, 600);
+        });
+      }
+    }
   }
-  radios.forEach(function (r) {
-    r.addEventListener('change', function () { syncVariant(r); });
-  });
-  syncVariant();
 
   /* ─── Hero bin SVG animation ─── */
   initHeroBinAnimations();
