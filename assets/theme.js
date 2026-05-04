@@ -305,13 +305,20 @@
 
     var ENTRANCE_DELAY        = 900;
     var DUMP_ROTATE_DURATION  = 2000;
-    var LID_GRAVITY_DELAY     = 500;
-    var LID_GRAVITY_DURATION  = 900;
+    /* The lid waits until the bin has tilted past ~-30° (critical angle
+       where gravity overcomes the lid sitting on the rim), then swings
+       open over a span that lands just before the bin reaches max tilt. */
+    var LID_GRAVITY_DELAY     = 750;
+    var LID_GRAVITY_DURATION  = 1150;
     var FLAG_HANG_DELAY       = 400;
     var FLAG_HANG_DURATION    = 1900;
     var HOLD_DOWN_DURATION    = 2500;
     var DUMP_RETURN_DURATION  = 1800;
-    var LID_CLOSE_DURATION    = 700;
+    /* On the return, the lid stays open while the bin is still past
+       horizontal. It only starts closing once the bin tips back past
+       the critical angle, then snaps shut just as the bin lands. */
+    var LID_CLOSE_DELAY       = 1150;
+    var LID_CLOSE_DURATION    = 500;
     var FLAG_SWING_DURATION   = 1800;
     var FLAG_RISE_DURATION    = 300;
     var LOOP_PAUSE            = 2500;
@@ -324,16 +331,31 @@
 
     var loopTimeout = null;
 
-    function easeOutBounce(t) {
-      if (t < 1 / 2.75) return 7.5625 * t * t;
-      if (t < 2 / 2.75) return 7.5625 * (t -= 1.5 / 2.75) * t + 0.75;
-      if (t < 2.5 / 2.75) return 7.5625 * (t -= 2.25 / 2.75) * t + 0.9375;
-      return 7.5625 * (t -= 2.625 / 2.75) * t + 0.984375;
-    }
     function easeInOutCubic(t) {
       return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     }
     function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+    /* Gravity-driven open: cubic acceleration, a touch of overshoot at
+       the open stop, then a damped settle. Looks like a heavy lid
+       falling open and clattering against the bin's back. */
+    function gravityOpen(t) {
+      if (t < 0.85) {
+        var u = t / 0.85;
+        return 1.04 * u * u * u;
+      }
+      var u = (t - 0.85) / 0.15;
+      return 1.04 - 0.04 * (1 - Math.pow(1 - u, 2));
+    }
+    /* Gravity-driven slam: quadratic acceleration to closed, slight
+       overshoot (lid hits the rim), small damped bounce, then rest. */
+    function gravitySlam(t) {
+      if (t < 0.78) {
+        var u = t / 0.78;
+        return 1.06 * u * u;
+      }
+      var u = (t - 0.78) / 0.22;
+      return 1.06 - 0.06 * (1 - Math.pow(1 - u, 2));
+    }
 
     /* Cache last-applied transforms to skip redundant style writes when
        multiple parallel tweens settle on the same value. */
@@ -394,14 +416,20 @@
               });
             }, 2500);
           }
+          /* Bin pivots back upright; lid stays open until the bin tips
+             back past the critical angle, then slams shut under gravity. */
           tween(DUMP_ANGLE, 0, DUMP_RETURN_DURATION, easeInOutCubic, setDumpGroup, onStep1Done);
-          tween(LID_OPEN_ANGLE, 0, LID_CLOSE_DURATION, easeInOutCubic, setLid, onStep1Done);
+          loopTimeout = setTimeout(function () {
+            tween(LID_OPEN_ANGLE, 0, LID_CLOSE_DURATION, gravitySlam, setLid, onStep1Done);
+          }, LID_CLOSE_DELAY);
           tween(FLAG_HANG_ANGLE, FLAG_DOWN_ANGLE, FLAG_SWING_DURATION, easeInOutCubic, setFlag, onStep1Done);
         }, HOLD_DOWN_DURATION);
       }
+      /* Bin tips forward; lid waits for the critical angle, then falls
+         open with cubic gravity acceleration and clatters at the stop. */
       tween(0, DUMP_ANGLE, DUMP_ROTATE_DURATION, easeInOutCubic, setDumpGroup, onForwardPartDone);
       setTimeout(function () {
-        tween(0, LID_OPEN_ANGLE, LID_GRAVITY_DURATION, easeOutBounce, setLid, onForwardPartDone);
+        tween(0, LID_OPEN_ANGLE, LID_GRAVITY_DURATION, gravityOpen, setLid, onForwardPartDone);
       }, LID_GRAVITY_DELAY);
       setTimeout(function () {
         tween(0, FLAG_HANG_ANGLE, FLAG_HANG_DURATION, easeOutCubic, setFlag, onForwardPartDone);
