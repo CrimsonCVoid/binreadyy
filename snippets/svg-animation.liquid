@@ -69,49 +69,53 @@
                   <rect x="98" y="286" width="12" height="12" rx="3" fill="#999" stroke="#888" stroke-width="1"></rect>
                   <rect x="98" y="306" width="12" height="12" rx="3" fill="#999" stroke="#888" stroke-width="1"></rect>
                 </g>
-                <g id="bin-wheels">
-                  <circle cx="118" cy="408" r="12" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="2"></circle>
-                  <circle cx="118" cy="408" r="4" fill="#1a1a1a"></circle>
-                  <circle cx="202" cy="408" r="12" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="2"></circle>
-                  <circle cx="202" cy="408" r="4" fill="#1a1a1a"></circle>
-                </g>
-                <path d="M91 190 L99 392 Q101 406 114 406 L206 406 Q219 406 221 392 L229 190 Z" fill="#3d6b4f" stroke="#2d5a3f" stroke-width="2"></path>
-                <line x1="104" y1="225" x2="216" y2="225" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"></line>
-                <line x1="103" y1="260" x2="217" y2="260" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"></line>
-                <line x1="101" y1="295" x2="219" y2="295" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"></line>
-                <line x1="100" y1="330" x2="220" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"></line>
-                <line x1="99" y1="365" x2="221" y2="365" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"></line>
-                <rect x="120" y="240" width="80" height="120" rx="5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.08)"></rect>
-                <path d="M106 200 Q108 300 110 390" stroke="rgba(255,255,255,0.05)" stroke-width="7" stroke-linecap="round"></path>
                 <g id="arm-hook-front">
                   <rect x="95" y="288" width="7" height="10" rx="2" fill="#888" stroke="#777" stroke-width="1" opacity="0.65"></rect>
                   <rect x="95" y="308" width="7" height="10" rx="2" fill="#888" stroke="#777" stroke-width="1" opacity="0.65"></rect>
                 </g>
-                <g id="bin-handle">
-                  <rect x="90" y="196" width="6" height="6" rx="1.5" fill="#2d5a3f" stroke="#1a4a2f" stroke-width="1"></rect>
-                  <rect x="90" y="210" width="6" height="6" rx="1.5" fill="#2d5a3f" stroke="#1a4a2f" stroke-width="1"></rect>
-                  <path d="M92 198 L74 198 Q66 198 66 206 L66 210 Q66 218 74 218 L92 218" stroke="#4a4a4a" stroke-width="5" stroke-linecap="round" fill="none"></path>
-                  <rect x="64" y="199" width="6" height="18" rx="3" fill="#555" stroke="#444" stroke-width="1"></rect>
-                  <rect x="88" y="194" width="16" height="28" rx="3" fill="rgba(0,0,0,0.1)"></rect>
-                </g>
-                <g id="bin-flag" filter="url(#glow-red)">
-                  <rect x="60" y="194" width="14" height="14" rx="4" fill="#f5612a" stroke="#d94f1e" stroke-width="1.5"></rect>
-                  <g transform="translate(67, 194)">
-                    <line x1="0" y1="0" x2="0" y2="-30" stroke="#f5612a" stroke-width="4" stroke-linecap="round"></line>
-                    <circle cx="0" cy="-37" r="7" fill="#f5612a"></circle>
-                    <line x1="0" y1="-20" x2="-10" y2="-33" stroke="#f5612a" stroke-width="3.5" stroke-linecap="round"></line>
-                    <line x1="-10" y1="-33" x2="-7" y2="-42" stroke="#f5612a" stroke-width="3.5" stroke-linecap="round"></line>
-                    <line x1="0" y1="-20" x2="10" y2="-32" stroke="#f5612a" stroke-width="3.5" stroke-linecap="round"></line>
-                    <line x1="10" y1="-32" x2="13" y2="-41" stroke="#f5612a" stroke-width="3.5" stroke-linecap="round"></line>
-                    <line x1="0" y1="0" x2="-7" y2="8" stroke="#f5612a" stroke-width="3.5" stroke-linecap="round"></line>
-                    <line x1="0" y1="0" x2="7" y2="8" stroke="#f5612a" stroke-width="3.5" stroke-linecap="round"></line>
+                <!-- Bin-only contents are mirrored around x=160 so the handle
+                     and Eddie sit on the side of the bin AWAY from the truck. -->
+                <g class="bin-mirror" transform="matrix(-1 0 0 1 320 0)">
+                  <g id="bin-wheels">
+                    <circle cx="118" cy="408" r="12" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="2"></circle>
+                    <circle cx="118" cy="408" r="4" fill="#1a1a1a"></circle>
+                    <circle cx="202" cy="408" r="12" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="2"></circle>
+                    <circle cx="202" cy="408" r="4" fill="#1a1a1a"></circle>
                   </g>
-                </g>
-                <g id="bin-lid">
-                  <ellipse id="lid-shadow" cx="160" cy="194" rx="64" ry="3" fill="rgba(0,0,0,0)"></ellipse>
-                  <path d="M86 190 Q86 172 97 170 L223 170 Q234 172 234 190 Z" fill="#4a4a4a" stroke="#3a3a3a" stroke-width="2"></path>
-                  <rect x="97" y="162" width="126" height="12" rx="4" fill="#555" stroke="#4a4a4a" stroke-width="1.5"></rect>
-                  <rect x="128" y="151" width="64" height="14" rx="6" fill="#666" stroke="#555" stroke-width="1.5"></rect>
+                  <path d="M91 190 L99 392 Q101 406 114 406 L206 406 Q219 406 221 392 L229 190 Z" fill="#3d6b4f" stroke="#2d5a3f" stroke-width="2"></path>
+                  <line x1="104" y1="225" x2="216" y2="225" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"></line>
+                  <line x1="103" y1="260" x2="217" y2="260" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"></line>
+                  <line x1="101" y1="295" x2="219" y2="295" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"></line>
+                  <line x1="100" y1="330" x2="220" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"></line>
+                  <line x1="99" y1="365" x2="221" y2="365" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"></line>
+                  <rect x="120" y="240" width="80" height="120" rx="5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.08)"></rect>
+                  <path d="M106 200 Q108 300 110 390" stroke="rgba(255,255,255,0.05)" stroke-width="7" stroke-linecap="round"></path>
+                  <g id="bin-handle">
+                    <rect x="90" y="196" width="6" height="6" rx="1.5" fill="#2d5a3f" stroke="#1a4a2f" stroke-width="1"></rect>
+                    <rect x="90" y="210" width="6" height="6" rx="1.5" fill="#2d5a3f" stroke="#1a4a2f" stroke-width="1"></rect>
+                    <path d="M92 198 L74 198 Q66 198 66 206 L66 210 Q66 218 74 218 L92 218" stroke="#4a4a4a" stroke-width="5" stroke-linecap="round" fill="none"></path>
+                    <rect x="64" y="199" width="6" height="18" rx="3" fill="#555" stroke="#444" stroke-width="1"></rect>
+                    <rect x="88" y="194" width="16" height="28" rx="3" fill="rgba(0,0,0,0.1)"></rect>
+                  </g>
+                  <g id="bin-flag" filter="url(#glow-red)">
+                    <rect x="60" y="194" width="14" height="14" rx="4" fill="#f5612a" stroke="#d94f1e" stroke-width="1.5"></rect>
+                    <g transform="translate(67, 194)">
+                      <line x1="0" y1="0" x2="0" y2="-30" stroke="#f5612a" stroke-width="4" stroke-linecap="round"></line>
+                      <circle cx="0" cy="-37" r="7" fill="#f5612a"></circle>
+                      <line x1="0" y1="-20" x2="-10" y2="-33" stroke="#f5612a" stroke-width="3.5" stroke-linecap="round"></line>
+                      <line x1="-10" y1="-33" x2="-7" y2="-42" stroke="#f5612a" stroke-width="3.5" stroke-linecap="round"></line>
+                      <line x1="0" y1="-20" x2="10" y2="-32" stroke="#f5612a" stroke-width="3.5" stroke-linecap="round"></line>
+                      <line x1="10" y1="-32" x2="13" y2="-41" stroke="#f5612a" stroke-width="3.5" stroke-linecap="round"></line>
+                      <line x1="0" y1="0" x2="-7" y2="8" stroke="#f5612a" stroke-width="3.5" stroke-linecap="round"></line>
+                      <line x1="0" y1="0" x2="7" y2="8" stroke="#f5612a" stroke-width="3.5" stroke-linecap="round"></line>
+                    </g>
+                  </g>
+                  <g id="bin-lid">
+                    <ellipse id="lid-shadow" cx="160" cy="194" rx="64" ry="3" fill="rgba(0,0,0,0)"></ellipse>
+                    <path d="M86 190 Q86 172 97 170 L223 170 Q234 172 234 190 Z" fill="#4a4a4a" stroke="#3a3a3a" stroke-width="2"></path>
+                    <rect x="97" y="162" width="126" height="12" rx="4" fill="#555" stroke="#4a4a4a" stroke-width="1.5"></rect>
+                    <rect x="128" y="151" width="64" height="14" rx="6" fill="#666" stroke="#555" stroke-width="1.5"></rect>
+                  </g>
                 </g>
               </g>
 

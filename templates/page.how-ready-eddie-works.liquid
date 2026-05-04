@@ -507,30 +507,6 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
 }
 .bin .photo img { width: 100%; height: 100%; object-fit: cover; }
-.bin .photo-placeholder {
-  background: repeating-linear-gradient(
-    135deg,
-    #F5EFDD 0,
-    #F5EFDD 14px,
-    #EDE6CF 14px,
-    #EDE6CF 28px
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 18px;
-  color: var(--ink-soft);
-}
-.bin .photo-placeholder span {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  background: rgba(251,241,222,0.85);
-  padding: 8px 14px;
-  border-radius: 999px;
-}
 .bin .body { padding: 22px 22px 26px; }
 .bin .tag {
   display: inline-block;
@@ -803,9 +779,7 @@ footer .small {
       </div>
 
       <div class="bin b">
-        <div class="photo photo-placeholder" role="img" aria-label="Bin B photo coming soon">
-          <span>Photo coming soon</span>
-        </div>
+        <div class="photo"><img src="{{ 'LidLevel.jpeg' | asset_url }}" alt="Bin B side profile, lid sits flush with the handle" loading="lazy" /></div>
         <div class="body">
           <span class="tag">BIN B</span>
           <h3>Lid sits level with the handle</h3>
