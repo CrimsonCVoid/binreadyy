@@ -1411,14 +1411,22 @@
     }
     footer .brand { font-size: 0.95rem; }
     footer .brand .brand-mark { height: 44px; }
-    .f-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .f-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      align-items: center;
+      line-height: 1;
+    }
+    .f-links > * { display: inline-flex; align-items: center; }
     .f-links a {
       text-decoration: none;
       color: var(--ink-soft);
-      padding: 8px 0;
+      padding: 6px 0;
       transition: color 0.3s var(--ease);
     }
     .f-links a:hover { color: var(--accent); }
+    .f-links .footer-patent { margin-top: 0; }
 
     /* ───────── Utilities ───────── */
     :focus-visible {
