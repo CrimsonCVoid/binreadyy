@@ -309,7 +309,7 @@
        where gravity overcomes the lid sitting on the rim), then swings
        open over a span that lands just before the bin reaches max tilt. */
     var LID_GRAVITY_DELAY     = 750;
-    var LID_GRAVITY_DURATION  = 1150;
+    var LID_GRAVITY_DURATION  = 850;
     var FLAG_HANG_DELAY       = 400;
     var FLAG_HANG_DURATION    = 1900;
     var HOLD_DOWN_DURATION    = 2500;
