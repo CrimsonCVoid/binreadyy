@@ -9,6 +9,15 @@
  */
 {
   "sections": {
+    "final_buy_UBbzm9": {
+      "type": "final-buy",
+      "name": "Final buy",
+      "settings": {
+        "product": "",
+        "heading": "Free shipping on orders of $40 or more",
+        "subheading": "Everyone loves free shipping!"
+      }
+    },
     "hero": {
       "type": "hero",
       "settings": {
@@ -182,7 +191,9 @@
       "settings": {
         "kicker": "Real quotes · names changed",
         "heading": "From the people who actually use it.",
-        "subheading": "These are real words from real customers. We swapped the names for privacy."
+        "subheading": "These are real words from real customers. We swapped the names for privacy.",
+        "rating": "4.9",
+        "trust_line": "average · early customer reviews"
       }
     },
     "faq": {
@@ -244,7 +255,8 @@
         "subheading": "Send us a note. Chris reads every message himself.",
         "policy_title": "Return policy",
         "policy_text": "<p>We stand behind every purchase. We think you'll love Ready Eddie, but if you don't, items may be returned within <strong>30 days of delivery</strong> in original condition with all packaging. Refunds are processed within 5–7 business days of receipt.</p><p>Return shipping costs are your responsibility. To initiate a return or ask questions, please contact us at <a href=\"mailto:returns@readyeddieshop.com\">returns@readyeddieshop.com</a>.</p>",
-        "contact_title": "Contact us"
+        "contact_title": "Contact us",
+        "success_message": "Thanks! We got your message. Chris will get back to you within one business day."
       }
     },
     "story": {
@@ -258,6 +270,7 @@
     }
   },
   "order": [
+    "final_buy_UBbzm9",
     "hero",
     "why-strip",
     "how-it-works",
