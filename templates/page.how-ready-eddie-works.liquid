@@ -34,9 +34,15 @@
 {%- endif -%}
 
 <link rel="canonical" href="{{ shop.url }}{{ page.url }}" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
+{%- comment -%}
+  Single preconnect to gstatic (the woff2 origin). googleapis preconnect
+  was redundant — it only serves the (already render-blocking) CSS file.
+  Load fonts CSS non-blocking via preload→stylesheet swap.
+{%- endcomment -%}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+{%- assign fonts_url = 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap' -%}
+<link rel="preload" as="style" href="{{ fonts_url }}" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript><link rel="stylesheet" href="{{ fonts_url }}" /></noscript>
 
 {{ content_for_header }}
 

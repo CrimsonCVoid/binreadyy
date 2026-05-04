@@ -15,12 +15,17 @@
     <link rel="apple-touch-icon" href="{{ 'WebsiteLogo-128.png' | asset_url }}" />
   {% endif %}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  {%- comment -%}
+    Only preconnect to gstatic (where the actual woff2 files live).
+    Preconnecting to googleapis doesn't help — the CSS request is
+    render-blocking either way, and extra preconnects warn in Lighthouse.
+    Load fonts CSS non-blocking via preload→stylesheet swap so it
+    can't hold up first paint; noscript fallback for no-JS visitors.
+  {%- endcomment -%}
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet"
-  />
+  {%- assign fonts_url = 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap' -%}
+  <link rel="preload" as="style" href="{{ fonts_url }}" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="{{ fonts_url }}" /></noscript>
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 
