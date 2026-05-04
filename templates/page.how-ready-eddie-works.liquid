@@ -407,6 +407,8 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
 }
 .bin .photo img { width: 100%; height: 100%; object-fit: cover; }
+.bin .photo-illustration { background: #F5EFDD; display: flex; align-items: center; justify-content: center; }
+.bin .photo-illustration svg { width: 100%; height: 100%; display: block; }
 .bin .body { padding: 22px 22px 26px; }
 .bin .tag {
   display: inline-block;
@@ -655,12 +657,30 @@ footer .small {
       </div>
     </div>
 
-    {%- comment -%}
-      BIN B card hidden until a flush-lid bin profile photo is available.
-      Restore this block and add assets/bin-b-lid-level.jpeg to bring it back.
-
     <div class="bin b">
-      <div class="photo"><img src="{{ 'bin-b-lid-level.jpeg' | asset_url }}" alt="Bin B side profile, lid sits flush with the handle" loading="lazy" /></div>
+      <div class="photo photo-illustration" role="img" aria-label="Bin B side profile, lid sits flush with the handle">
+        <svg viewBox="0 0 500 300" preserveAspectRatio="xMidYMid meet" focusable="false" aria-hidden="true">
+          <defs>
+            <linearGradient id="binB-bg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F5EFDD"/>
+              <stop offset="1" stop-color="#E8E0C8"/>
+            </linearGradient>
+          </defs>
+          <rect width="500" height="300" fill="url(#binB-bg)"/>
+          <line x1="40" y1="248" x2="460" y2="248" stroke="#1A1612" stroke-width="2" opacity="0.25"/>
+          <!-- Bin body -->
+          <path d="M150 90 L350 90 L370 248 L130 248 Z" fill="#2B2622" stroke="#1A1612" stroke-width="2" stroke-linejoin="round"/>
+          <!-- Flush lid -->
+          <rect x="142" y="78" width="216" height="14" rx="3" fill="#1A1612"/>
+          <!-- Handle bar at the same level as the lid -->
+          <rect x="190" y="78" width="120" height="6" rx="3" fill="#F5612A"/>
+          <!-- Hinge cuff -->
+          <rect x="232" y="74" width="36" height="14" rx="4" fill="#6E6F71" stroke="#1A1612" stroke-width="1.5"/>
+          <!-- Body shading -->
+          <path d="M150 92 L160 92 L150 248 L140 248 Z" fill="#1A1612" opacity="0.18"/>
+          <text x="250" y="288" text-anchor="middle" fill="#1A1612" opacity="0.55" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2">FLUSH LID PROFILE</text>
+        </svg>
+      </div>
       <div class="body">
         <span class="tag">BIN B</span>
         <h3>Lid sits level with the handle</h3>
@@ -668,7 +688,6 @@ footer .small {
         <div class="pick"><span class="cuff-swatch black"></span> Use the black cuff</div>
       </div>
     </div>
-    {%- endcomment -%}
   </div>
 </section>
 
