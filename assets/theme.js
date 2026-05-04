@@ -324,7 +324,7 @@
     var LOOP_PAUSE            = 2500;
 
     var DUMP_ANGLE       = -130;
-    var LID_OPEN_ANGLE   = -170;
+    var LID_OPEN_ANGLE   = -119;
     var FLAG_HANG_ANGLE  = -70;
     var FLAG_DOWN_ANGLE  = -180;
     var BIN_SCALE        = 0.82;

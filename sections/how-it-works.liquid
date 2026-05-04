@@ -17,14 +17,30 @@
         </div>
       </div>
 
-      <ol class="how-steps">
-        {%- for block in section.blocks -%}
-          <li class="reveal{% if forloop.index > 1 %} reveal-d{{ forloop.index | minus: 1 }}{% endif %}" {{ block.shopify_attributes }}>
-            <h3>{{ block.settings.title }}</h3>
-            <p>{{ block.settings.description }}</p>
-          </li>
-        {%- endfor -%}
-      </ol>
+      <div class="how-right">
+        <ol class="how-steps">
+          {%- for block in section.blocks -%}
+            <li class="reveal{% if forloop.index > 1 %} reveal-d{{ forloop.index | minus: 1 }}{% endif %}" {{ block.shopify_attributes }}>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.description }}</p>
+            </li>
+          {%- endfor -%}
+        </ol>
+
+        {%- if section.settings.more_label != blank and section.settings.more_url != blank -%}
+          <a href="{{ section.settings.more_url }}" class="how-more reveal reveal-d3">
+            <span class="how-more-text">{{ section.settings.more_label }}</span>
+            {%- if section.settings.more_sublabel != blank -%}
+              <span class="how-more-sub">{{ section.settings.more_sublabel }}</span>
+            {%- endif -%}
+            <span class="how-more-arrow" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10m-3.5-3.5L13 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+        {%- endif -%}
+      </div>
     </div>
   </div>
 </section>
@@ -44,6 +60,28 @@
       "id": "subheading",
       "label": "Subheading",
       "default": "Mechanical. Boring. Exactly what you want it to be."
+    },
+    {
+      "type": "header",
+      "content": "Deeper-dive link"
+    },
+    {
+      "type": "text",
+      "id": "more_label",
+      "label": "Link label",
+      "default": "See the full breakdown"
+    },
+    {
+      "type": "text",
+      "id": "more_sublabel",
+      "label": "Link sublabel (optional)",
+      "default": "Photos, mechanism, install — 60 seconds"
+    },
+    {
+      "type": "url",
+      "id": "more_url",
+      "label": "Link URL",
+      "default": "/pages/how-ready-eddie-works"
     }
   ],
   "blocks": [
