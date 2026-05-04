@@ -12,7 +12,7 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "product": "ready-eddie",
+        "product": "ready-eddie-1",
         "kicker": "A small, simple gadget. a big convenience.",
         "heading": "Know when your bin has been emptied.",
         "lede": "Flip Ready Eddie up on collection day. When the truck empties your bin, gravity flips Eddie down. One glance from the house — done. No apps, no batteries, no wondering, no unnecessary trips."
@@ -231,7 +231,7 @@
     "final-buy": {
       "type": "final-buy",
       "settings": {
-        "product": "ready-eddie",
+        "product": "ready-eddie-1",
         "heading": "Stop wondering.",
         "subheading": "Pick a pack, be done with trash day forever."
       }
