@@ -176,6 +176,91 @@
     syncSelection();
   });
 
+  /* ─── Contact form: inline submit, no page reload ─── */
+  document.querySelectorAll('.js-contact-form').forEach(function (form) {
+    var shell = form.closest('[data-contact-shell]') || form.parentElement;
+    var status = shell && shell.querySelector('[data-contact-status]');
+    var btn = form.querySelector('button[type="submit"]');
+    if (!btn) return;
+    var successMessage = (shell && shell.getAttribute('data-success-message'))
+      || 'Thanks! We got your message.';
+
+    function showStatus(text, isError) {
+      if (!status) return;
+      status.textContent = text;
+      status.className = 'contact-status is-shown' + (isError ? ' is-error' : '');
+      status.setAttribute('role', isError ? 'alert' : 'status');
+      status.hidden = false;
+    }
+    function clearStatus() {
+      if (!status) return;
+      status.textContent = '';
+      status.className = 'contact-status';
+      status.hidden = true;
+    }
+    function clearFallbacks() {
+      if (!shell) return;
+      shell.querySelectorAll('[data-contact-fallback]').forEach(function (el) {
+        el.remove();
+      });
+    }
+
+    form.addEventListener('submit', function (ev) {
+      if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
+        return; /* let the browser show its native validation UI */
+      }
+      ev.preventDefault();
+      clearFallbacks();
+      clearStatus();
+
+      var originalLabel = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = 'Sending&hellip;';
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'text/html' }
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('http ' + res.status);
+          /* Shopify redirects to ?contact_posted=true on success.
+             If the final URL says false, parse out the validation errors. */
+          var url = res.url || '';
+          if (url.indexOf('contact_posted=true') !== -1) {
+            return { ok: true };
+          }
+          return res.text().then(function (html) {
+            var doc = new DOMParser().parseFromString(html, 'text/html');
+            var err = doc.querySelector('[data-contact-fallback].is-error, .errors');
+            return {
+              ok: false,
+              message: err ? err.textContent.trim() : 'Could not send — please try again.'
+            };
+          });
+        })
+        .then(function (result) {
+          if (result.ok) {
+            showStatus(successMessage, false);
+            shell && shell.classList.add('is-sent');
+            form.reset();
+          } else {
+            showStatus(result.message, true);
+          }
+        })
+        .catch(function () {
+          showStatus(
+            "Couldn't send right now. Try again in a moment, or email us directly.",
+            true
+          );
+        })
+        .then(function () {
+          btn.disabled = false;
+          btn.innerHTML = originalLabel;
+        });
+    });
+  });
+
   /* ─── Cart page: qty controls, remove, AJAX update ─── */
   initCartPage();
 

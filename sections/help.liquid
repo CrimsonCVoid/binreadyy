@@ -16,35 +16,50 @@
       </div>
       <div class="help-col reveal reveal-d1">
         <h3>{{ section.settings.contact_title }}</h3>
-        {%- form 'contact', id: 'contact-form' -%}
-          {%- if form.posted_successfully? -%}
-            <div class="contact-status is-shown" role="status">
-              Thanks! We got your message. {{ settings.founder_name }} will get back to you within one business day.
-            </div>
-          {%- endif -%}
+        {%- assign success_message = section.settings.success_message | default: 'Thanks! We got your message. We will get back to you within one business day.' -%}
+        <div
+          class="contact-shell"
+          data-contact-shell
+          data-success-message="{{ success_message | escape }}"
+        >
+          {%- comment -%}
+            JS-controlled status div. Hidden by default; updated client-side
+            after AJAX submit. Server-rendered fallbacks below cover the
+            no-JS case (page reload + Shopify's standard success/error
+            re-render).
+          {%- endcomment -%}
+          <div class="contact-status" data-contact-status hidden role="status"></div>
 
-          {%- if form.errors -%}
-            <div class="contact-status is-shown" role="alert">
-              {{ form.errors | default_errors }}
-            </div>
-          {%- endif -%}
+          {%- form 'contact', id: 'contact-form', class: 'js-contact-form' -%}
+            {%- if form.posted_successfully? -%}
+              <div class="contact-status is-shown" role="status" data-contact-fallback>
+                {{ success_message }}
+              </div>
+            {%- endif -%}
 
-          <div class="contact-form">
-            <label>
-              Your name
-              <input type="text" name="contact[name]" autocomplete="name" required maxlength="80" value="{{ form.name }}" />
-            </label>
-            <label>
-              Your email
-              <input type="email" name="contact[email]" autocomplete="email" required maxlength="120" value="{{ form.email }}" />
-            </label>
-            <label>
-              What's on your mind?
-              <textarea name="contact[body]" required maxlength="1500">{{ form.body }}</textarea>
-            </label>
-            <button type="submit" class="btn btn-primary">{{ 'general.send_message' | t }}</button>
-          </div>
-        {%- endform -%}
+            {%- if form.errors -%}
+              <div class="contact-status is-shown is-error" role="alert" data-contact-fallback>
+                {{ form.errors | default_errors }}
+              </div>
+            {%- endif -%}
+
+            <div class="contact-form">
+              <label>
+                Your name
+                <input type="text" name="contact[name]" autocomplete="name" required maxlength="80" value="{{ form.name }}" />
+              </label>
+              <label>
+                Your email
+                <input type="email" name="contact[email]" autocomplete="email" required maxlength="120" value="{{ form.email }}" />
+              </label>
+              <label>
+                What's on your mind?
+                <textarea name="contact[body]" required maxlength="1500">{{ form.body }}</textarea>
+              </label>
+              <button type="submit" class="btn btn-primary">{{ 'general.send_message' | t }}</button>
+            </div>
+          {%- endform -%}
+        </div>
       </div>
     </div>
   </div>
@@ -89,6 +104,12 @@
       "id": "contact_title",
       "label": "Contact title",
       "default": "Contact us"
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success message (after sending)",
+      "default": "Thanks! We got your message. Chris will get back to you within one business day."
     }
   ],
   "presets": [
