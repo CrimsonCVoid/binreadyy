@@ -1,21 +1,24 @@
-<footer>
-  <div class="container">
-    <a href="/" class="brand">
-      {%- if settings.logo -%}
-        <img class="brand-mark" src="{{ settings.logo | image_url: width: 360 }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" loading="lazy" />
-      {%- else -%}
-        <img class="brand-mark" src="{{ 'Logo-240.png' | asset_url }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" loading="lazy" />
-      {%- endif -%}
-    </a>
-    <div class="f-links">
-      {%- for link in section.settings.menu.links -%}
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      {%- endfor -%}
-      <span>&copy; {{ 'now' | date: '%Y' }}</span>
-      <span class="footer-patent">Patent Pending (U.S. Patent Application No. 19/629,754)</span>
+{%- assign hide_on_handles = 'how-ready-eddie-works' | split: ',' -%}
+{%- unless hide_on_handles contains page.handle -%}
+  <footer>
+    <div class="container">
+      <a href="/" class="brand">
+        {%- if settings.logo -%}
+          <img class="brand-mark" src="{{ settings.logo | image_url: width: 360 }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" loading="lazy" />
+        {%- else -%}
+          <img class="brand-mark" src="{{ 'Logo-240.png' | asset_url }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" loading="lazy" />
+        {%- endif -%}
+      </a>
+      <div class="f-links">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+        <span>&copy; {{ 'now' | date: '%Y' }}</span>
+        <span class="footer-patent">Patent Pending (U.S. Patent Application No. 19/629,754)</span>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
+{%- endunless -%}
 
 {% schema %}
 {

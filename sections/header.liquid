@@ -1,23 +1,31 @@
-<header class="site-header">
-  <div class="container">
-    <a href="/" class="brand" aria-label="{{ shop.name }} home">
-      {%- if settings.logo -%}
-        <img class="brand-mark" src="{{ settings.logo | image_url: width: 360 }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" />
-      {%- else -%}
-        <img class="brand-mark" src="{{ 'Logo-240.png' | asset_url }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" />
-      {%- endif -%}
-    </a>
-    <nav class="nav" aria-label="Primary">
-      <a href="/pages/how-ready-eddie-works">How it works</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#faq">FAQ</a>
-      <a href="#help">Contact us</a>
-      {%- if section.settings.show_buy_button -%}
-        <a href="#buy" class="btn btn-primary btn-sm">Buy &mdash; {{ all_products[section.settings.product].price | money | default: '$12' }}</a>
-      {%- endif -%}
-    </nav>
-  </div>
-</header>
+{%- comment -%}
+  The how-it-works page renders its own standalone top bar.
+  Skip the global site header there even if the page admin
+  hasn't switched its template to how-ready-eddie-works.
+{%- endcomment -%}
+{%- assign hide_on_handles = 'how-ready-eddie-works' | split: ',' -%}
+{%- unless hide_on_handles contains page.handle -%}
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand" aria-label="{{ shop.name }} home">
+        {%- if settings.logo -%}
+          <img class="brand-mark" src="{{ settings.logo | image_url: width: 360 }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" />
+        {%- else -%}
+          <img class="brand-mark" src="{{ 'Logo-240.png' | asset_url }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" />
+        {%- endif -%}
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/pages/how-ready-eddie-works">How it works</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="#help">Contact us</a>
+        {%- if section.settings.show_buy_button -%}
+          <a href="#buy" class="btn btn-primary btn-sm">Buy &mdash; {{ all_products[section.settings.product].price | money | default: '$12' }}</a>
+        {%- endif -%}
+      </nav>
+    </div>
+  </header>
+{%- endunless -%}
 
 {% schema %}
 {
