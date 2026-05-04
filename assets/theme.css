@@ -853,9 +853,12 @@
     }
 
     /* Hero SVG animation styles */
-    #dump-group { transform-origin: 20px 200px; will-change: transform; transform: scale(0.82); }
-    #bin-lid    { transform-origin: 86px 190px; will-change: transform; }
-    #bin-flag   { transform-origin: 67px 200px; will-change: transform; }
+    /* Mirror the whole illustration: truck ends up on the right and the
+       bin tips rightward into it (matches the real-world side-loader). */
+    #bin-illustration { transform: scaleX(-1); transform-origin: 50% 50%; }
+    #dump-group { transform-origin: 20px 200px; will-change: transform; transform: translate3d(0,0,0) scale(0.82); }
+    #bin-lid    { transform-origin: 86px 190px; will-change: transform; transform: translate3d(0,0,0); }
+    #bin-flag   { transform-origin: 67px 200px; will-change: transform; transform: translate3d(0,0,0); }
     #indicator-text-up, #indicator-check { transition: opacity 0.5s var(--ease); }
     #bin-sparkles { opacity: 0; pointer-events: none; }
     #bin-sparkles.is-active { animation: sparkleBurst 1.6s var(--ease) forwards; }

@@ -299,9 +299,7 @@
     var dumpGroup     = document.getElementById('dump-group');
     var lid           = document.getElementById('bin-lid');
     var flag          = document.getElementById('bin-flag');
-    var binShadow     = document.getElementById('bin-shadow');
     var sparkles      = document.getElementById('bin-sparkles');
-    var lidShadow     = document.getElementById('lid-shadow');
 
     if (!dumpGroup || !lid || !flag) return;
 
@@ -337,23 +335,24 @@
     }
     function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
 
+    /* Cache last-applied transforms to skip redundant style writes when
+       multiple parallel tweens settle on the same value. */
+    var lastDump = null, lastLid = null, lastFlag = null;
     function setDumpGroup(angle) {
-      dumpGroup.style.transform = 'rotate(' + angle + 'deg) scale(' + BIN_SCALE + ')';
-      if (binShadow) {
-        var progress = Math.abs(angle / DUMP_ANGLE);
-        binShadow.setAttribute('rx', String(95 - 50 * progress));
-        binShadow.setAttribute('fill', 'rgba(0,0,0,' + Math.max(0, 0.18 - 0.14 * progress) + ')');
-      }
+      if (angle === lastDump) return;
+      lastDump = angle;
+      dumpGroup.style.transform = 'translate3d(0,0,0) rotate(' + angle.toFixed(2) + 'deg) scale(' + BIN_SCALE + ')';
     }
     function setLid(angle) {
-      lid.style.transform = 'rotate(' + angle + 'deg)';
-      if (lidShadow) {
-        var progress = Math.abs(angle / LID_OPEN_ANGLE);
-        lidShadow.setAttribute('fill', 'rgba(0,0,0,' + (0.08 * progress) + ')');
-        lidShadow.setAttribute('rx', String(64 + 16 * progress));
-      }
+      if (angle === lastLid) return;
+      lastLid = angle;
+      lid.style.transform = 'translate3d(0,0,0) rotate(' + angle.toFixed(2) + 'deg)';
     }
-    function setFlag(angle) { flag.style.transform = 'rotate(' + angle + 'deg)'; }
+    function setFlag(angle) {
+      if (angle === lastFlag) return;
+      lastFlag = angle;
+      flag.style.transform = 'translate3d(0,0,0) rotate(' + angle.toFixed(2) + 'deg)';
+    }
     function setIndicatorState(isDown) {
       if (sceneWrap) sceneWrap.classList.toggle('is-empty', !!isDown);
     }
