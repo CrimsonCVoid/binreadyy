@@ -120,7 +120,14 @@
       ],
       "settings": {
         "heading": "Three steps. No electronics.",
-        "subheading": "Mechanical. Boring. Exactly what you want it to be."
+        "subheading": "Mechanical. Boring. Exactly what you want it to be.",
+        "show_install_rules": true,
+        "install_rules_label": "Pick your cuff",
+        "install_rule_gray": "If the top of your bin lid is above your bin handle, put the GRAY cuff on your handle, and wrap Ready Eddie around it.",
+        "install_rule_black": "If the top of your bin lid is level with the top of your bin handle, use the BLACK cuff.",
+        "more_label": "See the full breakdown",
+        "more_sublabel": "Photos, mechanism, install — 60 seconds",
+        "more_url": "/pages/how-ready-eddie-works"
       }
     },
     "testimonials": {
