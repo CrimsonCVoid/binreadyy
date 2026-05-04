@@ -17,8 +17,8 @@
           "settings": {
             "show_announcement": true,
             "announcement_text": "<span style=\"text-decoration:underline\"><strong>Free shipping on orders of $40 or more</strong></span>",
-            "background_color": "#F5612A",
-            "text_color": "#FFFFFF",
+            "background_color": "#f5612a",
+            "text_color": "#ffffff",
             "font_size": 20
           },
           "blocks": {}
@@ -50,7 +50,7 @@
         "b2": {
           "type": "benefit",
           "settings": {
-            "text": "No app"
+            "text": "No apps"
           }
         },
         "b3": {
@@ -255,7 +255,7 @@
       "settings": {
         "product": "ready-eddie-1",
         "heading": "Stop wondering.",
-        "subheading": "Pick a pack, be done with trash day forever."
+        "subheading": "Pick a pack and enjoy knowing if and when all your bins are empty."
       }
     },
     "help": {
@@ -273,7 +273,7 @@
     "story": {
       "type": "story",
       "settings": {
-        "kicker": "Made by one guy · in a garage · in North Carolina",
+        "kicker": "Invented by one guy · in his garage · in North Carolina",
         "toggle_label": "Read our story",
         "heading": "Born on a muggy afternoon, at the end of a long driveway.",
         "story_text": "<p>Ready Eddie was built in a garage by <strong>Chris Krebs</strong> — a criminologist who lives in North Carolina with his wife, his kids, and a small menagerie of animals. Solving problems is his job. It's also his hobby.</p><p>One hot, muggy day, Chris walked all the way down his driveway to check the bin. Still full. That flicker of annoyance became an idea. He thought about his older neighbors. Families with long driveways snaking through the woods. Surely other people hated not knowing, too. This was a problem worth solving.</p><p>Back in the garage, the first prototype was born — a Frankenstein's monster of scrap metal, screws, and wire. Ugly enough to be beautiful. When he tested it the next morning, it worked flawlessly.</p><p>Energized, Chris taught himself CAD and started sending designs to a friend with a 3D printer. The new models looked right but failed in practice — breaking, falling off, working only half the time. The garage became a graveyard of failed attempts. Each one taught him something. After countless late nights and design overhauls, a version emerged that was simple, durable, and reliable. That's the Ready Eddie you see now.</p><p>Born from a sweltering afternoon and the stubborn belief that there's almost always a better, easier way.</p>"
