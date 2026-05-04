@@ -362,6 +362,18 @@
       outline: 2px solid var(--accent);
       outline-offset: 3px;
     }
+    .price-option:has(input:disabled) {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .po-soldout {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #b14a2a;
+      margin-left: 6px;
+    }
     .po-top {
       display: flex;
       align-items: baseline;

@@ -501,6 +501,8 @@ img { max-width: 100%; display: block; }
 .btn-primary:hover { background: var(--orange-deep); border-color: var(--orange-deep); }
 .btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
 .btn-ghost:hover { background: var(--ink); color: var(--cream); }
+.btn.is-disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+.btn.is-disabled small { display: block; font-weight: 400; font-size: 12px; opacity: 0.85; margin-top: 2px; }
 
 /* ---------- FOOTER ---------- */
 footer {
@@ -677,7 +679,7 @@ footer .small {
     <p>Take him home. He&rsquo;ll be doing his job by next pickup.</p>
     <div class="links">
       <a href="{{ shop.url }}" class="btn btn-primary">See the full site</a>
-      <a href="/pages/install" class="btn btn-ghost">Install instructions</a>
+      <span class="btn btn-ghost is-disabled" aria-disabled="true" role="button" tabindex="-1">Install instructions <small>(coming soon)</small></span>
     </div>
   </div>
 </section>

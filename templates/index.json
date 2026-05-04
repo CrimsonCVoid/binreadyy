@@ -231,7 +231,7 @@
     "final-buy": {
       "type": "final-buy",
       "settings": {
-        "product": "",
+        "product": "ready-eddie-1",
         "heading": "Stop wondering.",
         "subheading": "Pick a pack, be done with trash day forever."
       }

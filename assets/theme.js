@@ -116,20 +116,33 @@
       btn.disabled = true;
       btn.innerHTML = 'Adding&hellip;';
 
-      var variantId = form.querySelector('input[name="id"]:checked, input[name="id"]');
-      if (!variantId) return;
+      var variantInput = form.querySelector('input[name="id"]:checked')
+        || form.querySelector('input[name="id"]:not([type="radio"])')
+        || form.querySelector('input[name="id"]');
+      if (!variantInput || !variantInput.value) {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        return;
+      }
 
       fetch('/cart/add.js', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({
-          id: parseInt(variantId.value, 10),
-          quantity: 1
+          items: [{ id: parseInt(variantInput.value, 10), quantity: 1 }]
         })
       })
       .then(function (res) {
-        if (!res.ok) throw new Error('Cart error');
-        return res.json();
+        return res.json().then(function (data) {
+          if (!res.ok) {
+            var msg = (data && (data.description || data.message)) || 'Cart error';
+            throw new Error(msg);
+          }
+          return data;
+        });
       })
       .then(function () {
         btn.innerHTML = 'Added &#10003;';
@@ -137,10 +150,11 @@
           window.location.href = '/cart';
         }, 600);
       })
-      .catch(function () {
+      .catch(function (err) {
         btn.innerHTML = 'Error — try again';
         btn.disabled = false;
-        setTimeout(function () { btn.innerHTML = originalText; }, 2000);
+        if (window.console && console.warn) console.warn('Add to cart failed:', err);
+        setTimeout(function () { btn.innerHTML = originalText; }, 2200);
       });
     });
   });
@@ -154,22 +168,18 @@
     if (!variantId) return;
 
     radios.forEach(function (r) {
+      if (r.disabled) return;
       r.checked = (r.value === variantId);
     });
 
-    /* Update all hidden variant ID inputs in add-to-cart forms */
-    document.querySelectorAll('.js-variant-id').forEach(function (hidden) {
-      hidden.value = variantId;
+    /* Update price label inside each form's buy button using its own checked radio */
+    document.querySelectorAll('.js-add-to-cart').forEach(function (form) {
+      var checked = form.querySelector('.pricing-picker input[type="radio"]:checked');
+      if (!checked) return;
+      var price = checked.getAttribute('data-price');
+      var label = form.querySelector('.buy-price');
+      if (label && price) label.textContent = price;
     });
-
-    /* Update price labels from data attributes */
-    var checkedRadio = document.querySelector('.pricing-picker input[type="radio"]:checked');
-    if (checkedRadio) {
-      var price = checkedRadio.getAttribute('data-price');
-      document.querySelectorAll('.buy-price').forEach(function (el) {
-        el.textContent = price;
-      });
-    }
   }
   radios.forEach(function (r) {
     r.addEventListener('change', function () { syncVariant(r); });

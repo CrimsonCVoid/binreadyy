@@ -1,4 +1,4 @@
-{%- assign product = all_products[section.settings.product] -%}
+{%- assign product = all_products[section.settings.product] | default: product -%}
 
 <section class="final-buy" id="buy" aria-labelledby="final-title">
   <div class="container">
