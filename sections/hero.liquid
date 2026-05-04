@@ -20,7 +20,7 @@
                 {{ product.featured_image | image_url: width: 1200 }} 1200w
               "
               sizes="(max-width: 480px) 84vw, (max-width: 820px) 70vw, 36vw"
-              alt="{{ product.featured_image.alt | default: product.title }}"
+              alt="{{ product.featured_image.alt | default: product.title | default: 'Ready Eddie clipped on a curbside bin' }}"
               width="{{ product.featured_image.width }}"
               height="{{ product.featured_image.height }}"
               loading="eager"
