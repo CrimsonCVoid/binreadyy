@@ -159,6 +159,23 @@
     });
   });
 
+  /* ─── Pack picker: live update price, visual selection state ─── */
+  document.querySelectorAll('.pack-picker').forEach(function (picker) {
+    var form = picker.closest('form');
+    function syncSelection() {
+      var checked = picker.querySelector('input[type="radio"]:checked');
+      if (!checked) return;
+      picker.querySelectorAll('.pack-option').forEach(function (opt) {
+        var input = opt.querySelector('input[type="radio"]');
+        opt.classList.toggle('is-checked', !!input && input === checked);
+      });
+      var priceEl = form && form.querySelector('.buy-price');
+      if (priceEl && checked.dataset.price) priceEl.textContent = checked.dataset.price;
+    }
+    picker.addEventListener('change', syncSelection);
+    syncSelection();
+  });
+
   /* ─── Cart page: qty controls, remove, AJAX update ─── */
   initCartPage();
 

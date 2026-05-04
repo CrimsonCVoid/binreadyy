@@ -1,7 +1,8 @@
 {%- comment -%}
-  Add-to-cart CTAs. Requires `product` in scope.
-  Renders one button per variant (up to two, side by side).
-  JS in theme.js handles AJAX submission.
+  Add-to-cart panel. Requires `product` in scope.
+  Shows a 1-pack / 2-pack picker (when the product has >1 variant)
+  followed by a single Add to Cart button. JS in theme.js handles
+  live price update + AJAX submit.
 {%- endcomment -%}
 
 {%- assign product = product | default: all_products[section.settings.product] -%}
@@ -10,51 +11,65 @@
 {%- else -%}
   {%- assign variants = product.variants -%}
   {%- assign primary = variants[0] -%}
-  {%- assign secondary = variants[1] -%}
+  {%- assign default_variant = product.selected_or_first_available_variant | default: primary -%}
 
-  <div class="buy-options" data-variant-count="{{ variants.size }}">
-    {%- for variant in variants limit: 2 -%}
-      <form class="js-add-to-cart buy-option {% if forloop.first %}buy-option-primary{% else %}buy-option-secondary{% endif %}" action="/cart/add" method="post">
-        <input type="hidden" name="id" value="{{ variant.id }}" />
-        <input type="hidden" name="quantity" value="1" />
-
-        <div class="buy-option-meta">
-          <span class="buy-option-name">{{ variant.title | default: 'Ready Eddie' }}</span>
+  <form class="js-add-to-cart buy-form" action="/cart/add" method="post" data-pack-form>
+    {%- if variants.size > 1 -%}
+      <div class="pack-picker" role="radiogroup" aria-label="Choose your pack">
+        {%- for variant in variants -%}
+          {%- assign is_default = false -%}
+          {%- if variant.id == default_variant.id -%}{%- assign is_default = true -%}{%- endif -%}
+          {%- assign save_amount = 0 -%}
           {%- if variant.compare_at_price > variant.price -%}
-            <span class="buy-option-save">Save {{ variant.compare_at_price | minus: variant.price | money }}</span>
+            {%- assign save_amount = variant.compare_at_price | minus: variant.price -%}
           {%- elsif forloop.last and variants.size > 1 -%}
-            {%- assign per_unit_primary = primary.price -%}
-            {%- assign assumed_units = 2 -%}
-            {%- assign expected = per_unit_primary | times: assumed_units -%}
+            {%- assign expected = primary.price | times: 2 -%}
             {%- if variant.price < expected -%}
-              {%- assign diff = expected | minus: variant.price -%}
-              <span class="buy-option-save">Save {{ diff | money }}</span>
+              {%- assign save_amount = expected | minus: variant.price -%}
             {%- endif -%}
           {%- endif -%}
-        </div>
 
-        <button
-          type="submit"
-          class="btn btn-primary btn-buy {% unless forloop.first %}btn-buy-alt{% endunless %}"
-          {% unless variant.available %}disabled{% endunless %}
-        >
-          {%- if variant.available -%}
-            <span class="btn-buy-label">
-              {%- if forloop.first -%}
-                Add to cart
-              {%- else -%}
-                Buy 2-pack
+          <label class="pack-option{% if is_default %} is-checked{% endif %}{% unless variant.available %} is-disabled{% endunless %}">
+            <input
+              type="radio"
+              name="id"
+              value="{{ variant.id }}"
+              data-price="{{ variant.price | money }}"
+              data-label="{{ variant.title | escape }}"
+              {% if is_default %}checked{% endif %}
+              {% unless variant.available %}disabled{% endunless %}
+            />
+            <span class="pack-row">
+              <span class="pack-name">{{ variant.title }}</span>
+              {%- if save_amount > 0 -%}
+                <span class="pack-save">Save {{ save_amount | money }}</span>
               {%- endif -%}
             </span>
-            <span class="btn-buy-divider" aria-hidden="true">&middot;</span>
-            <span class="buy-price">{{ variant.price | money }}</span>
-          {%- else -%}
-            Sold out
-          {%- endif -%}
-        </button>
-      </form>
-    {%- endfor -%}
-  </div>
+            <span class="pack-price">{{ variant.price | money }}</span>
+            {%- unless variant.available -%}
+              <span class="pack-soldout">Sold out</span>
+            {%- endunless -%}
+          </label>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <input type="hidden" name="id" value="{{ default_variant.id }}" />
+    {%- endif -%}
+
+    <button
+      type="submit"
+      class="btn btn-primary btn-buy"
+      {% unless default_variant.available %}disabled{% endunless %}
+    >
+      {%- if default_variant.available -%}
+        <span class="btn-buy-label">Add to cart</span>
+        <span class="btn-buy-divider" aria-hidden="true">&middot;</span>
+        <span class="buy-price">{{ default_variant.price | money }}</span>
+      {%- else -%}
+        Sold out
+      {%- endif -%}
+    </button>
+  </form>
 
   {% render 'reassure-list' %}
 {%- endif -%}

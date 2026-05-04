@@ -313,52 +313,97 @@
     }
     .lede b { font-weight: 600; color: var(--ink); }
 
-    /* Buy options (1-pack / 2-pack CTAs) */
-    .buy-options {
+    /* Pack picker (1-pack / 2-pack toggle → single Add to Cart) */
+    .buy-form { display: flex; flex-direction: column; gap: 14px; }
+    .pack-picker {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin: 8px 0 16px;
-    }
-    .buy-options[data-variant-count="2"] {
       grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
-    @media (max-width: 480px) {
-      .buy-options[data-variant-count="2"] {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 360px) {
+      .pack-picker { grid-template-columns: 1fr; }
     }
-    .buy-option {
+    .pack-option {
+      position: relative;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin: 0;
+      gap: 6px;
+      padding: 14px 16px 16px;
+      background: var(--surface);
+      border: 1.5px solid var(--line-strong);
+      border-radius: 12px;
+      cursor: pointer;
+      transition:
+        border-color 0.25s var(--ease),
+        background 0.25s var(--ease),
+        box-shadow 0.3s var(--ease),
+        transform 0.3s var(--ease);
     }
-    .buy-option-meta {
+    .pack-option:hover { border-color: var(--ink-soft); transform: translateY(-1px); }
+    .pack-option input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .pack-option.is-checked {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      box-shadow:
+        0 0 0 3px rgba(245, 97, 42, 0.14),
+        0 8px 22px -14px rgba(245, 97, 42, 0.5);
+    }
+    .pack-option:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .pack-option.is-disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .pack-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      min-height: 18px;
     }
-    .buy-option-name {
+    .pack-name {
       font-family: var(--font-mono);
       font-size: 0.6875rem;
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--ink-muted);
+      color: var(--ink-soft);
     }
-    .buy-option-save {
+    .pack-option.is-checked .pack-name { color: var(--accent-deep); }
+    .pack-save {
       font-family: var(--font-mono);
       font-size: 0.625rem;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--accent);
-      background: rgba(245, 97, 42, 0.12);
+      background: rgba(245, 97, 42, 0.14);
       padding: 3px 7px;
       border-radius: 999px;
+    }
+    .pack-price {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      font-variation-settings: "opsz" 96;
+      line-height: 1;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+      font-variant-numeric: tabular-nums;
+    }
+    .pack-soldout {
+      align-self: flex-start;
+      margin-top: 2px;
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #b14a2a;
     }
 
     /* Buy CTA */
@@ -382,18 +427,6 @@
       transform: none;
       box-shadow: none;
     }
-    .btn-buy-alt {
-      background: var(--ink);
-      color: var(--bg);
-      box-shadow:
-        0 1px 0 rgba(255,255,255,0.08) inset,
-        0 12px 28px -14px rgba(21,21,19,0.45);
-    }
-    .btn-buy-alt:hover {
-      background: #000;
-      transform: translateY(-2px);
-    }
-    .btn-buy-alt::after { display: none; }
     .btn-buy-final {
       max-width: 360px;
       margin-left: auto;
