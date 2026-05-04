@@ -314,11 +314,12 @@
     var FLAG_HANG_DURATION    = 1900;
     var HOLD_DOWN_DURATION    = 2500;
     var DUMP_RETURN_DURATION  = 1800;
-    /* On the return, the lid stays open while the bin is still past
-       horizontal. It only starts closing once the bin tips back past
-       the critical angle, then snaps shut just as the bin lands. */
-    var LID_CLOSE_DELAY       = 1150;
-    var LID_CLOSE_DURATION    = 500;
+    /* On the return, the lid starts closing the moment the arm starts
+       coming back down and travels at the same pace as the bin so they
+       finish together — the gravitySlam easing keeps a small bounce in
+       the last ~20% as the lid meets the rim just before the bin lands. */
+    var LID_CLOSE_DELAY       = 0;
+    var LID_CLOSE_DURATION    = 1800;
     var FLAG_SWING_DURATION   = 1800;
     var FLAG_RISE_DURATION    = 300;
     var LOOP_PAUSE            = 2500;
