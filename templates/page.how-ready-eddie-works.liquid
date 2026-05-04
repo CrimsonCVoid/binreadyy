@@ -382,7 +382,7 @@ img { max-width: 100%; display: block; }
   padding-left: calc(100vw + 22px);
   padding-right: calc(100vw + 22px);
 }
-.bins-inner { max-width: 560px; margin: 0 auto; }
+.bins-inner { max-width: 1080px; margin: 0 auto; }
 .bins .eyebrow { color: rgba(251,241,222,0.6); margin-bottom: 16px; }
 .bins h2 {
   font-size: clamp(36px, 9vw, 48px);
@@ -393,6 +393,17 @@ img { max-width: 100%; display: block; }
   color: rgba(251,241,222,0.85);
   font-size: 17px;
   margin-bottom: 32px;
+  max-width: 560px;
+}
+
+.bins-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items: stretch;
+}
+@media (max-width: 720px) {
+  .bins-grid { grid-template-columns: 1fr; gap: 18px; }
 }
 
 .bin {
@@ -400,15 +411,38 @@ img { max-width: 100%; display: block; }
   color: var(--ink);
   border-radius: 16px;
   overflow: hidden;
-  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
 }
 .bin .photo {
   aspect-ratio: 5/3;
   overflow: hidden;
 }
 .bin .photo img { width: 100%; height: 100%; object-fit: cover; }
-.bin .photo-illustration { background: #F5EFDD; display: flex; align-items: center; justify-content: center; }
-.bin .photo-illustration svg { width: 100%; height: 100%; display: block; }
+.bin .photo-placeholder {
+  background: repeating-linear-gradient(
+    135deg,
+    #F5EFDD 0,
+    #F5EFDD 14px,
+    #EDE6CF 14px,
+    #EDE6CF 28px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 18px;
+  color: var(--ink-soft);
+}
+.bin .photo-placeholder span {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: rgba(251,241,222,0.85);
+  padding: 8px 14px;
+  border-radius: 999px;
+}
 .bin .body { padding: 22px 22px 26px; }
 .bin .tag {
   display: inline-block;
@@ -647,45 +681,27 @@ footer .small {
     <h2 class="display">Match your bin.</h2>
     <p class="lead">Look at your bin from the side. The pack ships with the right cuff so you don&rsquo;t have to guess at the store.</p>
 
-    <div class="bin a">
-      <div class="photo"><img src="{{ 'RaisedBin.jpeg' | asset_url }}" alt="Bin A side profile, lid sits higher than the handle" loading="lazy" /></div>
-      <div class="body">
-        <span class="tag">BIN A</span>
-        <h3>Lid sits higher than the handle</h3>
-        <div class="test">Visible gap between the closed lid and the handle bar below it.</div>
-        <div class="pick"><span class="cuff-swatch gray"></span> Use the gray cuff</div>
+    <div class="bins-grid">
+      <div class="bin a">
+        <div class="photo"><img src="{{ 'RaisedBin.jpeg' | asset_url }}" alt="Bin A side profile, lid sits higher than the handle" loading="lazy" /></div>
+        <div class="body">
+          <span class="tag">BIN A</span>
+          <h3>Lid sits higher than the handle</h3>
+          <div class="test">Visible gap between the closed lid and the handle bar below it.</div>
+          <div class="pick"><span class="cuff-swatch gray"></span> Use the gray cuff</div>
+        </div>
       </div>
-    </div>
 
-    <div class="bin b">
-      <div class="photo photo-illustration" role="img" aria-label="Bin B side profile, lid sits flush with the handle">
-        <svg viewBox="0 0 500 300" preserveAspectRatio="xMidYMid meet" focusable="false" aria-hidden="true">
-          <defs>
-            <linearGradient id="binB-bg" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#F5EFDD"/>
-              <stop offset="1" stop-color="#E8E0C8"/>
-            </linearGradient>
-          </defs>
-          <rect width="500" height="300" fill="url(#binB-bg)"/>
-          <line x1="40" y1="248" x2="460" y2="248" stroke="#1A1612" stroke-width="2" opacity="0.25"/>
-          <!-- Bin body -->
-          <path d="M150 90 L350 90 L370 248 L130 248 Z" fill="#2B2622" stroke="#1A1612" stroke-width="2" stroke-linejoin="round"/>
-          <!-- Flush lid -->
-          <rect x="142" y="78" width="216" height="14" rx="3" fill="#1A1612"/>
-          <!-- Handle bar at the same level as the lid -->
-          <rect x="190" y="78" width="120" height="6" rx="3" fill="#F5612A"/>
-          <!-- Hinge cuff -->
-          <rect x="232" y="74" width="36" height="14" rx="4" fill="#6E6F71" stroke="#1A1612" stroke-width="1.5"/>
-          <!-- Body shading -->
-          <path d="M150 92 L160 92 L150 248 L140 248 Z" fill="#1A1612" opacity="0.18"/>
-          <text x="250" y="288" text-anchor="middle" fill="#1A1612" opacity="0.55" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2">FLUSH LID PROFILE</text>
-        </svg>
-      </div>
-      <div class="body">
-        <span class="tag">BIN B</span>
-        <h3>Lid sits level with the handle</h3>
-        <div class="test">Closed lid lines up flush with the top of the handle. No gap.</div>
-        <div class="pick"><span class="cuff-swatch black"></span> Use the black cuff</div>
+      <div class="bin b">
+        <div class="photo photo-placeholder" role="img" aria-label="Bin B photo coming soon">
+          <span>Photo coming soon</span>
+        </div>
+        <div class="body">
+          <span class="tag">BIN B</span>
+          <h3>Lid sits level with the handle</h3>
+          <div class="test">Closed lid lines up flush with the top of the handle. No gap.</div>
+          <div class="pick"><span class="cuff-swatch black"></span> Use the black cuff</div>
+        </div>
       </div>
     </div>
   </div>
