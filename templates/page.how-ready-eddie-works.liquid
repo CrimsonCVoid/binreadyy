@@ -94,24 +94,37 @@ img { max-width: 100%; display: block; }
 
 /* ---------- TOP BAR ---------- */
 .top {
-  padding: 18px 22px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--rule);
-  background: var(--cream);
   position: sticky;
   top: 0;
   z-index: 10;
+  background: rgba(251, 241, 222, 0.92);
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+.top-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 12px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 60px;
 }
 .top-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.top-name {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 800;
   font-size: 18px;
   letter-spacing: -0.02em;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  line-height: 1;
 }
 .top-mark {
   width: 22px; height: 22px;
@@ -119,6 +132,7 @@ img { max-width: 100%; display: block; }
   border-radius: 50%;
   display: inline-block;
   position: relative;
+  flex-shrink: 0;
 }
 .top-mark::after {
   content: '';
@@ -129,12 +143,36 @@ img { max-width: 100%; display: block; }
   transform: translateX(-50%) rotate(20deg);
   border-radius: 2px;
 }
-.top-tag {
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.top-nav a {
+  display: inline-block;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
   font-weight: 600;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.top-nav a:hover,
+.top-nav a:focus-visible {
+  background: rgba(26,22,18,0.06);
+  color: var(--ink);
+  outline: none;
+}
+@media (max-width: 600px) {
+  .top-inner { padding: 10px 16px; gap: 8px; min-height: 56px; }
+  .top-nav { gap: 0; }
+  .top-nav a { padding: 8px 10px; font-size: 13px; }
+}
+@media (max-width: 380px) {
+  .top-name { display: none; }
+  .top-nav a { padding: 8px 8px; font-size: 12.5px; letter-spacing: -0.01em; }
 }
 
 /* ---------- HERO ---------- */
@@ -581,10 +619,19 @@ footer .small {
 <body>
 
 <!-- TOP -->
-<div class="top">
-  <div class="top-logo"><span class="top-mark"></span>Ready Eddie</div>
-  <div class="top-tag">How it works</div>
-</div>
+<header class="top">
+  <div class="top-inner">
+    <a href="/" class="top-logo" aria-label="Ready Eddie home">
+      <span class="top-mark" aria-hidden="true"></span>
+      <span class="top-name">Ready Eddie</span>
+    </a>
+    <nav class="top-nav" aria-label="Site sections">
+      <a href="/#reviews">Reviews</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#help">Contact us</a>
+    </nav>
+  </div>
+</header>
 
 <!-- HERO -->
 <section class="hero">
