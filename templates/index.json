@@ -9,14 +9,25 @@
  */
 {
   "sections": {
-    "final_buy_UBbzm9": {
-      "type": "final-buy",
-      "name": "Final buy",
-      "settings": {
-        "product": "",
-        "heading": "Free shipping on orders of $40 or more",
-        "subheading": "Everyone loves free shipping!"
-      }
+    "1777916456fdc91e5d": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f709bc0_RC9bQ7": {
+          "type": "ai_gen_block_f709bc0",
+          "settings": {
+            "show_announcement": true,
+            "announcement_text": "<span style=\"text-decoration:underline\"><strong>Free shipping on orders of $40 or more</strong></span>",
+            "background_color": "#F5612A",
+            "text_color": "#FFFFFF",
+            "font_size": 20
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f709bc0_RC9bQ7"
+      ],
+      "settings": {}
     },
     "hero": {
       "type": "hero",
@@ -270,7 +281,7 @@
     }
   },
   "order": [
-    "final_buy_UBbzm9",
+    "1777916456fdc91e5d",
     "hero",
     "why-strip",
     "how-it-works",
