@@ -19,46 +19,41 @@
 
 {% schema %}
 {
-  "name": "Eddie · Hero",
+  "name": "Eddie - Hero",
   "settings": [
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow text (small label above headline)",
+      "label": "Eyebrow text",
       "default": "You scanned the box. Hi."
     },
     {
       "type": "header",
-      "content": "Headline (assembled from four pieces)"
-    },
-    {
-      "type": "paragraph",
-      "content": "The headline reads: [Part 1] [Accent in orange] [Part 2] [Italic word]. Leave any piece blank to skip it."
+      "content": "Headline"
     },
     {
       "type": "text",
       "id": "heading_part_1",
-      "label": "Part 1",
+      "label": "Headline part 1",
       "default": "It's a"
     },
     {
       "type": "text",
       "id": "heading_accent",
-      "label": "Orange accent word",
+      "label": "Headline accent (orange word)",
       "default": "trash-day"
     },
     {
       "type": "text",
       "id": "heading_part_2",
-      "label": "Part 2",
+      "label": "Headline part 2",
       "default": "signal."
     },
     {
       "type": "text",
       "id": "heading_italic",
-      "label": "Italic serif word (optional, replaces Part 2 if used)",
-      "default": "",
-      "info": "Use this for a stylized italic word like 'signal.' If you fill this in, you may want to leave Part 2 blank."
+      "label": "Headline italic word (optional)",
+      "info": "Stylized italic word. If used, you may want to leave headline part 2 blank."
     },
     {
       "type": "header",
@@ -73,7 +68,7 @@
   ],
   "presets": [
     {
-      "name": "Eddie · Hero"
+      "name": "Eddie - Hero"
     }
   ]
 }
