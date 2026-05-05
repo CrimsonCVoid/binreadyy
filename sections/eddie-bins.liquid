@@ -11,43 +11,79 @@
     {%- endif -%}
 
     <div class="bins-grid">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'bin' -%}
-          {%- assign accent_class = '' -%}
-          {%- if block.settings.tag_style == 'orange' -%}{%- assign accent_class = 'b' -%}{%- endif -%}
-          <div class="bin {{ accent_class }}" {{ block.shopify_attributes }}>
-            <div class="photo">
-              {%- if block.settings.image != blank -%}
-                <img src="{{ block.settings.image | image_url: width: 800 }}"
-                     alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
-                     loading="lazy" />
-              {%- else -%}
-                {%- assign fallback = block.settings.fallback_asset | default: 'RaisedBin.jpeg' -%}
-                <img src="{{ fallback | asset_url }}"
-                     alt="{{ block.settings.title | escape }}"
-                     loading="lazy" />
-              {%- endif -%}
-            </div>
-            <div class="body">
-              {%- if block.settings.tag_label != blank -%}
-                <span class="tag">{{ block.settings.tag_label }}</span>
-              {%- endif -%}
-              {%- if block.settings.title != blank -%}
-                <h3>{{ block.settings.title }}</h3>
-              {%- endif -%}
-              {%- if block.settings.test != blank -%}
-                <div class="test">{{ block.settings.test }}</div>
-              {%- endif -%}
-              {%- if block.settings.cuff_text != blank -%}
-                <div class="pick">
-                  <span class="cuff-swatch {{ block.settings.cuff_color }}"></span>
-                  {{ block.settings.cuff_text }}
-                </div>
-              {%- endif -%}
-            </div>
+
+      {%- comment -%} ---------- BIN A ---------- {%- endcomment -%}
+      {%- if section.settings.show_bin_a -%}
+        {%- assign tag_class_a = '' -%}
+        {%- if section.settings.tag_style_a == 'orange' -%}{%- assign tag_class_a = 'b' -%}{%- endif -%}
+        <div class="bin {{ tag_class_a }}">
+          <div class="photo">
+            {%- if section.settings.image_a != blank -%}
+              <img src="{{ section.settings.image_a | image_url: width: 800 }}"
+                   alt="{{ section.settings.image_a.alt | default: section.settings.title_a | escape }}"
+                   loading="lazy" width="500" height="300" />
+            {%- else -%}
+              <img src="{{ 'RaisedBin.jpeg' | asset_url }}"
+                   alt="{{ section.settings.title_a | default: 'Bin A side profile' | escape }}"
+                   loading="lazy" />
+            {%- endif -%}
           </div>
-        {%- endif -%}
-      {%- endfor -%}
+          <div class="body">
+            {%- if section.settings.tag_label_a != blank -%}
+              <span class="tag">{{ section.settings.tag_label_a }}</span>
+            {%- endif -%}
+            {%- if section.settings.title_a != blank -%}
+              <h3>{{ section.settings.title_a }}</h3>
+            {%- endif -%}
+            {%- if section.settings.test_a != blank -%}
+              <div class="test">{{ section.settings.test_a }}</div>
+            {%- endif -%}
+            {%- if section.settings.cuff_text_a != blank -%}
+              <div class="pick">
+                <span class="cuff-swatch {{ section.settings.cuff_color_a }}"></span>
+                {{ section.settings.cuff_text_a }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} ---------- BIN B ---------- {%- endcomment -%}
+      {%- if section.settings.show_bin_b -%}
+        {%- assign tag_class_b = '' -%}
+        {%- if section.settings.tag_style_b == 'orange' -%}{%- assign tag_class_b = 'b' -%}{%- endif -%}
+        <div class="bin {{ tag_class_b }}">
+          <div class="photo">
+            {%- if section.settings.image_b != blank -%}
+              <img src="{{ section.settings.image_b | image_url: width: 800 }}"
+                   alt="{{ section.settings.image_b.alt | default: section.settings.title_b | escape }}"
+                   loading="lazy" width="500" height="300" />
+            {%- else -%}
+              <img src="{{ 'LidLevel.jpeg' | asset_url }}"
+                   alt="{{ section.settings.title_b | default: 'Bin B side profile' | escape }}"
+                   loading="lazy" />
+            {%- endif -%}
+          </div>
+          <div class="body">
+            {%- if section.settings.tag_label_b != blank -%}
+              <span class="tag">{{ section.settings.tag_label_b }}</span>
+            {%- endif -%}
+            {%- if section.settings.title_b != blank -%}
+              <h3>{{ section.settings.title_b }}</h3>
+            {%- endif -%}
+            {%- if section.settings.test_b != blank -%}
+              <div class="test">{{ section.settings.test_b }}</div>
+            {%- endif -%}
+            {%- if section.settings.cuff_text_b != blank -%}
+              <div class="pick">
+                <span class="cuff-swatch {{ section.settings.cuff_color_b }}"></span>
+                {{ section.settings.cuff_text_b }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
     </div>
   </div>
 </section>
@@ -56,6 +92,10 @@
 {
   "name": "Eddie - Bin picker",
   "settings": [
+    {
+      "type": "header",
+      "content": "Section heading"
+    },
     {
       "type": "text",
       "id": "eyebrow",
@@ -73,102 +113,133 @@
       "id": "lead",
       "label": "Intro paragraph",
       "default": "Look at your bin from the side. The pack ships with the right cuff so you don't have to guess at the store."
-    }
-  ],
-  "blocks": [
+    },
+
     {
-      "type": "bin",
-      "name": "Bin variant",
-      "limit": 4,
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Bin photo"
-        },
-        {
-          "type": "text",
-          "id": "fallback_asset",
-          "label": "Fallback image filename (in /assets)",
-          "info": "Used only if no image is uploaded above. e.g. RaisedBin.jpeg or LidLevel.jpeg",
-          "default": "RaisedBin.jpeg"
-        },
-        {
-          "type": "text",
-          "id": "tag_label",
-          "label": "Tag label (top corner)",
-          "default": "BIN A"
-        },
-        {
-          "type": "select",
-          "id": "tag_style",
-          "label": "Tag color",
-          "options": [
-            { "value": "dark", "label": "Dark (default)" },
-            { "value": "orange", "label": "Orange" }
-          ],
-          "default": "dark"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Bin title",
-          "default": "Lid sits higher than the handle"
-        },
-        {
-          "type": "textarea",
-          "id": "test",
-          "label": "How to tell (italic quote)",
-          "default": "Visible gap between the closed lid and the handle bar below it."
-        },
-        {
-          "type": "text",
-          "id": "cuff_text",
-          "label": "Cuff recommendation text",
-          "default": "Use the gray cuff"
-        },
-        {
-          "type": "select",
-          "id": "cuff_color",
-          "label": "Cuff swatch color",
-          "options": [
-            { "value": "gray", "label": "Gray" },
-            { "value": "black", "label": "Black" }
-          ],
-          "default": "gray"
-        }
-      ]
+      "type": "header",
+      "content": "Bin A (left card)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bin_a",
+      "label": "Show this bin",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image_a",
+      "label": "Bin A photo",
+      "info": "If empty, falls back to RaisedBin.jpeg in /assets."
+    },
+    {
+      "type": "text",
+      "id": "tag_label_a",
+      "label": "Tag label",
+      "default": "BIN A"
+    },
+    {
+      "type": "select",
+      "id": "tag_style_a",
+      "label": "Tag color",
+      "options": [
+        { "value": "dark", "label": "Dark" },
+        { "value": "orange", "label": "Orange" }
+      ],
+      "default": "dark"
+    },
+    {
+      "type": "text",
+      "id": "title_a",
+      "label": "Title",
+      "default": "Lid sits higher than the handle"
+    },
+    {
+      "type": "textarea",
+      "id": "test_a",
+      "label": "How to tell (italic quote)",
+      "default": "Visible gap between the closed lid and the handle bar below it."
+    },
+    {
+      "type": "text",
+      "id": "cuff_text_a",
+      "label": "Cuff recommendation text",
+      "default": "Use the gray cuff"
+    },
+    {
+      "type": "select",
+      "id": "cuff_color_a",
+      "label": "Cuff swatch color",
+      "options": [
+        { "value": "gray", "label": "Gray" },
+        { "value": "black", "label": "Black" }
+      ],
+      "default": "gray"
+    },
+
+    {
+      "type": "header",
+      "content": "Bin B (right card)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bin_b",
+      "label": "Show this bin",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image_b",
+      "label": "Bin B photo",
+      "info": "If empty, falls back to LidLevel.jpeg in /assets."
+    },
+    {
+      "type": "text",
+      "id": "tag_label_b",
+      "label": "Tag label",
+      "default": "BIN B"
+    },
+    {
+      "type": "select",
+      "id": "tag_style_b",
+      "label": "Tag color",
+      "options": [
+        { "value": "dark", "label": "Dark" },
+        { "value": "orange", "label": "Orange" }
+      ],
+      "default": "orange"
+    },
+    {
+      "type": "text",
+      "id": "title_b",
+      "label": "Title",
+      "default": "Lid sits level with the handle"
+    },
+    {
+      "type": "textarea",
+      "id": "test_b",
+      "label": "How to tell (italic quote)",
+      "default": "Closed lid lines up flush with the top of the handle. No gap."
+    },
+    {
+      "type": "text",
+      "id": "cuff_text_b",
+      "label": "Cuff recommendation text",
+      "default": "Use the black cuff"
+    },
+    {
+      "type": "select",
+      "id": "cuff_color_b",
+      "label": "Cuff swatch color",
+      "options": [
+        { "value": "gray", "label": "Gray" },
+        { "value": "black", "label": "Black" }
+      ],
+      "default": "black"
     }
   ],
   "presets": [
     {
-      "name": "Eddie - Bin picker",
-      "blocks": [
-        {
-          "type": "bin",
-          "settings": {
-            "fallback_asset": "RaisedBin.jpeg",
-            "tag_label": "BIN A",
-            "tag_style": "dark",
-            "title": "Lid sits higher than the handle",
-            "test": "Visible gap between the closed lid and the handle bar below it.",
-            "cuff_text": "Use the gray cuff",
-            "cuff_color": "gray"
-          }
-        },
-        {
-          "type": "bin",
-          "settings": {
-            "fallback_asset": "LidLevel.jpeg",
-            "tag_label": "BIN B",
-            "tag_style": "orange",
-            "title": "Lid sits level with the handle",
-            "test": "Closed lid lines up flush with the top of the handle. No gap.",
-            "cuff_text": "Use the black cuff",
-            "cuff_color": "black"
-          }
-        }
-      ]
+      "name": "Eddie - Bin picker"
     }
   ]
 }

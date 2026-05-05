@@ -9,17 +9,25 @@
     {%- endif -%}
 
     <div class="links">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'button' -%}
-          {%- assign disabled_class = '' -%}
-          {%- if block.settings.disabled %}{%- assign disabled_class = ' is-disabled' -%}{%- endif -%}
+      {%- for i in (1..3) -%}
+        {%- assign label_key    = 'btn_' | append: i | append: '_label' -%}
+        {%- assign sublabel_key = 'btn_' | append: i | append: '_sublabel' -%}
+        {%- assign url_key      = 'btn_' | append: i | append: '_url' -%}
+        {%- assign style_key    = 'btn_' | append: i | append: '_style' -%}
+        {%- assign disabled_key = 'btn_' | append: i | append: '_disabled' -%}
+        {%- assign btn_label = section.settings[label_key] -%}
+        {%- if btn_label != blank -%}
+          {%- assign btn_url      = section.settings[url_key] | default: '/' -%}
+          {%- assign btn_sublabel = section.settings[sublabel_key] -%}
+          {%- assign btn_style    = section.settings[style_key] | default: 'primary' -%}
+          {%- assign btn_disabled = section.settings[disabled_key] -%}
           {%- assign style_class = 'btn-primary' -%}
-          {%- if block.settings.style == 'ghost' %}{%- assign style_class = 'btn-ghost' -%}{%- endif -%}
-          <a href="{{ block.settings.url | default: '/' }}"
-             class="btn {{ style_class }}{{ disabled_class }}"
-             {{ block.shopify_attributes }}>
-            {{ block.settings.label }}
-            {%- if block.settings.sublabel != blank -%}<small>{{ block.settings.sublabel }}</small>{%- endif -%}
+          {%- if btn_style == 'ghost' %}{%- assign style_class = 'btn-ghost' -%}{%- endif -%}
+          {%- assign disabled_class = '' -%}
+          {%- if btn_disabled %}{%- assign disabled_class = ' is-disabled' -%}{%- endif -%}
+          <a href="{{ btn_url }}" class="btn {{ style_class }}{{ disabled_class }}">
+            {{ btn_label }}
+            {%- if btn_sublabel != blank -%}<small>{{ btn_sublabel }}</small>{%- endif -%}
           </a>
         {%- endif -%}
       {%- endfor -%}
@@ -56,64 +64,123 @@
       "id": "body",
       "label": "Body paragraph",
       "default": "Take him home. He'll be doing his job by next pickup."
-    }
-  ],
-  "blocks": [
+    },
+
     {
-      "type": "button",
-      "name": "Button",
-      "limit": 4,
-      "settings": [
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Button label",
-          "default": "See the full site"
-        },
-        {
-          "type": "text",
-          "id": "sublabel",
-          "label": "Small sub-label (optional)"
-        },
-        {
-          "type": "text",
-          "id": "url",
-          "label": "Button URL",
-          "default": "/",
-          "info": "Use a relative path like / or /products/ready-eddie."
-        },
-        {
-          "type": "select",
-          "id": "style",
-          "label": "Button style",
-          "options": [
-            { "value": "primary", "label": "Primary (orange fill)" },
-            { "value": "ghost", "label": "Ghost (outlined)" }
-          ],
-          "default": "primary"
-        },
-        {
-          "type": "checkbox",
-          "id": "disabled",
-          "label": "Show as disabled / coming-soon",
-          "default": false
-        }
-      ]
+      "type": "header",
+      "content": "Button 1"
+    },
+    {
+      "type": "text",
+      "id": "btn_1_label",
+      "label": "Label",
+      "default": "See the full site"
+    },
+    {
+      "type": "text",
+      "id": "btn_1_sublabel",
+      "label": "Small sub-label (optional)"
+    },
+    {
+      "type": "text",
+      "id": "btn_1_url",
+      "label": "URL",
+      "default": "/"
+    },
+    {
+      "type": "select",
+      "id": "btn_1_style",
+      "label": "Style",
+      "options": [
+        { "value": "primary", "label": "Primary (orange fill)" },
+        { "value": "ghost", "label": "Ghost (outlined)" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_1_disabled",
+      "label": "Show as disabled / coming-soon",
+      "default": false
+    },
+
+    {
+      "type": "header",
+      "content": "Button 2 (optional)"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_label",
+      "label": "Label"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_sublabel",
+      "label": "Small sub-label (optional)"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_url",
+      "label": "URL",
+      "default": "/"
+    },
+    {
+      "type": "select",
+      "id": "btn_2_style",
+      "label": "Style",
+      "options": [
+        { "value": "primary", "label": "Primary (orange fill)" },
+        { "value": "ghost", "label": "Ghost (outlined)" }
+      ],
+      "default": "ghost"
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_2_disabled",
+      "label": "Show as disabled / coming-soon",
+      "default": false
+    },
+
+    {
+      "type": "header",
+      "content": "Button 3 (optional)"
+    },
+    {
+      "type": "text",
+      "id": "btn_3_label",
+      "label": "Label"
+    },
+    {
+      "type": "text",
+      "id": "btn_3_sublabel",
+      "label": "Small sub-label (optional)"
+    },
+    {
+      "type": "text",
+      "id": "btn_3_url",
+      "label": "URL",
+      "default": "/"
+    },
+    {
+      "type": "select",
+      "id": "btn_3_style",
+      "label": "Style",
+      "options": [
+        { "value": "primary", "label": "Primary (orange fill)" },
+        { "value": "ghost", "label": "Ghost (outlined)" }
+      ],
+      "default": "ghost"
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_3_disabled",
+      "label": "Show as disabled / coming-soon",
+      "default": false
     }
   ],
   "presets": [
     {
-      "name": "Eddie - Outro",
-      "blocks": [
-        {
-          "type": "button",
-          "settings": {
-            "label": "See the full site",
-            "url": "/",
-            "style": "primary"
-          }
-        }
-      ]
+      "name": "Eddie - Outro"
     }
   ]
 }

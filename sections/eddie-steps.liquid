@@ -9,13 +9,19 @@
       {%- if section.settings.heading_italic != blank %} <span class="serif">{{ section.settings.heading_italic }}</span>{% endif -%}
     </h2>
 
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'step' -%}
-        <div class="step" {{ block.shopify_attributes }}>
-          <div class="step-num">{{ block.settings.number | default: forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+    {%- for i in (1..6) -%}
+      {%- assign num_key   = 'step_' | append: i | append: '_number' -%}
+      {%- assign title_key = 'step_' | append: i | append: '_title' -%}
+      {%- assign desc_key  = 'step_' | append: i | append: '_desc' -%}
+      {%- assign step_title = section.settings[title_key] -%}
+      {%- assign step_desc  = section.settings[desc_key] -%}
+      {%- assign step_num   = section.settings[num_key] -%}
+      {%- if step_title != blank or step_desc != blank -%}
+        <div class="step">
+          <div class="step-num">{{ step_num | default: i | prepend: '0' | slice: -2, 2 }}</div>
           <div>
-            <h3>{{ block.settings.title }}</h3>
-            <p>{{ block.settings.description }}</p>
+            {%- if step_title != blank -%}<h3>{{ step_title }}</h3>{%- endif -%}
+            {%- if step_desc  != blank -%}<p>{{ step_desc }}</p>{%- endif -%}
           </div>
         </div>
       {%- endif -%}
@@ -48,65 +54,140 @@
       "id": "heading_italic",
       "label": "Italic serif phrase (optional)",
       "default": "No app."
-    }
-  ],
-  "blocks": [
+    },
+
     {
-      "type": "step",
-      "name": "Step",
-      "limit": 6,
-      "settings": [
-        {
-          "type": "text",
-          "id": "number",
-          "label": "Step number (e.g. 01, 02)",
-          "default": "01",
-          "info": "If left blank, steps will be numbered automatically."
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Step title",
-          "default": "Eddie up. Bin to the curb."
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Step description",
-          "default": "Flip Ready Eddie up before you wheel the bin out."
-        }
-      ]
+      "type": "header",
+      "content": "Step 1"
+    },
+    {
+      "type": "text",
+      "id": "step_1_number",
+      "label": "Number",
+      "default": "01"
+    },
+    {
+      "type": "text",
+      "id": "step_1_title",
+      "label": "Title",
+      "default": "Eddie up. Bin to the curb."
+    },
+    {
+      "type": "textarea",
+      "id": "step_1_desc",
+      "label": "Description",
+      "default": "Flip Ready Eddie up before you wheel the bin out. The orange figure with his arm in the air is your \"still full\" signal - visible from 60 feet, hard to miss."
+    },
+
+    {
+      "type": "header",
+      "content": "Step 2"
+    },
+    {
+      "type": "text",
+      "id": "step_2_number",
+      "label": "Number",
+      "default": "02"
+    },
+    {
+      "type": "text",
+      "id": "step_2_title",
+      "label": "Title",
+      "default": "Truck flips the bin"
+    },
+    {
+      "type": "textarea",
+      "id": "step_2_desc",
+      "label": "Description",
+      "default": "The lid swings past vertical during the dump. Eddie rotates around his cuff and lands flat on top of the lid as it falls back closed."
+    },
+
+    {
+      "type": "header",
+      "content": "Step 3"
+    },
+    {
+      "type": "text",
+      "id": "step_3_number",
+      "label": "Number",
+      "default": "03"
+    },
+    {
+      "type": "text",
+      "id": "step_3_title",
+      "label": "Title",
+      "default": "Eddie's down. It's done."
+    },
+    {
+      "type": "textarea",
+      "id": "step_3_desc",
+      "label": "Description",
+      "default": "Glance at the curb - no more orange arm in the air means the truck has come and gone. Push Eddie back up with one finger before next collection day. Repeat forever."
+    },
+
+    {
+      "type": "header",
+      "content": "Step 4 (optional)"
+    },
+    {
+      "type": "text",
+      "id": "step_4_number",
+      "label": "Number"
+    },
+    {
+      "type": "text",
+      "id": "step_4_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "step_4_desc",
+      "label": "Description"
+    },
+
+    {
+      "type": "header",
+      "content": "Step 5 (optional)"
+    },
+    {
+      "type": "text",
+      "id": "step_5_number",
+      "label": "Number"
+    },
+    {
+      "type": "text",
+      "id": "step_5_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "step_5_desc",
+      "label": "Description"
+    },
+
+    {
+      "type": "header",
+      "content": "Step 6 (optional)"
+    },
+    {
+      "type": "text",
+      "id": "step_6_number",
+      "label": "Number"
+    },
+    {
+      "type": "text",
+      "id": "step_6_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "step_6_desc",
+      "label": "Description"
     }
   ],
   "presets": [
     {
-      "name": "Eddie - Steps",
-      "blocks": [
-        {
-          "type": "step",
-          "settings": {
-            "number": "01",
-            "title": "Eddie up. Bin to the curb.",
-            "description": "Flip Ready Eddie up before you wheel the bin out. The orange figure with his arm in the air is your \"still full\" signal — visible from 60 feet, hard to miss."
-          }
-        },
-        {
-          "type": "step",
-          "settings": {
-            "number": "02",
-            "title": "Truck flips the bin",
-            "description": "The lid swings past vertical during the dump. Eddie rotates around his cuff and lands flat on top of the lid as it falls back closed."
-          }
-        },
-        {
-          "type": "step",
-          "settings": {
-            "number": "03",
-            "title": "Eddie's down. It's done.",
-            "description": "Glance at the curb — no more orange arm in the air means the truck has come and gone. Push Eddie back up with one finger before next collection day. Repeat forever."
-          }
-        }
-      ]
+      "name": "Eddie - Steps"
     }
   ]
 }
