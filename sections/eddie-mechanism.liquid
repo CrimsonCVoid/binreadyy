@@ -1,0 +1,74 @@
+<section class="mech">
+  <div class="wrap">
+    <div class="mech-card">
+      <div class="photo">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 1200 }}"
+               alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+               loading="lazy" />
+        {%- else -%}
+          <img src="{{ 'cuff-attached.jpeg' | asset_url }}"
+               alt="Close-up of the orange cuff seated on the hinge bar"
+               loading="lazy" />
+        {%- endif -%}
+      </div>
+      <div class="body">
+        {%- if section.settings.eyebrow != blank -%}
+          <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h3>{{ section.settings.heading }}</h3>
+        {%- endif -%}
+        {%- if section.settings.body_1 != blank -%}
+          <p>{{ section.settings.body_1 }}</p>
+        {%- endif -%}
+        {%- if section.settings.body_2 != blank -%}
+          <p>{{ section.settings.body_2 }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Eddie · Mechanism card",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Card photo",
+      "info": "Close-up of the cuff or hinge. If empty, falls back to cuff-attached.jpeg in /assets."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow (orange small label)",
+      "default": "What's actually inside"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A cuff. A pivot. A stop."
+    },
+    {
+      "type": "textarea",
+      "id": "body_1",
+      "label": "First paragraph",
+      "default": "The cuff snaps onto the hinge bar of the bin and grips with a foam insert. Eddie's foot ring slips around the cuff and rotates freely."
+    },
+    {
+      "type": "textarea",
+      "id": "body_2",
+      "label": "Second paragraph",
+      "default": "When the lid hits a steep enough angle during pickup, Eddie passes over the pivot point and falls flat on top of the lid. A small ledge on the cuff catches him there. No springs. No magnets. Nothing to wear out."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Eddie · Mechanism card"
+    }
+  ]
+}
+{% endschema %}

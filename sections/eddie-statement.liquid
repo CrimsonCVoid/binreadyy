@@ -1,0 +1,64 @@
+<section class="statement">
+  <div class="statement-inner">
+    {%- if section.settings.line_1_part_a != blank or section.settings.line_1_highlight != blank or section.settings.line_1_part_b != blank -%}
+      <p>
+        {{ section.settings.line_1_part_a }}
+        {%- if section.settings.line_1_highlight != blank %} <span class="hl">{{ section.settings.line_1_highlight }}</span>{% endif -%}
+        {%- if section.settings.line_1_part_b != blank %} {{ section.settings.line_1_part_b }}{% endif -%}
+      </p>
+    {%- endif -%}
+
+    {%- if section.settings.line_2 != blank -%}
+      <p class="serif" style="color: var(--ink-soft);">{{ section.settings.line_2 }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Eddie · Big statement",
+  "settings": [
+    {
+      "type": "header",
+      "content": "First line (with orange highlight)"
+    },
+    {
+      "type": "paragraph",
+      "content": "The first line is built as: [Part A] [Highlighted phrase in orange] [Part B]. Leave any piece blank to skip it."
+    },
+    {
+      "type": "text",
+      "id": "line_1_part_a",
+      "label": "Line 1 — Part A",
+      "default": "You're standing at the front window"
+    },
+    {
+      "type": "text",
+      "id": "line_1_highlight",
+      "label": "Line 1 — orange-highlighted phrase",
+      "default": "squinting at a closed lid"
+    },
+    {
+      "type": "text",
+      "id": "line_1_part_b",
+      "label": "Line 1 — Part B",
+      "default": ", trying to figure out if the truck came yet."
+    },
+    {
+      "type": "header",
+      "content": "Second line (italic serif)"
+    },
+    {
+      "type": "text",
+      "id": "line_2",
+      "label": "Line 2",
+      "default": "Eddie ends that."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Eddie · Big statement"
+    }
+  ]
+}
+{% endschema %}

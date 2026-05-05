@@ -1,0 +1,124 @@
+<section class="outro">
+  <div class="wrap">
+    <h2 class="display">
+      {{ section.settings.heading_part_1 }}
+      {%- if section.settings.heading_italic != blank %} <span class="it">{{ section.settings.heading_italic }}</span>{% endif -%}
+    </h2>
+    {%- if section.settings.body != blank -%}
+      <p>{{ section.settings.body }}</p>
+    {%- endif -%}
+
+    <div class="links">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'button' -%}
+          {%- assign disabled_class = '' -%}
+          {%- if block.settings.disabled %}{%- assign disabled_class = ' is-disabled' -%}{%- endif -%}
+          {%- assign style_class = 'btn-primary' -%}
+          {%- if block.settings.style == 'ghost' %}{%- assign style_class = 'btn-ghost' -%}{%- endif -%}
+          <a href="{{ block.settings.url | default: '/' }}"
+             class="btn {{ style_class }}{{ disabled_class }}"
+             {{ block.shopify_attributes }}>
+            {{ block.settings.label }}
+            {%- if block.settings.sublabel != blank -%}<small>{{ block.settings.sublabel }}</small>{%- endif -%}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Eddie · Outro",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "paragraph",
+      "content": "The heading reads: [Main text] [Italic word]. Leave either blank to skip it."
+    },
+    {
+      "type": "text",
+      "id": "heading_part_1",
+      "label": "Main heading",
+      "default": "That's"
+    },
+    {
+      "type": "text",
+      "id": "heading_italic",
+      "label": "Italic serif word",
+      "default": "Eddie."
+    },
+    {
+      "type": "header",
+      "content": "Body"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body paragraph",
+      "default": "Take him home. He'll be doing his job by next pickup."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button label",
+          "default": "See the full site"
+        },
+        {
+          "type": "text",
+          "id": "sublabel",
+          "label": "Small sub-label (optional)"
+        },
+        {
+          "type": "text",
+          "id": "url",
+          "label": "Button URL",
+          "default": "/",
+          "info": "Use a relative path like / or /products/ready-eddie."
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Button style",
+          "options": [
+            { "value": "primary", "label": "Primary (orange fill)" },
+            { "value": "ghost", "label": "Ghost (outlined)" }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "checkbox",
+          "id": "disabled",
+          "label": "Show as disabled / coming-soon",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Eddie · Outro",
+      "blocks": [
+        {
+          "type": "button",
+          "settings": {
+            "label": "See the full site",
+            "url": "/",
+            "style": "primary"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,128 @@
+<header class="top">
+  <div class="top-inner">
+    {%- if section.settings.show_back -%}
+      <a href="{{ section.settings.back_url | default: '/' }}" class="top-back" aria-label="{{ section.settings.back_aria | default: 'Return to front page' | escape }}">
+        <span class="top-back-arrow" aria-hidden="true">&larr;</span>
+        <span class="top-back-label">{{ section.settings.back_label | default: 'Front page' }}</span>
+      </a>
+    {%- else -%}
+      <span></span>
+    {%- endif -%}
+
+    <nav class="top-nav" aria-label="{{ section.settings.nav_aria | default: 'Site sections' | escape }}">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'nav_link' -%}
+          <a href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    {%- if section.settings.show_buy -%}
+      <a href="{{ section.settings.buy_url | default: '/#buy' }}" class="top-buy">{{ section.settings.buy_label | default: 'Buy' }}</a>
+    {%- else -%}
+      <span></span>
+    {%- endif -%}
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Eddie · Top bar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Back link (left side)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_back",
+      "label": "Show back link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "back_label",
+      "label": "Back link text",
+      "default": "Front page"
+    },
+    {
+      "type": "text",
+      "id": "back_url",
+      "label": "Back link URL",
+      "default": "/",
+      "info": "Use a relative path like / or /pages/something."
+    },
+    {
+      "type": "text",
+      "id": "back_aria",
+      "label": "Back link screen-reader description",
+      "default": "Return to front page"
+    },
+    {
+      "type": "header",
+      "content": "Navigation links (center)"
+    },
+    {
+      "type": "text",
+      "id": "nav_aria",
+      "label": "Navigation screen-reader label",
+      "default": "Site sections"
+    },
+    {
+      "type": "header",
+      "content": "Buy button (right side)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buy",
+      "label": "Show buy button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "buy_label",
+      "label": "Buy button text",
+      "default": "Buy"
+    },
+    {
+      "type": "text",
+      "id": "buy_url",
+      "label": "Buy button URL",
+      "default": "/#buy",
+      "info": "Use /#buy to scroll to the buy section on the homepage, or /products/ready-eddie to link to the product page."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_link",
+      "name": "Nav link",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Reviews"
+        },
+        {
+          "type": "text",
+          "id": "url",
+          "label": "URL",
+          "default": "/#reviews",
+          "info": "Use anchors like /#faq to scroll to a homepage section."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Eddie · Top bar",
+      "blocks": [
+        { "type": "nav_link", "settings": { "label": "Reviews", "url": "/#reviews" } },
+        { "type": "nav_link", "settings": { "label": "FAQ", "url": "/#faq" } },
+        { "type": "nav_link", "settings": { "label": "Contact us", "url": "/#help" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

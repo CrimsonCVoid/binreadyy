@@ -1,0 +1,55 @@
+<footer>
+  {%- if section.settings.logo_text != blank -%}
+    <div class="foot-logo">{{ section.settings.logo_text }}</div>
+  {%- endif -%}
+  {%- if section.settings.tagline != blank -%}
+    <div>{{ section.settings.tagline }}</div>
+  {%- endif -%}
+  {%- if section.settings.fine_print != blank -%}
+    <div class="small">
+      {%- if section.settings.show_year -%}&copy; {{ 'now' | date: '%Y' }} &middot; {%- endif -%}
+      {{ section.settings.fine_print }}
+    </div>
+  {%- endif -%}
+</footer>
+
+{% schema %}
+{
+  "name": "Eddie · Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "Ready Eddie"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline line",
+      "default": "Designed and printed in Apex, NC."
+    },
+    {
+      "type": "header",
+      "content": "Fine print (bottom line)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_year",
+      "label": "Prefix with © + current year",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "fine_print",
+      "label": "Fine-print text",
+      "default": "Patent pending"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Eddie · Footer"
+    }
+  ]
+}
+{% endschema %}

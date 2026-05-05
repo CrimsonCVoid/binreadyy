@@ -1,0 +1,117 @@
+<section class="steps">
+  <div class="wrap">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="eyebrow" style="margin-bottom: 14px;">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+
+    <h2 class="display">
+      {{ section.settings.heading_part_1 }}
+      {%- if section.settings.heading_italic != blank %} <span class="serif">{{ section.settings.heading_italic }}</span>{% endif -%}
+    </h2>
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'step' -%}
+        <div class="step" {{ block.shopify_attributes }}>
+          <div class="step-num">{{ block.settings.number | default: forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+          <div>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Eddie · Steps",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow (small label above heading)",
+      "default": "The mechanism"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "paragraph",
+      "content": "The heading reads: [Main heading] [Italic phrase]. Leave the italic part blank to skip it."
+    },
+    {
+      "type": "text",
+      "id": "heading_part_1",
+      "label": "Main heading",
+      "default": "No batteries."
+    },
+    {
+      "type": "text",
+      "id": "heading_italic",
+      "label": "Italic serif phrase",
+      "default": "No app."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Step number (e.g. 01, 02)",
+          "default": "01",
+          "info": "If left blank, steps will be numbered automatically."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "Eddie up. Bin to the curb."
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step description",
+          "default": "Flip Ready Eddie up before you wheel the bin out."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Eddie · Steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "number": "01",
+            "title": "Eddie up. Bin to the curb.",
+            "description": "Flip Ready Eddie up before you wheel the bin out. The orange figure with his arm in the air is your \"still full\" signal — visible from 60 feet, hard to miss."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "title": "Truck flips the bin",
+            "description": "The lid swings past vertical during the dump. Eddie rotates around his cuff and lands flat on top of the lid as it falls back closed."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "title": "Eddie's down. It's done.",
+            "description": "Glance at the curb — no more orange arm in the air means the truck has come and gone. Push Eddie back up with one finger before next collection day. Repeat forever."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

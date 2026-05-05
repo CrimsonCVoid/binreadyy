@@ -1,0 +1,120 @@
+<section class="demo">
+  <div class="wrap">
+    <div class="demo-stage" id="stage" data-state="{{ section.settings.initial_state | default: 'up' }}">
+      {%- if section.settings.image_down != blank -%}
+        <img src="{{ section.settings.image_down | image_url: width: 1200 }}"
+             alt="{{ section.settings.image_down.alt | default: 'Ready Eddie flipped down on a green bin — collection is done' | escape }}"
+             class="down" loading="eager" width="800" height="1000" />
+      {%- else -%}
+        <img src="{{ 'EddyFlippedDown.jpeg' | asset_url }}"
+             alt="Ready Eddie flipped down on a green bin — collection is done"
+             class="down" loading="eager" />
+      {%- endif -%}
+
+      {%- if section.settings.image_up != blank -%}
+        <img src="{{ section.settings.image_up | image_url: width: 1200 }}"
+             alt="{{ section.settings.image_up.alt | default: 'Ready Eddie standing up with arm raised — bin still needs pickup' | escape }}"
+             class="up" loading="eager" width="800" height="1000" />
+      {%- else -%}
+        <img src="{{ 'EddyFlippedUp.jpeg' | asset_url }}"
+             alt="Ready Eddie standing up with arm raised on a green bin — bin still needs pickup"
+             class="up" loading="eager" />
+      {%- endif -%}
+
+      <div class="demo-state-label">
+        <span class="dot"></span>
+        <span class="text-down">{{ section.settings.label_down | default: 'Bin emptied' }}</span>
+        <span class="text-up">{{ section.settings.label_up | default: 'Bin not emptied' }}</span>
+      </div>
+    </div>
+
+    <div class="demo-controls">
+      <button class="demo-button" id="toggle" type="button"
+              data-label-up="{{ section.settings.button_label_up | default: 'Tap to send the truck' | escape }}"
+              data-label-down="{{ section.settings.button_label_down | default: 'Tap to put it back' | escape }}">
+        <span class="arrow">&darr;</span>
+        <span class="label">{{ section.settings.button_label_up | default: 'Tap to send the truck' }}</span>
+      </button>
+      {%- if section.settings.caption != blank -%}
+        <p class="demo-caption">{{ section.settings.caption }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Eddie · Interactive demo",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Demo images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_up",
+      "label": "Eddie UP image (arm raised)",
+      "info": "Shown when the bin still needs pickup. If empty, falls back to EddyFlippedUp.jpeg in /assets."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_down",
+      "label": "Eddie DOWN image (flat on lid)",
+      "info": "Shown after the truck has come. If empty, falls back to EddyFlippedDown.jpeg in /assets."
+    },
+    {
+      "type": "select",
+      "id": "initial_state",
+      "label": "Which state shows first?",
+      "options": [
+        { "value": "up", "label": "UP — bin needs pickup" },
+        { "value": "down", "label": "DOWN — already emptied" }
+      ],
+      "default": "up"
+    },
+    {
+      "type": "header",
+      "content": "State labels (the pill on the image)"
+    },
+    {
+      "type": "text",
+      "id": "label_up",
+      "label": "Label when Eddie is UP",
+      "default": "Bin not emptied"
+    },
+    {
+      "type": "text",
+      "id": "label_down",
+      "label": "Label when Eddie is DOWN",
+      "default": "Bin emptied"
+    },
+    {
+      "type": "header",
+      "content": "Tap button"
+    },
+    {
+      "type": "text",
+      "id": "button_label_up",
+      "label": "Button text when Eddie is UP",
+      "default": "Tap to send the truck"
+    },
+    {
+      "type": "text",
+      "id": "button_label_down",
+      "label": "Button text when Eddie is DOWN",
+      "default": "Tap to put it back"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption under button",
+      "default": "Tap a few times. That's the whole interaction in real life."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Eddie · Interactive demo"
+    }
+  ]
+}
+{% endschema %}
