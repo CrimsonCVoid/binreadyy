@@ -18,6 +18,162 @@
     "shipping_line": "Ships in 2 business days",
     "free_shipping_note": "Free shipping on orders $40+",
     "returns_line": "30-day returns",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "product": "",
+          "show_buy_button": true
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "menu": "footer"
+        }
+      },
+      "eddie-top-bar": {
+        "type": "eddie-top-bar",
+        "settings": {
+          "show_back": true,
+          "back_label": "Front page",
+          "back_url": "/",
+          "back_aria": "Return to front page",
+          "nav_aria": "Site sections",
+          "link_1_label": "Reviews",
+          "link_1_url": "/#reviews",
+          "link_2_label": "FAQ",
+          "link_2_url": "/#faq",
+          "link_3_label": "Contact us",
+          "link_3_url": "/#help",
+          "link_4_label": "",
+          "link_4_url": "",
+          "show_buy": true,
+          "buy_label": "Buy",
+          "buy_url": "/#buy"
+        }
+      },
+      "eddie-hero": {
+        "type": "eddie-hero",
+        "settings": {
+          "eyebrow": "Here's how Ready Eddie Works",
+          "heading_part_1": "It's a signal for",
+          "heading_accent": "trash collection day.",
+          "heading_part_2": "",
+          "heading_italic": "",
+          "body": "Ready Eddie snaps onto the handle of your waste or recycling bin. You flip him up on pickup day; and gravity flips him down when they empty your bin. A glance from the house tells you if your bin has been emptied."
+        }
+      },
+      "eddie-demo": {
+        "type": "eddie-demo",
+        "settings": {
+          "initial_state": "up",
+          "label_up": "Bin not emptied",
+          "label_down": "Bin emptied",
+          "button_label_up": "Tap to see what happens when the truck empties your bin",
+          "button_label_down": "Tap again to put it back",
+          "caption": "Tap a few times. That's the process."
+        }
+      },
+      "eddie-statement": {
+        "type": "eddie-statement",
+        "settings": {
+          "line_1_part_a": "You ever look out your front window",
+          "line_1_highlight": "squinting at a closed lid,",
+          "line_1_part_b": "wondering if your bin has been emptied yet?",
+          "line_2": "Ready Eddie ends that."
+        }
+      },
+      "eddie-steps": {
+        "type": "eddie-steps",
+        "settings": {
+          "eyebrow": "The mechanism and the steps",
+          "heading_part_1": "No batteries.",
+          "heading_italic": "No apps.",
+          "step_1_number": "01",
+          "step_1_title": "Take your bin to the curb. Set Ready Eddie upright.",
+          "step_1_desc": "Flip Ready Eddie up and the orange figure with his arm in the air is your \"still full\" signal - visible from 75+ feet, hard to miss.",
+          "step_2_number": "02",
+          "step_2_title": "Truck flips and empties the bin.",
+          "step_2_desc": "Gravity rotates Ready Eddie rotates down when the bit gets set back down, telling you the bin is empty.",
+          "step_3_number": "03",
+          "step_3_title": "Eddie's down. Your bin is ready.",
+          "step_3_desc": "Glance at your bin out at the curb - no more orange arm in the air means your bin is empty. No more wondering or walking to the street to check. Repeat forever and enjoy the convenience of knowing.",
+          "step_4_number": "",
+          "step_4_title": "",
+          "step_4_desc": "",
+          "step_5_number": "",
+          "step_5_title": "",
+          "step_5_desc": "",
+          "step_6_number": "",
+          "step_6_title": "",
+          "step_6_desc": ""
+        }
+      },
+      "eddie-mechanism": {
+        "type": "eddie-mechanism",
+        "settings": {
+          "eyebrow": "What's included?",
+          "heading": "Two cuffs. Ready Eddie. Convenience.",
+          "body_1": "The cuff snaps onto the bin handle and Ready Eddie wraps around the cuff and rotates freely.",
+          "body_2": "When the bin gets set back down, gravity rotates Ready Eddie backward and down past the pivot point. No springs. No batteries, No tools, No apps. No magnets. Nothing to break or wear out."
+        }
+      },
+      "eddie-bins": {
+        "type": "eddie-bins",
+        "settings": {
+          "eyebrow": "First, pick the right cuff",
+          "heading": "Match your bin.",
+          "lead": "Look at your bin from the side. The pack ships with two cuffs, one of which is designed for your bin.",
+          "show_bin_a": true,
+          "tag_label_a": "Bin A",
+          "tag_style_a": "dark",
+          "title_a": "Lid sits higher than or above the handle",
+          "test_a": "Visible gap between the top of the closed lid and the top of the handle.",
+          "cuff_text_a": "Use the gray cuff",
+          "cuff_color_a": "gray",
+          "show_bin_b": true,
+          "tag_label_b": "Bin B",
+          "tag_style_b": "orange",
+          "title_b": "Lid sits level with the handle",
+          "test_b": "Top of the closed lid is level with the top of the handle. No gap.",
+          "cuff_text_b": "Use the black cuff",
+          "cuff_color_b": "black"
+        }
+      },
+      "eddie-outro": {
+        "type": "eddie-outro",
+        "settings": {
+          "heading_part_1": "That's",
+          "heading_italic": "Ready Eddie.",
+          "body": "Take Ready Eddie home today, and he'll be doing his job by next pickup and for many years to come.",
+          "btn_1_label": "See the full site",
+          "btn_1_sublabel": "",
+          "btn_1_url": "/",
+          "btn_1_style": "primary",
+          "btn_1_disabled": false,
+          "btn_2_label": "",
+          "btn_2_sublabel": "",
+          "btn_2_url": "/",
+          "btn_2_style": "ghost",
+          "btn_2_disabled": false,
+          "btn_3_label": "",
+          "btn_3_sublabel": "",
+          "btn_3_url": "/",
+          "btn_3_style": "ghost",
+          "btn_3_disabled": false
+        }
+      },
+      "eddie-footer": {
+        "type": "eddie-footer",
+        "settings": {
+          "logo_text": "Ready Eddie",
+          "tagline": "Invented and manufactured in North Carolina.",
+          "show_year": true,
+          "fine_print": "- Patent pending (No. 19/629, 754)"
+        }
+      }
+    },
     "content_for_index": [],
     "blocks": {
       "14060646107696862457": {
