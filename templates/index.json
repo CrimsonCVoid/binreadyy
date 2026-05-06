@@ -41,6 +41,12 @@
     "why-strip": {
       "type": "why-strip",
       "blocks": {
+        "benefit_bwxFF8": {
+          "type": "benefit",
+          "settings": {
+            "text": "No tools"
+          }
+        },
         "b1": {
           "type": "benefit",
           "settings": {
@@ -79,6 +85,7 @@
         }
       },
       "block_order": [
+        "benefit_bwxFF8",
         "b1",
         "b2",
         "b3",
