@@ -16,7 +16,7 @@
           "type": "ai_gen_block_f709bc0",
           "settings": {
             "show_announcement": true,
-            "announcement_text": "It is estimated that tens of thousands of people fall each year while taking out or bringing in their waste or recycling bins. Ready Eddie helps avoid unnecessary trips.   <span style=\"text-decoration:underline\"><strong>Free Shipping!</strong></span>",
+            "announcement_text": "<strong>Free shipping on all orders</strong> &middot; 30-day returns",
             "background_color": "#f5612a",
             "text_color": "#ffffff",
             "font_size": 20
@@ -36,6 +36,27 @@
         "kicker": "A small, simple gadget. a big convenience.",
         "heading": "Know when your waste or recycling bin has been emptied.",
         "lede": "Flip Ready Eddie up on collection day. When the truck empties your bin, gravity flips Eddie down. One glance from the house — done. No apps, no batteries, no wondering, no unnecessary trips."
+      }
+    },
+    "social-proof": {
+      "type": "social-proof-strip",
+      "blocks": {
+        "q1": { "type": "quote", "settings": { "quote": "Like a flag on the mailbox" } },
+        "q2": { "type": "quote", "settings": { "quote": "Saves a walk in the rain" } },
+        "q3": { "type": "quote", "settings": { "quote": "Prevents an unnecessary trip" } },
+        "q4": { "type": "quote", "settings": { "quote": "Kids actually remember chores" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": {
+        "rating": "4.9",
+        "count_label": "early customer reviews"
+      }
+    },
+    "falls-stat": {
+      "type": "falls-stat",
+      "settings": {
+        "stat_lead": "Tens of thousands of people fall each year",
+        "stat_body": "while taking out or bringing in their bins. Ready Eddie helps avoid unnecessary trips."
       }
     },
     "why-strip": {
@@ -297,6 +318,8 @@
   "order": [
     "1777916456fdc91e5d",
     "hero",
+    "social-proof",
+    "falls-stat",
     "why-strip",
     "how-it-works",
     "testimonials",

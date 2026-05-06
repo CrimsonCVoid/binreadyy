@@ -1,0 +1,51 @@
+<section class="social-proof" aria-label="Customer reviews">
+  <div class="container social-proof-row">
+    <div class="social-proof-rating">
+      <span class="social-proof-stars" aria-hidden="true">
+        {%- for i in (1..5) -%}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.2l2.07 4.2 4.63.67-3.35 3.27.79 4.61L8 11.78l-4.14 2.18.79-4.61L1.3 6.07l4.63-.67L8 1.2z"/></svg>
+        {%- endfor -%}
+      </span>
+      <span class="social-proof-score">{{ section.settings.rating | default: '4.9' }}</span>
+      <span class="social-proof-count">{{ section.settings.count_label | default: 'early customer reviews' }}</span>
+    </div>
+    {%- if section.blocks.size > 0 -%}
+      <ul class="social-proof-quotes" role="list">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>&ldquo;{{ block.settings.quote }}&rdquo;</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Social proof strip",
+  "settings": [
+    { "type": "text", "id": "rating", "label": "Rating", "default": "4.9" },
+    { "type": "text", "id": "count_label", "label": "Reviews label (small caps)", "default": "early customer reviews" }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Pull quote",
+      "settings": [
+        { "type": "text", "id": "quote", "label": "Pull quote (2-4 words)", "default": "Like a flag on the mailbox" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Social proof strip",
+      "blocks": [
+        { "type": "quote", "settings": { "quote": "Like a flag on the mailbox" } },
+        { "type": "quote", "settings": { "quote": "Saves a walk in the rain" } },
+        { "type": "quote", "settings": { "quote": "Prevents an unnecessary trip" } },
+        { "type": "quote", "settings": { "quote": "Kids actually remember chores" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
