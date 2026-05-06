@@ -204,10 +204,11 @@
     /* Match the CSS breakpoint — only behave on phone widths. */
     var mq = window.matchMedia('(max-width: 720px)');
 
-    var hero = document.querySelector('.hero');
-    var buyPanel = document.querySelector('.final-buy') || document.querySelector('.buy-panel');
-    var heroVisible = true;
-    var buyVisible = false;
+    /* Hide only when an actual purchase CTA (final-buy picker or hero
+       buy panel) is in view — otherwise keep the bar visible from
+       initial load so price + CTA are always one tap away. */
+    var ctas = document.querySelectorAll('.final-buy, .buy-panel');
+    var ctaInView = 0;
 
     function update() {
       if (!mq.matches) {
@@ -216,34 +217,18 @@
         return;
       }
       bar.hidden = false;
-      /* Show after the user has scrolled past the hero, hide once the
-         final-buy picker is on screen (no need for a sticky shortcut
-         when the real CTA is visible). */
-      var show = !heroVisible && !buyVisible;
-      bar.classList.toggle('is-visible', show);
+      bar.classList.toggle('is-visible', ctaInView === 0);
     }
 
-    if ('IntersectionObserver' in window) {
-      if (hero) {
-        new IntersectionObserver(function (entries) {
-          heroVisible = entries[0].isIntersecting;
-          update();
-        }, { threshold: 0.05 }).observe(hero);
-      } else {
-        heroVisible = false;
-      }
-      if (buyPanel) {
-        new IntersectionObserver(function (entries) {
-          buyVisible = entries[0].isIntersecting;
-          update();
-        }, { threshold: 0.2 }).observe(buyPanel);
-      }
-    } else {
-      /* Fallback: just show after 400px of scroll */
-      window.addEventListener('scroll', function () {
-        heroVisible = window.scrollY < 400;
+    if ('IntersectionObserver' in window && ctas.length) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          ctaInView += entry.isIntersecting ? 1 : -1;
+        });
+        if (ctaInView < 0) ctaInView = 0;
         update();
-      }, { passive: true });
+      }, { threshold: 0.2 });
+      ctas.forEach(function (el) { io.observe(el); });
     }
 
     mq.addEventListener('change', update);

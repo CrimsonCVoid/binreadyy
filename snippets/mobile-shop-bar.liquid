@@ -1,8 +1,8 @@
 {%- comment -%}
   Sticky bottom shop bar for mobile only. Requires `product` in scope.
-  Hides on desktop and when the user is already looking at a buy panel
-  (handled by JS via IntersectionObserver). Tapping the CTA smooth-scrolls
-  to the final-buy section anchor (#buy) where the picker lives.
+  Visible from initial page load on phone widths so price + CTA are
+  always one tap away; hides only when a real buy panel is in view.
+  Tapping the CTA smooth-scrolls to the final-buy anchor (#buy).
 {%- endcomment -%}
 
 {%- assign product = product | default: all_products[section.settings.product] -%}

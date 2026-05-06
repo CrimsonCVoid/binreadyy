@@ -1146,6 +1146,46 @@
       50%      { transform: scale(1.3); }
     }
 
+    /* ───────── Safety banner (top of page, above hero) ───────── */
+    .safety-banner {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    }
+    .safety-banner-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .safety-banner-icon {
+      flex: 0 0 auto;
+      display: inline-flex;
+      color: var(--accent);
+    }
+    .safety-banner-text {
+      margin: 0;
+      font-size: 0.875rem;
+      line-height: 1.4;
+    }
+    .safety-banner-text strong {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      margin-right: 4px;
+    }
+    .safety-banner-text span {
+      color: rgba(250, 248, 242, 0.86);
+    }
+    @media (max-width: 720px) {
+      .safety-banner { padding: 9px 0; }
+      .safety-banner .container { padding: 0 16px; }
+      .safety-banner-row { gap: 10px; align-items: flex-start; }
+      .safety-banner-text { font-size: 0.8125rem; line-height: 1.35; }
+      .safety-banner-icon svg { width: 16px; height: 16px; }
+    }
+
     /* ───────── Social proof strip (under hero) ───────── */
     .social-proof {
       padding: 22px 0;

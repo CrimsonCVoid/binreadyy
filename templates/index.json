@@ -9,6 +9,13 @@
  */
 {
   "sections": {
+    "safety-banner": {
+      "type": "safety-banner",
+      "settings": {
+        "lead": "Tens of thousands of people fall each year",
+        "body": "while taking out their bins. Ready Eddie helps avoid unnecessary trips."
+      }
+    },
     "hero": {
       "type": "hero",
       "settings": {
@@ -16,7 +23,7 @@
         "kicker": "A small, simple gadget. a big convenience.",
         "heading": "Know when your waste or recycling bin has been emptied.",
         "lede": "Flip Ready Eddie up on collection day. When the truck empties your bin, gravity flips Eddie down. One glance from the house — done. No apps, no batteries, no wondering, no unnecessary trips.",
-        "safety_note": "Tens of thousands of people fall each year while taking out their bins. Ready Eddie helps avoid unnecessary trips.",
+        "safety_note": "",
         "show_ship_badge": true,
         "ship_badge_text": "Free shipping on all orders"
       }
@@ -292,6 +299,7 @@
     }
   },
   "order": [
+    "safety-banner",
     "hero",
     "social-proof",
     "why-strip",
