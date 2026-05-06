@@ -830,7 +830,7 @@
     .reassure-patent, .story-patent, .footer-patent {
       font-size: 0.75rem;
       color: var(--ink-muted);
-      margin-top: 10px;
+      margin-top: 2px;
     }
 
     /* Mobile hero */
