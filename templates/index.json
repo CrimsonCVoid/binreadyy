@@ -16,10 +16,11 @@
           "type": "ai_gen_block_f709bc0",
           "settings": {
             "show_announcement": true,
-            "announcement_text": "<strong>Free shipping on all orders</strong> &middot; 30-day returns",
+            "announcement_text": "Free shipping on all orders",
+            "secondary_text": "Tens of thousands of people fall each year while taking out their bins. Ready Eddie helps avoid unnecessary trips.",
             "background_color": "#f5612a",
             "text_color": "#ffffff",
-            "font_size": 20
+            "font_size": 16
           },
           "blocks": {}
         }
@@ -50,13 +51,6 @@
       "settings": {
         "rating": "4.9",
         "count_label": "early customer reviews"
-      }
-    },
-    "falls-stat": {
-      "type": "falls-stat",
-      "settings": {
-        "stat_lead": "Tens of thousands of people fall each year",
-        "stat_body": "while taking out or bringing in their bins. Ready Eddie helps avoid unnecessary trips."
       }
     },
     "why-strip": {
@@ -317,7 +311,6 @@
   },
   "order": [
     "1777916456fdc91e5d",
-    "falls-stat",
     "hero",
     "social-proof",
     "why-strip",

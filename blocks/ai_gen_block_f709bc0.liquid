@@ -10,25 +10,47 @@
     width: 100%;
     background-color: {{ block.settings.background_color }};
     color: {{ block.settings.text_color }};
-    text-align: center;
-    padding: 12px 20px;
-    font-size: {{ block.settings.font_size }}px;
-    line-height: 1.4;
+    padding: 10px 24px;
+    line-height: 1.35;
   }
+  .ai-announcement-bar-{{ ai_gen_id }}[hidden] { display: none; }
 
-  .ai-announcement-bar-{{ ai_gen_id }}[hidden] {
-    display: none;
+  .ai-announcement-bar__row-{{ ai_gen_id }} {
+    margin: 0 auto;
+    max-width: 1180px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
   }
-
-  .ai-announcement-bar__content-{{ ai_gen_id }} {
+  .ai-announcement-bar__primary-{{ ai_gen_id }} {
     margin: 0;
-    padding: 0;
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: 600;
+    flex: 0 0 auto;
+  }
+  .ai-announcement-bar__secondary-{{ ai_gen_id }} {
+    margin: 0;
+    font-size: {{ block.settings.font_size | minus: 4 }}px;
+    opacity: 0.94;
+    text-align: right;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   @media screen and (max-width: 749px) {
-    .ai-announcement-bar-{{ ai_gen_id }} {
-      font-size: {{ block.settings.font_size | times: 0.9 }}px;
-      padding: 10px 16px;
+    .ai-announcement-bar-{{ ai_gen_id }} { padding: 8px 14px; }
+    .ai-announcement-bar__row-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 2px;
+      text-align: center;
+    }
+    .ai-announcement-bar__primary-{{ ai_gen_id }} {
+      font-size: {{ block.settings.font_size | times: 0.92 }}px;
+    }
+    .ai-announcement-bar__secondary-{{ ai_gen_id }} {
+      font-size: {{ block.settings.font_size | minus: 5 }}px;
+      text-align: center;
     }
   }
 {% endstyle %}
@@ -38,9 +60,12 @@
   {{ block.shopify_attributes }}
   {% unless block.settings.show_announcement %}hidden{% endunless %}
 >
-  <p class="ai-announcement-bar__content-{{ ai_gen_id }}">
-    {{ block.settings.announcement_text }}
-  </p>
+  <div class="ai-announcement-bar__row-{{ ai_gen_id }}">
+    <p class="ai-announcement-bar__primary-{{ ai_gen_id }}">{{ block.settings.announcement_text }}</p>
+    {%- if block.settings.secondary_text != blank -%}
+      <p class="ai-announcement-bar__secondary-{{ ai_gen_id }}">{{ block.settings.secondary_text }}</p>
+    {%- endif -%}
+  </div>
 </div>
 
 {% schema %}
@@ -56,8 +81,14 @@
     {
       "type": "inline_richtext",
       "id": "announcement_text",
-      "label": "Announcement text",
+      "label": "Primary text (left, bold)",
       "default": "Free shipping on all orders"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "secondary_text",
+      "label": "Secondary text (right, smaller)",
+      "default": "Tens of thousands of people fall each year while taking out their bins. Ready Eddie helps avoid unnecessary trips."
     },
     {
       "type": "header",
