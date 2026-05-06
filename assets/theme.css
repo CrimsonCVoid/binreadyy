@@ -312,7 +312,27 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
+    }
+    .ship-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px 7px 12px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(245, 97, 42, 0.28);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-deep);
+      white-space: nowrap;
+    }
+    .ship-badge svg { color: var(--accent); flex-shrink: 0; }
+    @media (max-width: 480px) {
+      .ship-badge { font-size: 0.625rem; padding: 6px 12px 6px 10px; }
     }
     .product-frame {
       position: relative;
@@ -370,6 +390,18 @@
       flex-direction: column;
       gap: 22px;
       max-width: 520px;
+    }
+    .hero-note {
+      margin: -4px 0 0;
+      padding: 2px 0 2px 14px;
+      border-left: 2px solid var(--accent);
+    }
+    .hero-note p {
+      margin: 0;
+      font-style: italic;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      color: var(--ink-muted);
     }
     .kicker {
       display: inline-flex;

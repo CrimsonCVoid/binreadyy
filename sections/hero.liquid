@@ -6,6 +6,15 @@
 
       <!-- LEFT: Product stage -->
       <div class="product-stage">
+        {%- if section.settings.show_ship_badge -%}
+          {%- assign ship_text = section.settings.ship_badge_text | default: settings.free_shipping_note | default: 'Free shipping on all orders' -%}
+          <span class="ship-badge">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7.4l2.6 2.6L11 4.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            {{ ship_text }}
+          </span>
+        {%- endif -%}
         <div class="product-frame">
           {%- if product.featured_image -%}
             <img
@@ -54,6 +63,12 @@
           <p class="lede">{{ section.settings.lede }}</p>
         {%- endif -%}
 
+        {%- if section.settings.safety_note != blank -%}
+          <aside class="hero-note" aria-label="Why this matters">
+            <p>{{ section.settings.safety_note }}</p>
+          </aside>
+        {%- endif -%}
+
         {% render 'buy-button', product: product %}
       </div>
 
@@ -89,6 +104,32 @@
       "id": "lede",
       "label": "Description",
       "default": "Flip Ready Eddie up on collection day. When the truck empties your bin, gravity flips Eddie down. One glance from the house — done. No apps, no batteries, no wondering, no unnecessary trips."
+    },
+    {
+      "type": "header",
+      "content": "Safety note (under description)"
+    },
+    {
+      "type": "textarea",
+      "id": "safety_note",
+      "label": "Italic editorial line under the description",
+      "default": "Tens of thousands of people fall each year while taking out their bins. Ready Eddie helps avoid unnecessary trips."
+    },
+    {
+      "type": "header",
+      "content": "Free-shipping badge (above product image)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ship_badge",
+      "label": "Show free-shipping badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "ship_badge_text",
+      "label": "Badge text (defaults to theme setting)",
+      "default": "Free shipping on all orders"
     }
   ],
   "presets": [
