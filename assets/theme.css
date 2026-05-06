@@ -103,7 +103,7 @@
     }
     .brand:hover { opacity: 0.78; }
     .brand-mark {
-      height: 66px;
+      height: 76px;
       width: auto;
       display: inline-block;
       flex-shrink: 0;
@@ -113,35 +113,13 @@
     .brand:hover .brand-mark {
       transform: scale(1.06);
     }
-    /* Footer variant: full lockup with tagline visible */
+    /* Footer variant: a wider crop of the same lockup */
     .brand-mark--full {
       height: auto;
-      width: 200px;
-    }
-    /* Cropped window for the header — uses object-fit: cover with
-       centered positioning so the brand content (Eddie + READY EDDIE)
-       sits in the visible band. Source image is 600x400 (1.5:1). */
-    .brand-mark-window {
-      display: inline-block;
-      position: relative;
-      width: 230px;
-      height: 82px;
-      overflow: hidden;
-      flex-shrink: 0;
-      transition: transform 0.4s var(--ease-spring);
-    }
-    .brand:hover .brand-mark-window {
-      transform: scale(1.06);
-    }
-    .brand-mark-window img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
+      width: 240px;
     }
     @media (max-width: 720px) {
-      .brand-mark-window--header { width: 192px; height: 70px; }
+      .brand-mark { height: 64px; }
     }
     .nav {
       display: flex;

@@ -11,9 +11,7 @@
         {%- if settings.logo -%}
           <img class="brand-mark" src="{{ settings.logo | image_url: width: 240 }}" width="240" height="160" alt="{{ shop.name }}" decoding="async" />
         {%- else -%}
-          <span class="brand-mark-window brand-mark-window--header" role="img" aria-label="{{ shop.name }}">
-            <img src="{{ 'LogoWinner.png' | asset_url }}" width="600" height="400" alt="{{ shop.name }}" decoding="async" />
-          </span>
+          <img class="brand-mark" src="{{ 'correctedlogo.png' | asset_url }}" width="700" height="290" alt="{{ shop.name }}" decoding="async" />
         {%- endif -%}
       </a>
       <button
