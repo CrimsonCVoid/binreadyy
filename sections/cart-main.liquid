@@ -4,8 +4,6 @@
   assign empty_sub = section.settings.empty_subheading
   assign empty_label = section.settings.empty_cta_label | default: 'Continue shopping'
   assign empty_link = section.settings.empty_cta_link | default: '/'
-  assign show_note = section.settings.show_note
-  assign note_label = section.settings.note_label | default: 'Order note'
 -%}
 
 <section class="cart-page" aria-labelledby="cart-title">
@@ -98,13 +96,6 @@
           {%- endfor -%}
         </ul>
 
-        {%- if show_note -%}
-          <div class="cart-note" data-cart-note-form>
-            <label class="cart-note-label" for="CartNote">{{ note_label }}</label>
-            <textarea id="CartNote" name="note" rows="3" class="cart-note-field" placeholder="Optional">{{ cart.note }}</textarea>
-          </div>
-        {%- endif -%}
-
         <div class="cart-summary">
           <div class="cart-summary-row">
             <span class="cart-summary-label">Subtotal</span>
@@ -143,9 +134,7 @@
     { "type": "text", "id": "empty_heading", "label": "Empty cart heading", "default": "Your cart is empty" },
     { "type": "text", "id": "empty_subheading", "label": "Empty cart subheading", "default": "Pick up a Ready Eddie below." },
     { "type": "text", "id": "empty_cta_label", "label": "Empty cart button label", "default": "Back to Ready Eddie" },
-    { "type": "url", "id": "empty_cta_link", "label": "Empty cart button link", "default": "/" },
-    { "type": "checkbox", "id": "show_note", "label": "Show order note field", "default": true },
-    { "type": "text", "id": "note_label", "label": "Order note label", "default": "Add a note (delivery instructions, gift, etc.)" }
+    { "type": "url", "id": "empty_cta_link", "label": "Empty cart button link", "default": "/" }
   ]
 }
 {% endschema %}

@@ -819,32 +819,43 @@
       position: relative;
     }
     /* Cuff-pick step (step 01 of How it Works) */
-    .how-step--cuff .cuff-pick-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 12px;
+    .how-step--cuff {
+      padding: 56px 20px 20px !important;
     }
-    @media (max-width: 720px) {
-      .how-step--cuff .cuff-pick-grid { grid-template-columns: 1fr; }
+    .how-step--cuff > h3 {
+      margin: 0 0 4px;
+    }
+    .how-step--cuff .cuff-pick-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 14px;
     }
     .cuff-pick {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 12px;
-      padding: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 12px;
       background: var(--bg);
       border: 1px solid var(--line);
       border-radius: 10px;
+      min-width: 0;
     }
     .cuff-pick-thumb {
-      width: 72px;
-      height: 72px;
+      width: 76px;
+      height: 76px;
+      flex: 0 0 76px;
       object-fit: cover;
       border-radius: 8px;
       background: var(--bg-deep);
     }
-    .cuff-pick-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .cuff-pick-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
     .cuff-pick-tag {
       display: inline-flex;
       align-items: center;
@@ -870,6 +881,12 @@
       font-size: 0.875rem;
       line-height: 1.45;
       color: var(--ink-soft);
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 480px) {
+      .cuff-pick { gap: 12px; padding: 10px; }
+      .cuff-pick-thumb { width: 64px; height: 64px; flex-basis: 64px; }
+      .cuff-pick p { font-size: 0.8125rem; }
     }
 
     .how-head {
