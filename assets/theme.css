@@ -118,14 +118,14 @@
       height: auto;
       width: 200px;
     }
-    /* Cropped window for the header — hides the small tagline at the
-       bottom of LogoWinner so READY EDDIE + bin stay readable in the
-       sticky bar. Source image is 600x400 (1.5:1). */
+    /* Cropped window for the header — uses object-fit: cover with
+       centered positioning so the brand content (Eddie + READY EDDIE)
+       sits in the visible band. Source image is 600x400 (1.5:1). */
     .brand-mark-window {
       display: inline-block;
       position: relative;
-      width: 175px;
-      height: 66px;
+      width: 200px;
+      height: 72px;
       overflow: hidden;
       flex-shrink: 0;
       transition: transform 0.4s var(--ease-spring);
@@ -134,15 +134,14 @@
       transform: scale(1.06);
     }
     .brand-mark-window img {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
       display: block;
     }
     @media (max-width: 720px) {
-      .brand-mark-window--header { width: 152px; height: 58px; }
+      .brand-mark-window--header { width: 168px; height: 62px; }
     }
     .nav {
       display: flex;
