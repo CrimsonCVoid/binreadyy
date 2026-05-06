@@ -1,6 +1,6 @@
 {% doc %}
   @prompt
-    Create a custom announcement bar section for a Shopify theme. The announcement bar should display the message "Free shipping on orders of $40 or more" and be positioned at the very top of the page, inside the header. It should have customizable settings including: announcement text, background color, text color, and the ability to show/hide the bar. Style it to be clean and minimal, matching a simple and functional store design. Make it a standalone section that can be added to the theme header group.
+    Create a custom announcement bar section for a Shopify theme. The announcement bar should display the message "Free shipping on all orders" and be positioned at the very top of the page, inside the header. It should have customizable settings including: announcement text, background color, text color, and the ability to show/hide the bar. Style it to be clean and minimal, matching a simple and functional store design. Make it a standalone section that can be added to the theme header group.
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
@@ -57,7 +57,7 @@
       "type": "inline_richtext",
       "id": "announcement_text",
       "label": "Announcement text",
-      "default": "Free shipping on orders of $40 or more"
+      "default": "Free shipping on all orders"
     },
     {
       "type": "header",
