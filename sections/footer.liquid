@@ -6,7 +6,7 @@
         {%- if settings.logo -%}
           <img class="brand-mark" src="{{ settings.logo | image_url: width: 360 }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" loading="lazy" />
         {%- else -%}
-          <img class="brand-mark" src="{{ 'LogoChat.png' | asset_url }}" width="360" height="240" alt="{{ shop.name }}" decoding="async" loading="lazy" />
+          <img class="brand-mark brand-mark--full" src="{{ 'LogoWinner.png' | asset_url }}" width="600" height="400" alt="{{ shop.name }}" decoding="async" loading="lazy" />
         {%- endif -%}
       </a>
       <div class="f-links">

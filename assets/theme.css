@@ -113,6 +113,37 @@
     .brand:hover .brand-mark {
       transform: scale(1.06);
     }
+    /* Footer variant: full lockup with tagline visible */
+    .brand-mark--full {
+      height: auto;
+      width: 200px;
+    }
+    /* Cropped window for the header — hides the small tagline at the
+       bottom of LogoWinner so READY EDDIE + bin stay readable in the
+       sticky bar. Source image is 600x400 (1.5:1). */
+    .brand-mark-window {
+      display: inline-block;
+      position: relative;
+      width: 175px;
+      height: 66px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: transform 0.4s var(--ease-spring);
+    }
+    .brand:hover .brand-mark-window {
+      transform: scale(1.06);
+    }
+    .brand-mark-window img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    @media (max-width: 720px) {
+      .brand-mark-window--header { width: 152px; height: 58px; }
+    }
     .nav {
       display: flex;
       align-items: center;
