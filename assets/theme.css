@@ -124,8 +124,8 @@
     .brand-mark-window {
       display: inline-block;
       position: relative;
-      width: 200px;
-      height: 72px;
+      width: 230px;
+      height: 82px;
       overflow: hidden;
       flex-shrink: 0;
       transition: transform 0.4s var(--ease-spring);
@@ -141,7 +141,7 @@
       display: block;
     }
     @media (max-width: 720px) {
-      .brand-mark-window--header { width: 168px; height: 62px; }
+      .brand-mark-window--header { width: 192px; height: 70px; }
     }
     .nav {
       display: flex;
