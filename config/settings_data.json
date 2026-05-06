@@ -22,7 +22,7 @@
       "header": {
         "type": "header",
         "settings": {
-          "product": "",
+          "product": "ready-eddie-1",
           "show_buy_button": true
         }
       },
@@ -174,13 +174,6 @@
         }
       }
     },
-    "content_for_index": [],
-    "blocks": {
-      "14060646107696862457": {
-        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": false,
-        "settings": {}
-      }
-    }
+    "content_for_index": []
   }
 }

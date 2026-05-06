@@ -16,7 +16,7 @@
           "type": "ai_gen_block_f709bc0",
           "settings": {
             "show_announcement": true,
-            "announcement_text": "<span style=\"text-decoration:underline\"><strong>Free shipping on orders of $40 or more</strong></span>",
+            "announcement_text": "<span style=\"text-decoration:underline\"><strong>Free shipping on all orders!</strong></span>",
             "background_color": "#f5612a",
             "text_color": "#ffffff",
             "font_size": 20
@@ -126,7 +126,7 @@
         "install_rule_gray": "If the top of your bin lid is above your bin handle, put the GRAY cuff on your handle, and wrap Ready Eddie around it.",
         "install_rule_black": "If the top of your bin lid is level with the top of your bin handle, use the BLACK cuff.",
         "more_label": "See the full breakdown",
-        "more_sublabel": "Photos, mechanism, install — 60 seconds",
+        "more_sublabel": "Photos, mechanism, installs in 15 seconds",
         "more_url": "/pages/how-ready-eddie-works"
       }
     },
