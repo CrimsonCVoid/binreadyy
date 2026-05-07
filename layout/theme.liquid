@@ -58,6 +58,18 @@
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 
   {{ content_for_header }}
+
+  {%- comment -%}
+    Single-product store: the product page and homepage are near-duplicates.
+    Consolidate all indexing signals to the homepage by overriding the
+    product template's canonical and noindexing it. The product URL still
+    works for direct visits, cart line items, and checkout — it just
+    stops competing with the homepage in search.
+  {%- endcomment -%}
+  {%- if template == 'product' -%}
+    <link rel="canonical" href="{{ shop.url }}/" />
+    <meta name="robots" content="noindex,follow" />
+  {%- endif -%}
 </head>
 <body>
 
