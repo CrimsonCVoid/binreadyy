@@ -31,15 +31,40 @@
     "social-proof": {
       "type": "social-proof-strip",
       "blocks": {
-        "q1": { "type": "quote", "settings": { "quote": "Like a flag on the mailbox" } },
-        "q2": { "type": "quote", "settings": { "quote": "Saves a walk in the rain" } },
-        "q3": { "type": "quote", "settings": { "quote": "Prevents an unnecessary trip" } },
-        "q4": { "type": "quote", "settings": { "quote": "Kids actually remember chores" } }
+        "q1": {
+          "type": "quote",
+          "settings": {
+            "quote": "Like a flag on the mailbox"
+          }
+        },
+        "q2": {
+          "type": "quote",
+          "settings": {
+            "quote": "Saves a walk in the rain"
+          }
+        },
+        "q3": {
+          "type": "quote",
+          "settings": {
+            "quote": "Prevents an unnecessary trip"
+          }
+        },
+        "q4": {
+          "type": "quote",
+          "settings": {
+            "quote": "Kids actually remember chores"
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
       "settings": {
         "rating": "4.9",
-        "count_label": "early customer reviews"
+        "count_label": "customer reviews"
       }
     },
     "why-strip": {
