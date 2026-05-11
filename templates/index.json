@@ -12,8 +12,8 @@
     "safety-banner": {
       "type": "safety-banner",
       "settings": {
-        "lead": "Tens of thousands of people fall each year",
-        "body": "while taking out their bins. Ready Eddie helps avoid unnecessary trips."
+        "lead": "Tens of thousands of people fall each year while taking out their bins.",
+        "body": "Ready Eddie helps avoid unnecessary trips."
       }
     },
     "hero": {
@@ -330,8 +330,8 @@
           "settings": {
             "button_text": "Buy now",
             "sold_out_text": "Sold out",
-            "button_color": "#F5612A",
-            "button_hover_color": "#D94F1E",
+            "button_color": "#f5612a",
+            "button_hover_color": "#d94f1e",
             "button_text_color": "#ffffff",
             "font_size": 16,
             "font_weight": "600",
