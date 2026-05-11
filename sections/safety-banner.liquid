@@ -6,8 +6,8 @@
       </svg>
     </span>
     <p class="safety-banner-text">
-      <strong>{{ section.settings.lead | default: 'Tens of thousands of people fall each year' }}</strong>
-      <span>{{ section.settings.body | default: 'while taking out their bins. Ready Eddie helps avoid unnecessary trips.' }}</span>
+      <strong>{{ section.settings.lead | default: 'Tens of thousands of people fall each year while taking out their bins.' }}</strong>
+      <span>{{ section.settings.body | default: 'Ready Eddie helps avoid unnecessary trips.' }}</span>
     </p>
   </div>
 </section>
@@ -16,8 +16,8 @@
 {
   "name": "Safety banner",
   "settings": [
-    { "type": "text", "id": "lead", "label": "Lead (bold, accent color)", "default": "Tens of thousands of people fall each year" },
-    { "type": "textarea", "id": "body", "label": "Body", "default": "while taking out their bins. Ready Eddie helps avoid unnecessary trips." }
+    { "type": "text", "id": "lead", "label": "Lead (bold, accent color)", "default": "Tens of thousands of people fall each year while taking out their bins." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Ready Eddie helps avoid unnecessary trips." }
   ],
   "presets": [
     { "name": "Safety banner" }
