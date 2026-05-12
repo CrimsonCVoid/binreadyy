@@ -346,6 +346,10 @@
         "ai_gen_block_84d46b3_AgxxzR"
       ],
       "settings": {}
+    },
+    "17785206841101fe93": {
+      "type": "_blocks",
+      "settings": {}
     }
   },
   "order": [
@@ -359,6 +363,7 @@
     "final-buy",
     "help",
     "story",
-    "1778508913ddb3cdc6"
+    "1778508913ddb3cdc6",
+    "17785206841101fe93"
   ]
 }
