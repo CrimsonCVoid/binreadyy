@@ -48,7 +48,7 @@
             "caption_alignment": "center",
             "caption_spacing": 5,
             "max_width": 600,
-            "image_gap": 10,
+            "image_gap": 30,
             "mobile_gap": 10,
             "image_border_radius": 20,
             "section_padding_top": 10,
