@@ -28,6 +28,41 @@
         "ship_badge_text": "Free shipping on all orders"
       }
     },
+    "1779462355e96b9d28": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_bb282ab_4ThNCz": {
+          "type": "ai_gen_block_bb282ab",
+          "settings": {
+            "heading": "Ready Eddie drops down when they empty your bin",
+            "heading_size": 30,
+            "heading_color": "#1A1A17",
+            "heading_alignment": "center",
+            "heading_spacing": 10,
+            "image_left": "shopify://shop_images/RE_Up_Bin_is_Full.jpg",
+            "caption_left": "<strong>Ready Eddie Up = Bin is Full</strong>",
+            "image_right": "shopify://shop_images/RE_Down_Bin_is_Empty.jpg",
+            "caption_right": "<strong>Ready Eddie Down = Bin is Empty</strong>",
+            "caption_size": 18,
+            "caption_color": "#1A1A17",
+            "caption_alignment": "center",
+            "caption_spacing": 5,
+            "max_width": 600,
+            "image_gap": 10,
+            "mobile_gap": 10,
+            "image_border_radius": 20,
+            "section_padding_top": 10,
+            "section_padding_bottom": 5,
+            "background_color": "#FAF8F2"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_bb282ab_4ThNCz"
+      ],
+      "settings": {}
+    },
     "social-proof": {
       "type": "social-proof-strip",
       "blocks": {
@@ -350,46 +385,12 @@
     "17785206841101fe93": {
       "type": "_blocks",
       "settings": {}
-    },
-    "1779462355e96b9d28": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_bb282ab_4ThNCz": {
-          "type": "ai_gen_block_bb282ab",
-          "settings": {
-            "heading": "Ready Eddie drops down when they empty your bin",
-            "heading_size": 34,
-            "heading_color": "#1A1A17",
-            "heading_alignment": "center",
-            "heading_spacing": 10,
-            "image_left": "shopify://shop_images/RE_Up_Bin_is_Full.jpg",
-            "caption_left": "<strong>Ready Eddie Up = Bin is Full</strong>",
-            "image_right": "shopify://shop_images/RE_Down_Bin_is_Empty.jpg",
-            "caption_right": "<strong>Ready Eddie Down = Bin is Empty</strong>",
-            "caption_size": 19,
-            "caption_color": "#1A1A17",
-            "caption_alignment": "center",
-            "caption_spacing": 5,
-            "max_width": 1000,
-            "image_gap": 30,
-            "mobile_gap": 10,
-            "image_border_radius": 6,
-            "section_padding_top": 20,
-            "section_padding_bottom": 10,
-            "background_color": "#FAF8F2"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_bb282ab_4ThNCz"
-      ],
-      "settings": {}
     }
   },
   "order": [
     "safety-banner",
     "hero",
+    "1779462355e96b9d28",
     "social-proof",
     "why-strip",
     "how-it-works",
@@ -399,7 +400,6 @@
     "help",
     "story",
     "1778508913ddb3cdc6",
-    "17785206841101fe93",
-    "1779462355e96b9d28"
+    "17785206841101fe93"
   ]
 }
