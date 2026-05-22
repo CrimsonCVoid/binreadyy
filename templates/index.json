@@ -53,7 +53,7 @@
             "image_border_radius": 20,
             "section_padding_top": 10,
             "section_padding_bottom": 5,
-            "background_color": "#FAF8F2"
+            "background_color": "#f0ece0"
           },
           "blocks": {}
         }
