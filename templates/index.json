@@ -23,7 +23,7 @@
         "kicker": "A small, simple gadget. a big convenience.",
         "heading": "Know when your waste or recycling bin has been emptied.",
         "lede": "Flip Ready Eddie up on collection day. When the truck empties your bin, gravity flips Eddie down. One glance from the house — done. No apps, no batteries, no wondering, no unnecessary trips. Just convenience. Makes a great Father's Day gift for Dad!",
-        "safety_note": "",
+        "safety_note": "-  Ready Eddie is a simple trash pickup indicator you can see from your window. No more asking: Did the trash get picked up yet?",
         "show_ship_badge": true,
         "ship_badge_text": "Free shipping on all orders"
       }
@@ -36,7 +36,7 @@
           "settings": {
             "heading": "Ready Eddie drops down when they empty your bin",
             "heading_size": 30,
-            "heading_color": "#1A1A17",
+            "heading_color": "#1a1a17",
             "heading_alignment": "center",
             "heading_spacing": 10,
             "image_left": "shopify://shop_images/RE_Up_Bin_is_Full.jpg",
@@ -44,7 +44,7 @@
             "image_right": "shopify://shop_images/RE_Down_Bin_is_Empty.jpg",
             "caption_right": "<strong>Ready Eddie Down = Bin is Empty</strong>",
             "caption_size": 18,
-            "caption_color": "#1A1A17",
+            "caption_color": "#1a1a17",
             "caption_alignment": "center",
             "caption_spacing": 5,
             "max_width": 600,
