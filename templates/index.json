@@ -144,7 +144,7 @@
         "b6": {
           "type": "benefit",
           "settings": {
-            "text": "Weatherproof"
+            "text": "Durable"
           }
         }
       },
@@ -278,7 +278,7 @@
         "t7"
       ],
       "settings": {
-        "kicker": "Real quotes · names changed",
+        "kicker": "Real quotes",
         "heading": "From the people who actually use it.",
         "subheading": "These are real words from real customers.",
         "rating": "4.9",
@@ -313,7 +313,7 @@
           "type": "faq",
           "settings": {
             "question": "What if I don't love it?",
-            "answer": "Send it back within 30 days for a full refund. No questions, no restocking fee, no hoops."
+            "answer": "Your satisfaction is 100% guaranteed. Just ship it back to us within 30 days for a full refund. No questions, no restocking fee, no hoops."
           }
         }
       },
