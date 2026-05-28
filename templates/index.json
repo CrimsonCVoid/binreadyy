@@ -12,7 +12,7 @@
     "safety-banner": {
       "type": "safety-banner",
       "settings": {
-        "lead": "Tens of thousands of people fall each year while taking out their bins.",
+        "lead": "Tens of thousands of people fall each year while taking out their bins (National Safety Council / CDC).",
         "body": "Ready Eddie helps avoid unnecessary trips."
       }
     },
