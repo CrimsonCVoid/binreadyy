@@ -1,5 +1,12 @@
 {%- assign product = all_products[section.settings.product] | default: product -%}
 
+{%- comment -%}
+  Demo video. A bundled clip (CoverCenterVideo.mp4) ships as the default so the
+  play button is always live. The theme editor can override it: an uploaded file
+  or a YouTube/Vimeo link both take precedence over the bundled clip.
+{%- endcomment -%}
+{%- assign has_video = true -%}
+
 <section class="hero" aria-labelledby="hero-title">
   <div class="container">
     <div class="hero-grid">
@@ -48,6 +55,16 @@
               fetchpriority="high"
             />
           {%- endif -%}
+          {%- if has_video -%}
+            <button type="button" class="video-trigger" aria-haspopup="dialog" aria-controls="hero-video-modal">
+              <span class="video-trigger-ring" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                  <path d="M8 6.5l8 4.5-8 4.5V6.5z" fill="currentColor"/>
+                </svg>
+              </span>
+              <span class="video-trigger-label">{{ section.settings.video_label | default: 'See how it works' }}</span>
+            </button>
+          {%- endif -%}
         </div>
       </div>
 
@@ -76,6 +93,32 @@
   </div>
 </section>
 
+{%- if has_video -%}
+  <div class="video-modal" id="hero-video-modal" role="dialog" aria-modal="true" aria-label="{{ section.settings.video_label | default: 'See how it works' | escape }}" hidden>
+    <div class="video-modal-overlay" data-video-close></div>
+    <div class="video-modal-frame" role="document">
+      <button type="button" class="video-modal-close" data-video-close aria-label="Close video">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="video-modal-media">
+        {%- if section.settings.video_file != blank -%}
+          {{ section.settings.video_file | video_tag: image_size: '1100x', controls: true, preload: 'none', class: 'video-modal-el' }}
+        {%- elsif section.settings.demo_video.type == 'youtube' -%}
+          <iframe class="video-modal-el" data-src="https://www.youtube.com/embed/{{ section.settings.demo_video.id }}?autoplay=1&rel=0&modestbranding=1" title="{{ section.settings.video_label | default: 'See how it works' | escape }}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>
+        {%- elsif section.settings.demo_video.type == 'vimeo' -%}
+          <iframe class="video-modal-el" data-src="https://player.vimeo.com/video/{{ section.settings.demo_video.id }}?autoplay=1" title="{{ section.settings.video_label | default: 'See how it works' | escape }}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        {%- else -%}
+          <video class="video-modal-el" controls playsinline loop preload="none" poster="{% if product.featured_image %}{{ product.featured_image | image_url: width: 1080 }}{% else %}{{ 'OrangeEddy-1200.jpg' | asset_url }}{% endif %}">
+            <source src="{{ 'CoverCenterVideo.mp4' | asset_url }}" type="video/mp4" />
+          </video>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
 {% render 'mobile-shop-bar', product: product %}
 
 {% schema %}
@@ -86,6 +129,31 @@
       "type": "product",
       "id": "product",
       "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Demo video (how it works)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add a short demo and a play button appears over the product image, opening it in a pop-up. Upload a file OR paste a YouTube/Vimeo link. If both are set, the uploaded file wins."
+    },
+    {
+      "type": "video",
+      "id": "video_file",
+      "label": "Upload a video"
+    },
+    {
+      "type": "video_url",
+      "id": "demo_video",
+      "label": "…or paste a YouTube / Vimeo link",
+      "accept": ["youtube", "vimeo"]
+    },
+    {
+      "type": "text",
+      "id": "video_label",
+      "label": "Play button / pop-up label",
+      "default": "See how it works"
     },
     {
       "type": "text",
