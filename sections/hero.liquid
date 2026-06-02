@@ -80,9 +80,16 @@
           <p class="lede">{{ section.settings.lede }}</p>
         {%- endif -%}
 
+        {%- if section.settings.gift_note != blank -%}
+          <p class="hero-gift">{{ section.settings.gift_note }}</p>
+        {%- endif -%}
+
         {%- if section.settings.safety_note != blank -%}
           <aside class="hero-note" aria-label="Why this matters">
             <p>{{ section.settings.safety_note }}</p>
+            {%- if section.settings.safety_note_2 != blank -%}
+              <p class="hero-note-q">{{ section.settings.safety_note_2 }}</p>
+            {%- endif -%}
           </aside>
         {%- endif -%}
 
@@ -174,6 +181,13 @@
       "default": "Flip Ready Eddie up on collection day. When the truck empties your bin, gravity flips Eddie down. One glance from the house — done. No apps, no batteries, no wondering, no unnecessary trips."
     },
     {
+      "type": "text",
+      "id": "gift_note",
+      "label": "Gift callout (dashed divider above it)",
+      "info": "Short line set off from the description, e.g. a seasonal gift angle.",
+      "default": "Makes a great Father's Day gift for Dad!"
+    },
+    {
       "type": "header",
       "content": "Safety note (under description)"
     },
@@ -182,6 +196,12 @@
       "id": "safety_note",
       "label": "Italic editorial line under the description",
       "default": "Tens of thousands of people fall each year while taking out their bins. Ready Eddie helps avoid unnecessary trips."
+    },
+    {
+      "type": "textarea",
+      "id": "safety_note_2",
+      "label": "Second italic line (optional)",
+      "info": "Stacks under the first line inside the same accent-bordered note."
     },
     {
       "type": "header",

@@ -22,8 +22,10 @@
         "product": "ready-eddie-1",
         "kicker": "A small, simple gadget. a big convenience.",
         "heading": "Know when your waste  bin has been emptied",
-        "lede": "Flip Ready Eddie up on collection day. Gravity flips him down when they empty your bin. One glance from the house - done! No apps, no batteries, no wondering, no unnecessary trips. ------------- Makes a great Father's Day gift for Dad! ----------",
-        "safety_note": "-  Ready Eddie is a simple trash or recycling pickup indicator._____________ - No more asking: Did the trash get picked up yet?",
+        "lede": "Flip Ready Eddie up on collection day. Gravity flips him down when they empty your bin. One glance from the house — done! No apps, no batteries, no wondering, no unnecessary trips.",
+        "gift_note": "Makes a great Father's Day gift for Dad!",
+        "safety_note": "Ready Eddie is a simple trash or recycling pickup indicator.",
+        "safety_note_2": "No more asking: Did the trash get picked up yet?",
         "show_ship_badge": true,
         "ship_badge_text": "Free shipping on all orders"
       }
@@ -34,7 +36,8 @@
         "ai_gen_block_bb282ab_4ThNCz": {
           "type": "ai_gen_block_bb282ab",
           "settings": {
-            "heading": "---- Ready Eddie drops down when they empty your bin ---- No more wondering or trips down the driveway to check.",
+            "heading": "Ready Eddie drops down when they empty your bin",
+            "subheading": "No more wondering or trips down the driveway to check.",
             "heading_size": 28,
             "heading_color": "#1a1a17",
             "heading_alignment": "center",

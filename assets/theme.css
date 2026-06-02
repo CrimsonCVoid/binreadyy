@@ -524,6 +524,17 @@
       gap: 22px;
       max-width: 520px;
     }
+    /* Gift callout — real dashed divider replaces the typed "-----" guide */
+    .hero-gift {
+      margin: 2px 0 0;
+      padding-top: 14px;
+      border-top: 1px dashed var(--line);
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--accent-deep, var(--accent));
+    }
     .hero-note {
       margin: -4px 0 0;
       padding: 2px 0 2px 14px;
@@ -535,6 +546,11 @@
       font-size: 0.9375rem;
       line-height: 1.5;
       color: var(--ink-muted);
+    }
+    /* Second stacked line of the note — slightly lighter, real spacing */
+    .hero-note p.hero-note-q {
+      margin-top: 6px;
+      color: var(--ink-soft);
     }
     .kicker {
       display: inline-flex;
