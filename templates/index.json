@@ -20,6 +20,8 @@
       "type": "hero",
       "settings": {
         "product": "ready-eddie-1",
+        "demo_video": "",
+        "video_label": "See how it works",
         "kicker": "A small, simple gadget. a big convenience.",
         "heading": "Know when your waste bin has been emptied",
         "lede": "Flip Ready Eddie up on collection day. Gravity flips him down when they empty your bin. One glance from the house — done! No apps, no batteries, no wondering, no unnecessary trips.",
@@ -388,6 +390,30 @@
     "17785206841101fe93": {
       "type": "_blocks",
       "settings": {}
+    },
+    "17807568002fe5afe8": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_b9fa6e0_qTR9iY": {
+          "type": "ai_gen_block_b9fa6e0",
+          "settings": {
+            "callout_text": "The 2-pack and the 3-pack will appear as 1 item in your cart.",
+            "show_icon": true,
+            "conditional_display": true,
+            "background_color": "#F0F7FF",
+            "border_color": "#2563EB",
+            "text_color": "#1A1A17",
+            "font_size": 13,
+            "icon_size": 16,
+            "border_radius": 4
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_b9fa6e0_qTR9iY"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -403,6 +429,7 @@
     "help",
     "story",
     "1778508913ddb3cdc6",
-    "17785206841101fe93"
+    "17785206841101fe93",
+    "17807568002fe5afe8"
   ]
 }
