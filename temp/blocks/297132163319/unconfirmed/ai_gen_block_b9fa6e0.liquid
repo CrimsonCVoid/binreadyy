@@ -1,6 +1,232 @@
+{% doc %}
+  @prompt
+    Add a small inline callout note directly above the "Add to Cart" button on the product page. The note should read: "The 2-pack and the 3-pack will appear as 1 item in your cart." Style it as a subtle but clear highlighted callout — use a light background with a left border accent or an info icon (ℹ️), small font size, and some padding. It should only be visible when a 2-pack or 3-pack variant is selected, if possible — otherwise show it always. Do not place it in the header or hero section.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-cart-callout-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .ai-cart-callout__content-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    background-color: {{ block.settings.background_color }};
+    border-left: 3px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    font-size: {{ block.settings.font_size }}px;
+    line-height: 1.4;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-cart-callout__icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    font-size: {{ block.settings.icon_size }}px;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .ai-cart-callout__text-{{ ai_gen_id }} {
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  .ai-cart-callout-{{ ai_gen_id }}.hidden {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-cart-callout__content-{{ ai_gen_id }} {
+      padding: 10px 12px;
+      font-size: {{ block.settings.font_size | times: 0.9 }}px;
+    }
+
+    .ai-cart-callout__icon-{{ ai_gen_id }} {
+      font-size: {{ block.settings.icon_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<cart-callout-{{ ai_gen_id }}
+  class="ai-cart-callout-{{ ai_gen_id }} {% if block.settings.conditional_display %}hidden{% endif %}"
+  data-conditional="{{ block.settings.conditional_display }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-cart-callout__content-{{ ai_gen_id }}">
+    {% if block.settings.show_icon %}
+      <span class="ai-cart-callout__icon-{{ ai_gen_id }}" aria-hidden="true">ℹ️</span>
+    {% endif %}
+    <p class="ai-cart-callout__text-{{ ai_gen_id }}">
+      {{ block.settings.callout_text }}
+    </p>
+  </div>
+</cart-callout-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class CartCallout{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.conditionalDisplay = this.dataset.conditional === 'true';
+      }
+
+      connectedCallback() {
+        if (!this.conditionalDisplay) {
+          return;
+        }
+
+        this.productForm = document.querySelector('form[action*="/cart/add"]');
+        if (!this.productForm) {
+          return;
+        }
+
+        this.variantSelect = this.productForm.querySelector('select[name="id"]') ||
+                            this.productForm.querySelector('input[name="id"]') ||
+                            this.productForm.querySelector('[name="id"]');
+
+        if (this.variantSelect) {
+          this.checkVariant();
+          this.variantSelect.addEventListener('change', this.checkVariant.bind(this));
+        }
+
+        document.addEventListener('variant:change', this.handleVariantChange.bind(this));
+      }
+
+      checkVariant() {
+        const selectedValue = this.variantSelect.value;
+        const selectedOption = this.variantSelect.options ? 
+          this.variantSelect.options[this.variantSelect.selectedIndex] : null;
+        
+        const variantTitle = selectedOption ? 
+          selectedOption.textContent.toLowerCase() : 
+          this.variantSelect.dataset.variantTitle ? 
+          this.variantSelect.dataset.variantTitle.toLowerCase() : '';
+
+        const shouldShow = variantTitle.includes('2-pack') || 
+                          variantTitle.includes('2 pack') || 
+                          variantTitle.includes('3-pack') || 
+                          variantTitle.includes('3 pack');
+
+        if (shouldShow) {
+          this.classList.remove('hidden');
+        } else {
+          this.classList.add('hidden');
+        }
+      }
+
+      handleVariantChange(event) {
+        if (event.detail && event.detail.variant) {
+          const variantTitle = event.detail.variant.title ? 
+            event.detail.variant.title.toLowerCase() : '';
+          
+          const shouldShow = variantTitle.includes('2-pack') || 
+                            variantTitle.includes('2 pack') || 
+                            variantTitle.includes('3-pack') || 
+                            variantTitle.includes('3 pack');
+
+          if (shouldShow) {
+            this.classList.remove('hidden');
+          } else {
+            this.classList.add('hidden');
+          }
+        }
+      }
+    }
+
+    customElements.define('cart-callout-{{ ai_gen_id }}', CartCallout{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Cart callout note",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "callout_text",
+      "label": "Callout text",
+      "default": "The 2-pack and the 3-pack will appear as 1 item in your cart."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show info icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "conditional_display",
+      "label": "Only show for 2-pack and 3-pack variants",
+      "default": true,
+      "info": "When enabled, the callout only appears when a 2-pack or 3-pack variant is selected"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F0F7FF"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border accent color",
+      "default": "#2563EB"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1A1A17"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cart callout note"
+    }
+  ]
+}
 {% endschema %}
