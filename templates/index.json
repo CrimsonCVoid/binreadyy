@@ -414,6 +414,37 @@
         "ai_gen_block_b9fa6e0_qTR9iY"
       ],
       "settings": {}
+    },
+    "17817095999ba5643c": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a1ab93f_hzhwW6": {
+          "type": "ai_gen_block_a1ab93f",
+          "settings": {
+            "instagram_url": "",
+            "facebook_url": "",
+            "tiktok_url": "",
+            "youtube_url": "",
+            "pinterest_url": "",
+            "twitter_url": "",
+            "linkedin_url": "",
+            "alignment": "center",
+            "icon_spacing": 16,
+            "desktop_width_percent": 100,
+            "icon_size": 44,
+            "icon_border_radius": 8,
+            "icon_background_color": "#F5612A",
+            "icon_color": "#FFFFFF",
+            "icon_hover_background_color": "#1A5A3A",
+            "icon_hover_color": "#FFFFFF"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a1ab93f_hzhwW6"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -430,6 +461,7 @@
     "story",
     "1778508913ddb3cdc6",
     "17785206841101fe93",
-    "17807568002fe5afe8"
+    "17807568002fe5afe8",
+    "17817095999ba5643c"
   ]
 }
