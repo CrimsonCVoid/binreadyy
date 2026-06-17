@@ -103,8 +103,8 @@
         "q4"
       ],
       "settings": {
-        "rating": "4.9",
-        "count_label": "customer reviews"
+        "rating": "4.9 rating",
+        "count_label": "based on 56 customer reviews"
       }
     },
     "why-strip": {
