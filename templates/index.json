@@ -330,7 +330,7 @@
       ],
       "settings": {
         "heading": "Questions?",
-        "subheading": "Here are the short ones. Email us if you want the long ones at info@readyeddieshop.com."
+        "subheading": "Here are the short ones. Email us if you want the long ones at <a href=\"mailto:info@readyeddieshop.com\">info@readyeddieshop.com</a>."
       }
     },
     "final-buy": {
