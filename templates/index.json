@@ -13,7 +13,7 @@
       "type": "safety-banner",
       "settings": {
         "lead": "Tens of thousands of people fall each year while taking out their bins (National Safety Council / CDC).",
-        "body": "Ready Eddie helps avoid unnecessary trips."
+        "body": "Ready Eddie™ helps avoid unnecessary trips."
       }
     },
     "hero": {
@@ -24,9 +24,9 @@
         "video_label": "See how it works",
         "kicker": "A small, simple gadget. a big convenience.",
         "heading": "Know when your waste bin has been emptied",
-        "lede": "Flip Ready Eddie up on collection day. Gravity flips him down when they empty your bin. One glance from the house — done! No apps, no batteries, no wondering, no unnecessary trips.",
+        "lede": "Flip Ready Eddie™ up on collection day. Gravity flips him down when they empty your bin. One glance from the house — done! No apps, no batteries, no wondering, no unnecessary trips.",
         "gift_note": "Makes a great Father's Day gift for Dad!",
-        "safety_note": "Ready Eddie is a simple trash or recycling empty indicator.",
+        "safety_note": "Ready Eddie™ is a simple trash or recycling empty indicator.",
         "safety_note_2": "No more asking: Did the trash get picked up yet?",
         "show_ship_badge": true,
         "ship_badge_text": "Free shipping on all U.S. orders"
@@ -38,16 +38,16 @@
         "ai_gen_block_bb282ab_4ThNCz": {
           "type": "ai_gen_block_bb282ab",
           "settings": {
-            "heading": "Ready Eddie drops down when they empty your bin",
+            "heading": "Ready Eddie™ drops down when they empty your bin",
             "subheading": "No more wondering or trips down the driveway to check.",
             "heading_size": 28,
             "heading_color": "#1a1a17",
             "heading_alignment": "center",
             "heading_spacing": 10,
             "image_left": "shopify://shop_images/RE_Up_Bin_is_Full.jpg",
-            "caption_left": "<strong>Ready Eddie Up = Bin is Full</strong>",
+            "caption_left": "<strong>Ready Eddie™ Up = Bin is Full</strong>",
             "image_right": "shopify://shop_images/RE_Down_Bin_is_Empty.jpg",
-            "caption_right": "<strong>Ready Eddie Down = Bin is Empty</strong>",
+            "caption_right": "<strong>Ready Eddie™ Down = Bin is Empty</strong>",
             "caption_size": 18,
             "caption_color": "#1a1a17",
             "caption_alignment": "center",
@@ -170,7 +170,7 @@
         "s1": {
           "type": "step",
           "settings": {
-            "title": "Flip Ready Eddie up",
+            "title": "Flip Ready Eddie™ up",
             "description": "On collection day, flip Ready Eddie upright on your bin handle. Done."
           }
         },
@@ -178,14 +178,14 @@
           "type": "step",
           "settings": {
             "title": "The truck empties the bin",
-            "description": "Gravity does its thing and flips Eddie down."
+            "description": "Gravity does its thing and flips Eddie™ down."
           }
         },
         "s3": {
           "type": "step",
           "settings": {
             "title": "Glance from the house",
-            "description": "If Eddie is down, it's done. That's it."
+            "description": "If Eddie™ is down, it's done. That's it."
           }
         }
       },
@@ -311,7 +311,7 @@
           "type": "faq",
           "settings": {
             "question": "Does the garbage truck have to do anything different?",
-            "answer": "Nope. The natural motion of your bin being lifted and emptied flips Ready Eddie down on its own. The driver might not even notice, but Ready Eddie can also tell the driver that your bin needs emptying, reducing the likelihood that they miss your bin."
+            "answer": "Nope. The natural motion of your bin being lifted and emptied flips Ready Eddie™ down on its own. The driver might not even notice, but Ready Eddie™ can also tell the driver that your bin needs emptying, reducing the likelihood that they miss your bin."
           }
         },
         "q4": {
@@ -359,7 +359,7 @@
         "kicker": "Invented by one guy · in his garage · in North Carolina",
         "toggle_label": "Read our story",
         "heading": "Born on a muggy afternoon, at the end of a long driveway.",
-        "story_text": "<p>Ready Eddie was designed in a garage by <strong>Chris Krebs</strong> — a researcher<br/>who lives in North Carolina with his wife, his kids, and a handful of animals.<br/>Solving problems is his job. It's also a hobby.</p><p>One hot, muggy day, Chris walked to the end of his driveway to check the<br/>bin. Still full. That flicker of annoyance became an idea. He thought about his<br/>older neighbors, and people who have long driveways that snake through the<br/>woods. Surely other people would want to know if their bin is empty. He decided<br/>this was a problem worth solving.</p><p>Back in the garage, the first prototype was born — a Frankenstein's monster<br/>of scrap metal, screws, and wire. It was ugly enough to somehow be beautiful.<br/>When he tested it the next day, it worked perfectly.</p><p>Energized, Chris taught himself how to design things in computer-aided<br/>design (CAD) and started sending models to a friend with a 3D printer. The new<br/>models looked right but failed in practice — breaking, not fitting, falling<br/>off, working only half the time. The corner of Chris’s garage became a<br/>graveyard of unsuccessful attempts. Each failure taught him something, and after<br/>countless late nights and design overhauls, a version emerged that fit all bins<br/>and was simple, durable, and reliable. That's the Ready Eddie you see today.</p><p>Ready Eddie was born from a sweltering afternoon and the stubborn belief<br/>that there's almost always a better, simpler way.</p>"
+        "story_text": "<p>Ready Eddie™ was designed in a garage by <strong>Chris Krebs</strong> — a researcher<br/>who lives in North Carolina with his wife, his kids, and a handful of animals.<br/>Solving problems is his job. It's also a hobby.</p><p>One hot, muggy day, Chris walked to the end of his driveway to check the<br/>bin. Still full. That flicker of annoyance became an idea. He thought about his<br/>older neighbors, and people who have long driveways that snake through the<br/>woods. Surely other people would want to know if their bin is empty. He decided<br/>this was a problem worth solving.</p><p>Back in the garage, the first prototype was born — a Frankenstein's monster<br/>of scrap metal, screws, and wire. It was ugly enough to somehow be beautiful.<br/>When he tested it the next day, it worked perfectly.</p><p>Energized, Chris taught himself how to design things in computer-aided<br/>design (CAD) and started sending models to a friend with a 3D printer. The new<br/>models looked right but failed in the field. Back to the drawing board. After<br/>months of iteration, the design was finally ready. Chris sent it to a<br/>manufacturer in China, and the first batch of Ready Eddie™ units arrived in<br/>North Carolina in the spring of 2023.</p><p>Today, Ready Eddie™ sits on thousands of bins across the United States. Chris<br/>still reads every email. He still iterates on the design. And he still lives in<br/>North Carolina, in the same house, at the end of the same driveway.</p>"
       }
     },
     "1778508913ddb3cdc6": {
