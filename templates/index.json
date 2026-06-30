@@ -421,34 +421,6 @@
       ],
       "settings": {}
     },
-    "17828306158372870b": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_1127db5_atJLXd": {
-          "type": "ai_gen_block_1127db5",
-          "settings": {
-            "button_text": "Buy now",
-            "sold_out_text": "Sold out",
-            "button_color": "#f5612a",
-            "button_hover_color": "#d94f1e",
-            "button_text_color": "#faf8f2",
-            "button_hover_text_color": "#faf8f2",
-            "sold_out_bg_color": "#cccccc",
-            "sold_out_text_color": "#666666",
-            "font_size": 16,
-            "font_weight": "600",
-            "button_padding": 16,
-            "border_radius": 8,
-            "desktop_width_percent": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_1127db5_atJLXd"
-      ],
-      "settings": {}
-    },
     "1782832736d6f0f9d9": {
       "type": "_blocks",
       "blocks": {
@@ -494,7 +466,6 @@
     "17785206841101fe93",
     "17807568002fe5afe8",
     "17817095999ba5643c",
-    "17828306158372870b",
     "1782832736d6f0f9d9"
   ]
 }
