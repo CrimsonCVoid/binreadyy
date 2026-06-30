@@ -362,31 +362,6 @@
         "story_text": "<p>Ready Eddie™ was designed in a garage by <strong>Chris Krebs</strong> — a researcher<br/>who lives in North Carolina with his wife, his kids, and a handful of animals.<br/>Solving problems is his job. It's also a hobby.</p><p>One hot, muggy day, Chris walked to the end of his driveway to check the<br/>bin. Still full. That flicker of annoyance became an idea. He thought about his<br/>older neighbors, and people who have long driveways that snake through the<br/>woods. Surely other people would want to know if their bin is empty. He decided<br/>this was a problem worth solving.</p><p>Back in the garage, the first prototype was born — a Frankenstein's monster<br/>of scrap metal, screws, and wire. It was ugly enough to somehow be beautiful.<br/>When he tested it the next day, it worked perfectly.</p><p>Energized, Chris taught himself how to design things in computer-aided<br/>design (CAD) and started sending models to a friend with a 3D printer. The new models looked right but failed in the field. Back to the drawing board. After months of iteration, the design was finally ready. Chris sent it to a<br/>manufacturer in China, and the first batch of Ready Eddie™ units arrived in<br/>North Carolina in the spring of 2023.</p><p>Today, Ready Eddie™ sits on thousands of bins across the United States. Chris<br/>still reads every email. He still iterates on the design. And he still lives in<br/>North Carolina, in the same house, at the end of the same driveway.</p>"
       }
     },
-    "1778508913ddb3cdc6": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_84d46b3_AgxxzR": {
-          "type": "ai_gen_block_84d46b3",
-          "settings": {
-            "button_text": "Buy now",
-            "sold_out_text": "Sold out",
-            "button_color": "#f5612a",
-            "button_hover_color": "#d94f1e",
-            "button_text_color": "#ffffff",
-            "font_size": 16,
-            "font_weight": "600",
-            "button_padding": 16,
-            "border_radius": 8,
-            "desktop_width_percent": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_84d46b3_AgxxzR"
-      ],
-      "settings": {}
-    },
     "17785206841101fe93": {
       "type": "_blocks",
       "settings": {}
@@ -445,6 +420,63 @@
         "ai_gen_block_a1ab93f_hzhwW6"
       ],
       "settings": {}
+    },
+    "17828306158372870b": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_1127db5_atJLXd": {
+          "type": "ai_gen_block_1127db5",
+          "settings": {
+            "button_text": "Buy now",
+            "sold_out_text": "Sold out",
+            "button_color": "#f5612a",
+            "button_hover_color": "#d94f1e",
+            "button_text_color": "#faf8f2",
+            "button_hover_text_color": "#faf8f2",
+            "sold_out_bg_color": "#cccccc",
+            "sold_out_text_color": "#666666",
+            "font_size": 16,
+            "font_weight": "600",
+            "button_padding": 16,
+            "border_radius": 8,
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_1127db5_atJLXd"
+      ],
+      "settings": {}
+    },
+    "1782832736d6f0f9d9": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_cecd481_zyEyfV": {
+          "type": "ai_gen_block_cecd481",
+          "settings": {
+            "button_text": "Buy now",
+            "sold_out_text": "Sold out",
+            "button_color": "#F5612A",
+            "button_hover_color": "#D94F1E",
+            "button_text_color": "#FFFFFF",
+            "button_hover_text_color": "#FFFFFF",
+            "font_size": 16,
+            "font_weight": "600",
+            "button_padding": 14,
+            "border_radius": 8,
+            "desktop_width_percent": 100,
+            "sold_out_bg_color": "#CCCCCC",
+            "sold_out_text_color": "#666666",
+            "enable_dynamic_checkout": true
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_cecd481_zyEyfV"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -459,9 +491,10 @@
     "final-buy",
     "help",
     "story",
-    "1778508913ddb3cdc6",
     "17785206841101fe93",
     "17807568002fe5afe8",
-    "17817095999ba5643c"
+    "17817095999ba5643c",
+    "17828306158372870b",
+    "1782832736d6f0f9d9"
   ]
 }
