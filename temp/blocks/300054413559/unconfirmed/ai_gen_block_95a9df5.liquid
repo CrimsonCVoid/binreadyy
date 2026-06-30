@@ -1,6 +1,312 @@
+{% doc %}
+  @prompt
+    Modify the Add to Cart button so that when a customer clicks it, they are redirected directly to checkout instead of just adding to the cart. The store sells a single product and wants a direct add-to-cart-then-checkout flow. Either change the product form action from /cart/add to /checkout, or add JavaScript that submits the add-to-cart form and then redirects the customer to /checkout after the item is added., It is showing a section that starts with Liquid error and a lot of text
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-checkout-button-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+  }
+
+  .ai-checkout-button__form-{{ ai_gen_id }} {
+    width: 100%;
+  }
+
+  .ai-checkout-button__button-{{ ai_gen_id }} {
+    width: 100%;
+    padding: {{ block.settings.button_padding }}px;
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.border_radius }}px;
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: {{ block.settings.font_weight }};
+    text-transform: {{ block.settings.text_transform }};
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .ai-checkout-button__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+  }
+
+  .ai-checkout-button__button-{{ ai_gen_id }}:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .ai-checkout-button__spinner-{{ ai_gen_id }} {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid {{ block.settings.button_text_color }};
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: ai-checkout-button-spin-{{ ai_gen_id }} 0.6s linear infinite;
+  }
+
+  .ai-checkout-button__button-{{ ai_gen_id }}.loading .ai-checkout-button__spinner-{{ ai_gen_id }} {
+    display: block;
+  }
+
+  .ai-checkout-button__button-{{ ai_gen_id }}.loading .ai-checkout-button__text-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  @keyframes ai-checkout-button-spin-{{ ai_gen_id }} {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .ai-checkout-button__error-{{ ai_gen_id }} {
+    margin-top: 12px;
+    padding: 12px;
+    background-color: #FEE;
+    color: #D82C0D;
+    border-radius: 4px;
+    font-size: 14px;
+    display: none;
+  }
+
+  .ai-checkout-button__error-{{ ai_gen_id }}.visible {
+    display: block;
+  }
+{% endstyle %}
+
+<add-to-checkout-{{ ai_gen_id }}
+  class="ai-checkout-button-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  {% assign form_class = 'ai-checkout-button__form-' | append: ai_gen_id %}
+  {% form 'product', product, class: form_class %}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <input type="hidden" name="quantity" value="1">
+    
+    <button
+      type="submit"
+      name="add"
+      class="ai-checkout-button__button-{{ ai_gen_id }}"
+      {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+    >
+      <span class="ai-checkout-button__spinner-{{ ai_gen_id }}"></span>
+      <span class="ai-checkout-button__text-{{ ai_gen_id }}">
+        {% if product.selected_or_first_available_variant.available %}
+          {{ block.settings.button_text }}
+        {% else %}
+          {{ block.settings.sold_out_text }}
+        {% endif %}
+      </span>
+    </button>
+  {% endform %}
+  
+  <div class="ai-checkout-button__error-{{ ai_gen_id }}" role="alert"></div>
+</add-to-checkout-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class AddToCheckout{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.form = this.querySelector('.ai-checkout-button__form-{{ ai_gen_id }}');
+        this.button = this.querySelector('.ai-checkout-button__button-{{ ai_gen_id }}');
+        this.errorContainer = this.querySelector('.ai-checkout-button__error-{{ ai_gen_id }}');
+      }
+
+      connectedCallback() {
+        this.form.addEventListener('submit', this.handleSubmit.bind(this));
+      }
+
+      async handleSubmit(event) {
+        event.preventDefault();
+
+        if (this.button.disabled) return;
+
+        this.button.classList.add('loading');
+        this.button.disabled = true;
+        this.hideError();
+
+        const formData = new FormData(this.form);
+
+        try {
+          const response = await fetch('/cart/add.js', {
+            method: 'POST',
+            body: formData
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to add item to cart');
+          }
+
+          const data = await response.json();
+
+          window.location.href = '/checkout';
+        } catch (error) {
+          this.showError('{{ block.settings.error_message }}');
+          this.button.classList.remove('loading');
+          this.button.disabled = false;
+        }
+      }
+
+      showError(message) {
+        this.errorContainer.textContent = message;
+        this.errorContainer.classList.add('visible');
+      }
+
+      hideError() {
+        this.errorContainer.classList.remove('visible');
+      }
+    }
+
+    customElements.define('add-to-checkout-{{ ai_gen_id }}', AddToCheckout{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Buy now checkout button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Buy now"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_text",
+      "label": "Sold out text",
+      "default": "Sold out"
+    },
+    {
+      "type": "text",
+      "id": "error_message",
+      "label": "Error message",
+      "default": "Unable to add to cart. Please try again."
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Background color",
+      "default": "#F5612A"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Hover background color",
+      "default": "#D94F1E"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "button_padding",
+      "label": "Padding",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "select",
+      "id": "text_transform",
+      "label": "Text transform",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize"
+        }
+      ],
+      "default": "none"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Buy now checkout button"
+    }
+  ]
+}
 {% endschema %}
