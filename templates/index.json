@@ -23,13 +23,13 @@
         "demo_video": "",
         "video_label": "See how it works",
         "kicker": "A small, simple gadget. a big convenience.",
-        "heading": "Know when your waste bin has been emptied",
-        "lede": "Flip Ready Eddie™ up on collection day. Gravity flips him down when they empty your bin. One glance from the house — done! No apps, no batteries, no wondering, no unnecessary trips.",
+        "heading": "Stop Wondering or Walking Down Your Driveway to See if the Trash or Recycling Was Picked Up",
+        "lede": "Ready Eddie™ flips down automatically after pickup so you know from inside your home when your trash bin is empty. No apps, no batteries, no wondering, no unnecessary trips.",
         "gift_note": "Makes a great gift!",
-        "safety_note": "Ready Eddie™ is a simple trash or recycling empty indicator.",
-        "safety_note_2": "No more asking: Did the trash get picked up yet?",
+        "safety_note": "Perfect for older folks, busy families, long driveways, or hot or rainy days.",
+        "safety_note_2": "Installs in seconds and durable.",
         "show_ship_badge": true,
-        "ship_badge_text": "Free and fast shipping on all U.S. orders"
+        "ship_badge_text": "Free, fast, and secure shipping on all orders in the U.S."
       }
     },
     "1779462355e96b9d28": {
@@ -429,16 +429,16 @@
           "settings": {
             "button_text": "Buy now",
             "sold_out_text": "Sold out",
-            "button_color": "#F5612A",
-            "button_hover_color": "#D94F1E",
-            "button_text_color": "#FFFFFF",
-            "button_hover_text_color": "#FFFFFF",
+            "button_color": "#f5612a",
+            "button_hover_color": "#d94f1e",
+            "button_text_color": "#ffffff",
+            "button_hover_text_color": "#ffffff",
             "font_size": 16,
             "font_weight": "600",
             "button_padding": 14,
             "border_radius": 8,
             "desktop_width_percent": 100,
-            "sold_out_bg_color": "#CCCCCC",
+            "sold_out_bg_color": "#cccccc",
             "sold_out_text_color": "#666666",
             "enable_dynamic_checkout": true
           },
