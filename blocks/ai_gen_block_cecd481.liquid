@@ -2,18 +2,30 @@
   @prompt
     Fix the "sold out" display issue in the AI-generated Buy Now button block. The product has inventory in all variants but the button is showing as sold out. Create a Buy Now button block that correctly checks variant.available and product.available using Shopify Liquid to show the correct state - never hardcoded sold out.
 {% enddoc %}
+{%- comment -%}
+  Rewritten 2026-07: the AI-generated version rendered a dead <button> on the
+  homepage (no `product` in scope, and its script targeted Dawn elements this
+  theme doesn't have). Now a native flow with zero JS:
+    - cart already has items  -> plain link to /checkout
+    - cart empty              -> POST /cart/add with return_to=/checkout
+  Product resolution: block setting -> page product -> theme LCP handle.
+{%- endcomment -%}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{%- assign buy_product = all_products[block.settings.product] -%}
+{%- if buy_product == blank and product != blank -%}
+  {%- assign buy_product = product -%}
+{%- endif -%}
+{%- if buy_product == blank -%}
+  {%- assign buy_product = all_products[settings.lcp_product_handle] -%}
+{%- endif -%}
+{%- assign current_variant = buy_product.selected_or_first_available_variant -%}
 
 {% style %}
   .ai-buy-now-button-{{ ai_gen_id }} {
     display: block;
     width: {{ block.settings.desktop_width_percent }}%;
     max-width: 100%;
-  }
-
-  .ai-buy-now-button__wrapper-{{ ai_gen_id }} {
-    position: relative;
-    width: 100%;
   }
 
   .ai-buy-now-button__btn-{{ ai_gen_id }} {
@@ -25,11 +37,13 @@
     border-radius: {{ block.settings.border_radius }}px;
     font-size: {{ block.settings.font_size }}px;
     font-weight: {{ block.settings.font_weight }};
+    font-family: inherit;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
+    box-sizing: border-box;
   }
 
   .ai-buy-now-button__btn-{{ ai_gen_id }}:hover {
@@ -50,134 +64,42 @@
   }
 {% endstyle %}
 
-<div
-  class="ai-buy-now-button-{{ ai_gen_id }}"
-  {{ block.shopify_attributes }}
->
-  <div class="ai-buy-now-button__wrapper-{{ ai_gen_id }}">
-    {% if product %}
-      {% liquid
-        assign current_variant = product.selected_or_first_available_variant
-        assign is_available = false
-        
-        if current_variant.available
-          assign is_available = true
-        endif
-      %}
-
-      {% if is_available %}
-        <button
-          type="submit"
-          name="add"
-          class="ai-buy-now-button__btn-{{ ai_gen_id }}"
-          {% if block.settings.enable_dynamic_checkout %}
-            form="product-form-{{ product.id }}"
-          {% endif %}
-        >
-          {{ block.settings.button_text }}
-        </button>
-      {% else %}
-        <button
-          type="button"
-          class="ai-buy-now-button__btn-{{ ai_gen_id }} ai-buy-now-button__btn-{{ ai_gen_id }}--sold-out"
-          disabled
-        >
-          {{ block.settings.sold_out_text }}
-        </button>
-      {% endif %}
-    {% else %}
-      <button
-        type="button"
-        class="ai-buy-now-button__btn-{{ ai_gen_id }}"
-      >
+<div class="ai-buy-now-button-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {%- if cart.item_count > 0 -%}
+    <a href="/checkout" class="ai-buy-now-button__btn-{{ ai_gen_id }}">
+      {{ block.settings.button_text }}
+    </a>
+  {%- elsif current_variant and current_variant.available -%}
+    <form action="/cart/add" method="post">
+      <input type="hidden" name="id" value="{{ current_variant.id }}" />
+      <input type="hidden" name="quantity" value="1" />
+      <input type="hidden" name="return_to" value="/checkout" />
+      <button type="submit" class="ai-buy-now-button__btn-{{ ai_gen_id }}">
         {{ block.settings.button_text }}
       </button>
-    {% endif %}
-  </div>
+    </form>
+  {%- else -%}
+    <button
+      type="button"
+      class="ai-buy-now-button__btn-{{ ai_gen_id }} ai-buy-now-button__btn-{{ ai_gen_id }}--sold-out"
+      disabled
+    >
+      {{ block.settings.sold_out_text }}
+    </button>
+  {%- endif -%}
 </div>
-
-<script>
-  (function() {
-    class BuyNowButton{{ ai_gen_id }} extends HTMLElement {
-      constructor() {
-        super();
-        this.button = this.querySelector('.ai-buy-now-button__btn-{{ ai_gen_id }}');
-      }
-
-      connectedCallback() {
-        if (!this.button) return;
-
-        const productForm = document.querySelector('product-form');
-        if (!productForm) return;
-
-        const variantPicker = productForm.querySelector('variant-selects, variant-radios');
-        if (!variantPicker) return;
-
-        variantPicker.addEventListener('change', () => {
-          this.updateButton();
-        });
-
-        this.updateButton();
-      }
-
-      updateButton() {
-        const productForm = document.querySelector('product-form');
-        if (!productForm) return;
-
-        const variantInput = productForm.querySelector('[name="id"]');
-        if (!variantInput) return;
-
-        const variantId = variantInput.value;
-        const productData = this.getProductData();
-        
-        if (!productData || !productData.variants) return;
-
-        const selectedVariant = productData.variants.find(v => v.id == variantId);
-        
-        if (!selectedVariant) return;
-
-        const isAvailable = selectedVariant.available;
-        const buttonText = '{{ block.settings.button_text }}';
-        const soldOutText = '{{ block.settings.sold_out_text }}';
-
-        if (isAvailable) {
-          this.button.textContent = buttonText;
-          this.button.disabled = false;
-          this.button.classList.remove('ai-buy-now-button__btn-{{ ai_gen_id }}--sold-out');
-          this.button.type = 'submit';
-        } else {
-          this.button.textContent = soldOutText;
-          this.button.disabled = true;
-          this.button.classList.add('ai-buy-now-button__btn-{{ ai_gen_id }}--sold-out');
-          this.button.type = 'button';
-        }
-      }
-
-      getProductData() {
-        const productJson = document.querySelector('[data-product-json]');
-        if (!productJson) return null;
-        
-        try {
-          return JSON.parse(productJson.textContent);
-        } catch (e) {
-          const scriptTag = document.querySelector('script[type="application/json"][data-product-json]');
-          if (scriptTag) {
-            return JSON.parse(scriptTag.textContent);
-          }
-          return null;
-        }
-      }
-    }
-
-    customElements.define('buy-now-button-{{ ai_gen_id }}', BuyNowButton{{ ai_gen_id }});
-  })();
-</script>
 
 {% schema %}
 {
   "name": "Buy now button",
   "tag": null,
   "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "Optional. Falls back to the page's product, then the theme's LCP product handle."
+    },
     {
       "type": "header",
       "content": "Button text"
@@ -303,14 +225,10 @@
       "default": "#666666"
     },
     {
-      "type": "header",
-      "content": "Functionality"
-    },
-    {
       "type": "checkbox",
       "id": "enable_dynamic_checkout",
       "label": "Enable dynamic checkout",
-      "info": "Links button to product form for add to cart",
+      "info": "Legacy setting, no longer used.",
       "default": true
     }
   ],
