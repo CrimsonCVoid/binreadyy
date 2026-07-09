@@ -12,10 +12,14 @@
     "main": {
       "type": "hero",
       "settings": {
-        "product": "ready-eddie",
+        "product": "ready-eddie-1",
         "kicker": "Page not found",
         "heading": "This page doesn't exist.",
-        "lede": "Maybe the truck already emptied it. Head back to the homepage and take another look."
+        "lede": "Maybe the truck already emptied it. Head back to the homepage and take another look.",
+        "gift_note": "",
+        "safety_note": "",
+        "safety_note_2": "",
+        "show_ship_badge": false
       }
     }
   },
