@@ -1,0 +1,113 @@
+{%- comment -%}
+  About Us page (templates/page.about-us.json). Copy supplied by Chris (Jul 2026).
+  The founder photo can be swapped in the theme editor; it falls back to the
+  bundled HeadshotChris.jpg asset so the card never renders empty.
+{%- endcomment -%}
+<section class="about-page">
+  <div class="container">
+    <header class="about-head">
+      <span class="kicker">{{ section.settings.kicker }}</span>
+      <h1>{{ section.settings.heading }}</h1>
+    </header>
+
+    <div class="about-body">
+      <h2>Why Ready Eddie&trade;?</h2>
+      <p>We love solving everyday problems with simple ideas. Ready Eddie&trade; was created to solve a simple but surprisingly common problem:</p>
+      <blockquote class="about-quote">How do you know when your trash has been picked up without walking down the driveway to check?</blockquote>
+      <p>Like many homeowners, we found ourselves making unnecessary trips to the street just to see whether the garbage truck had already come. We wanted a simple, reliable solution that didn&rsquo;t require batteries, Wi-Fi, apps, or an engineering degree.</p>
+      <p>That idea became Ready Eddie&trade; &mdash; an easy-to-install visual indicator that lets you know when your trash or recycling bin has been emptied.</p>
+
+      <h2>Designed for Real Life</h2>
+      <p>Ready Eddie&trade; is especially helpful for:</p>
+      <ul class="about-list">
+        <li>Homeowners with long driveways</li>
+        <li>Seniors who want fewer unnecessary trips outside</li>
+        <li>Busy families</li>
+        <li>Anyone who might enjoy knowing when their trash or recycling bin has been emptied &mdash; sometimes the simplest ideas make everyday life just a little easier.</li>
+      </ul>
+
+      <h2>Built to Last</h2>
+      <p>Ready Eddie&trade; is designed to withstand outdoor conditions and provide years of dependable use with no batteries, electronics, or maintenance required.</p>
+      <p>Our goal is to create practical products that solve everyday problems through simple, thoughtful design.</p>
+
+      <h2>About Ready Eddie&trade; Shop</h2>
+      <p>Bin Ready, LLC is the company behind the Ready Eddie&trade; brand and operates ReadyEddieShop.com.</p>
+      <p>We are a U.S.-based, family-owned small business focused on designing practical products that improve everyday life.</p>
+      <p>Ready Eddie&trade; products are manufactured in the U.S. to ensure consistent quality and durability.</p>
+
+      <h2>Our Commitment</h2>
+      <p>We appreciate every customer who chooses to support our small, family-owned business, and we are committed to providing:</p>
+      <ul class="about-list">
+        <li>Quality products</li>
+        <li>Fast, friendly customer service</li>
+        <li>Secure online ordering</li>
+        <li>Fast, free shipping within the United States</li>
+        <li>A satisfaction guarantee</li>
+      </ul>
+      <p>Thank you for visiting Ready Eddie Shop and supporting our mission.</p>
+
+      <aside class="about-founder">
+        {%- if section.settings.founder_photo -%}
+          <img
+            class="about-founder-photo"
+            src="{{ section.settings.founder_photo | image_url: width: 480 }}"
+            alt="Chris, the inventor of Ready Eddie"
+            width="{{ section.settings.founder_photo.width }}"
+            height="{{ section.settings.founder_photo.height }}"
+            loading="lazy"
+          />
+        {%- else -%}
+          <img
+            class="about-founder-photo"
+            src="{{ 'HeadshotChris.jpg' | asset_url }}"
+            alt="Chris, the inventor of Ready Eddie"
+            width="472"
+            height="1024"
+            loading="lazy"
+          />
+        {%- endif -%}
+        <div class="about-founder-text">
+          <p>{{ section.settings.founder_note }}</p>
+          <p class="about-founder-sig">&mdash;&nbsp;&nbsp;<strong>{{ settings.founder_name | default: 'Chris Krebs' }}</strong>&nbsp;&nbsp;{{ settings.founder_role | default: 'Maker, Ready Eddie' }}</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker (small text above heading)",
+      "default": "A family-owned U.S. small business"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page heading",
+      "default": "About Us"
+    },
+    {
+      "type": "image_picker",
+      "id": "founder_photo",
+      "label": "Founder photo",
+      "info": "Defaults to the bundled headshot if left empty."
+    },
+    {
+      "type": "textarea",
+      "id": "founder_note",
+      "label": "Founder note (next to the photo)",
+      "default": "Hi, I'm Chris, the inventor of Ready Eddie™. Thanks for visiting our store and supporting a U.S. small business."
+    }
+  ],
+  "presets": [
+    {
+      "name": "About us"
+    }
+  ]
+}
+{% endschema %}
