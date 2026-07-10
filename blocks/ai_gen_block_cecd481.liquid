@@ -16,8 +16,11 @@
 {%- if buy_product == blank and product != blank -%}
   {%- assign buy_product = product -%}
 {%- endif -%}
-{%- if buy_product == blank -%}
+{%- if buy_product == blank and settings.lcp_product_handle != blank -%}
   {%- assign buy_product = all_products[settings.lcp_product_handle] -%}
+{%- endif -%}
+{%- if buy_product == blank -%}
+  {%- assign buy_product = collections.all.products.first -%}
 {%- endif -%}
 {%- assign current_variant = buy_product.selected_or_first_available_variant -%}
 
