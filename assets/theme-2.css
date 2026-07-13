@@ -985,13 +985,25 @@
 
     /* Mobile hero */
     @media (max-width: 820px) {
-      .hero { padding: 36px 0 56px; }
+      .hero { padding: 28px 0 56px; }
       .hero-grid {
         grid-template-columns: 1fr;
-        gap: 36px;
+        gap: 32px;
       }
-      .product-frame { max-width: 380px; }
+      /* Keep the stage compact: chip + demo pill + photo must not fill the
+         whole first viewport, so cap the photo and shrink the pill. */
+      .product-stage { gap: 12px; }
+      .product-frame { max-width: 320px; }
+      .video-trigger {
+        padding: 7px 14px 7px 8px;
+        font-size: 0.875rem;
+        gap: 8px;
+      }
+      .video-trigger-ring { width: 32px; height: 32px; }
       .buy-panel { max-width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .product-frame { max-width: 290px; }
     }
 
     /* ───────── How it works ───────── */
