@@ -390,7 +390,8 @@
       });
       var subtotal = cartRoot.querySelector('[data-cart-subtotal]');
       if (subtotal) subtotal.textContent = fmtMoney(cart.items_subtotal_price);
-      var count = cartRoot.querySelector('[data-cart-count]');
+      /* the count element lives in .cart-head, outside the form/cartRoot */
+      var count = document.querySelector('[data-cart-count]');
       if (count) count.textContent = cart.item_count + (cart.item_count === 1 ? ' item' : ' items');
       var checkoutPrice = cartRoot.querySelector('.cart-actions .buy-price');
       if (checkoutPrice) checkoutPrice.textContent = fmtMoney(cart.total_price);
