@@ -765,7 +765,10 @@
     .cart-line-placeholder {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      /* contain, not cover: the 2/3-pack variant photos are landscape with
+         the product at the edges — a center crop shows empty background */
+      object-fit: contain;
+      background: #FFFFFF;
     }
     .cart-line-placeholder { background: var(--bg-deep); }
     .cart-line-body { display: flex; flex-direction: column; gap: 10px; min-width: 0; }

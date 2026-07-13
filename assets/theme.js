@@ -344,13 +344,16 @@
       el.hidden = !msg;
     }
 
-    function updateLine(line, quantity) {
+    /* Update by line-item key, not positional line number — positions go
+       stale as soon as a row is removed and Shopify then rejects the call
+       with "line parameter is invalid". Keys are stable. */
+    function updateLine(key, quantity) {
       setBusy(true);
       showError('');
       return fetch('/cart/change.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ line: line, quantity: quantity })
+        body: JSON.stringify({ id: key, quantity: quantity })
       })
         .then(function (res) {
           return res.json().then(function (data) {
@@ -389,6 +392,8 @@
       if (subtotal) subtotal.textContent = fmtMoney(cart.items_subtotal_price);
       var count = cartRoot.querySelector('[data-cart-count]');
       if (count) count.textContent = cart.item_count + (cart.item_count === 1 ? ' item' : ' items');
+      var checkoutPrice = cartRoot.querySelector('.cart-actions .buy-price');
+      if (checkoutPrice) checkoutPrice.textContent = fmtMoney(cart.total_price);
     }
 
     cartRoot.addEventListener('click', function (ev) {
@@ -397,12 +402,12 @@
       ev.preventDefault();
       var row = btn.closest('[data-line-row]');
       if (!row) return;
-      var line = parseInt(row.getAttribute('data-line-index'), 10);
+      var key = row.getAttribute('data-line-key');
       var current = parseInt(row.querySelector('[data-line-qty-value]').textContent, 10) || 0;
       var action = btn.getAttribute('data-line-action');
-      if (action === 'inc') updateLine(line, current + 1);
-      else if (action === 'dec') updateLine(line, Math.max(0, current - 1));
-      else if (action === 'remove') updateLine(line, 0);
+      if (action === 'inc') updateLine(key, current + 1);
+      else if (action === 'dec') updateLine(key, Math.max(0, current - 1));
+      else if (action === 'remove') updateLine(key, 0);
     });
 
     cartRoot.addEventListener('change', function (ev) {
@@ -410,9 +415,9 @@
       if (!input) return;
       var row = input.closest('[data-line-row]');
       if (!row) return;
-      var line = parseInt(row.getAttribute('data-line-index'), 10);
+      var key = row.getAttribute('data-line-key');
       var n = Math.max(0, parseInt(input.value, 10) || 0);
-      updateLine(line, n);
+      updateLine(key, n);
     });
 
     var noteForm = cartRoot.querySelector('[data-cart-note-form]');
