@@ -995,6 +995,8 @@
       .product-stage { gap: 12px; }
       .product-frame { max-width: 320px; }
       .video-trigger {
+        /* below the photo on mobile (desktop keeps it above) */
+        order: 1;
         padding: 7px 14px 7px 8px;
         font-size: 0.875rem;
         gap: 8px;
