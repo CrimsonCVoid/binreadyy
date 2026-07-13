@@ -54,7 +54,7 @@
     {%- endif -%}
   {%- endif -%}
 
-  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ 'theme-2.css' | asset_url | stylesheet_tag }}
 
   {{ content_for_header }}
 
@@ -80,6 +80,6 @@
 
   {% section 'footer' %}
 
-  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  <script src="{{ 'theme-2.js' | asset_url }}" defer></script>
 </body>
 </html>
