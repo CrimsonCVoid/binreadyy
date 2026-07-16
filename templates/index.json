@@ -362,10 +362,6 @@
         "story_text": "<p>Ready Eddie™ was designed in a garage by <strong>Chris Krebs</strong> — a researcher<br/>who lives in North Carolina with his wife, his kids, and a handful of animals.<br/>Solving problems is his job. It's also a hobby.</p><p>One hot, muggy day, Chris walked to the end of his driveway to check the<br/>bin. Still full. That flicker of annoyance became an idea. He thought about his<br/>older neighbors, and people who have long driveways that snake through the<br/>woods. Surely other people would want to know if their bin is empty. He decided<br/>this was a problem worth solving.</p><p>Back in the garage, the first prototype was born — a Frankenstein's monster<br/>of scrap metal, screws, and wire. It was ugly enough to somehow be beautiful.<br/>When he tested it the next day, it worked perfectly.</p><p>Energized, Chris taught himself how to design things in computer-aided<br/>design (CAD) and started sending models to a friend with a 3D printer. The new models looked right but failed in the field. Back to the drawing board. After months of iteration, the design was finally ready. Chris sent it to a<br/>manufacturer in China, and the first batch of Ready Eddie™ units arrived in<br/>North Carolina in the spring of 2023.</p><p>Today, Ready Eddie™ sits on thousands of bins across the United States. Chris<br/>still reads every email. He still iterates on the design. And he still lives in<br/>North Carolina, in the same house, at the end of the same driveway.</p>"
       }
     },
-    "17785206841101fe93": {
-      "type": "_blocks",
-      "settings": {}
-    },
     "17807568002fe5afe8": {
       "type": "_blocks",
       "blocks": {
@@ -463,7 +459,6 @@
     "final-buy",
     "help",
     "story",
-    "17785206841101fe93",
     "17807568002fe5afe8",
     "17817095999ba5643c",
     "1782832736d6f0f9d9"

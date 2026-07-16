@@ -16,9 +16,7 @@
         "empty_heading": "Your cart is empty",
         "empty_subheading": "Pick up a Ready Eddie below.",
         "empty_cta_label": "Back to Ready Eddie",
-        "empty_cta_link": "/",
-        "show_note": true,
-        "note_label": "Add a note (delivery instructions, gift, etc.)"
+        "empty_cta_link": "/"
       }
     }
   },

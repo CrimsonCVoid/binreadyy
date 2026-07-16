@@ -420,24 +420,6 @@
       var n = Math.max(0, parseInt(input.value, 10) || 0);
       updateLine(key, n);
     });
-
-    var noteForm = cartRoot.querySelector('[data-cart-note-form]');
-    if (noteForm) {
-      var noteField = noteForm.querySelector('textarea[name="note"]');
-      var saveTimer;
-      if (noteField) {
-        noteField.addEventListener('input', function () {
-          clearTimeout(saveTimer);
-          saveTimer = setTimeout(function () {
-            fetch('/cart/update.js', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              body: JSON.stringify({ note: noteField.value })
-            }).catch(function () { /* silent */ });
-          }, 600);
-        });
-      }
-    }
   }
 
   /* ─── Hero bin SVG animation ─── */

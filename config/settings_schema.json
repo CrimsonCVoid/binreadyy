@@ -6,6 +6,90 @@
     "theme_author": "Ready Eddie Shop"
   },
   {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo",
+        "info": "Shown in the header and footer. Falls back to the bundled logo asset when empty."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Falls back to the bundled WebsiteLogo asset when empty."
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent color",
+        "default": "#F5612A",
+        "info": "Used for inline SVG accents (e.g. reassurance checkmarks). Must match the --accent token in theme-2.css — the stylesheet is the source of truth for site-wide colors."
+      },
+      {
+        "type": "color",
+        "id": "accent_color_deep",
+        "label": "Accent color (deep)",
+        "default": "#D94F1E",
+        "info": "Keep in sync with --accent-deep in theme-2.css."
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#FAF8F2",
+        "info": "Sets the browser theme-color meta tag. Keep in sync with --bg in theme-2.css."
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#1A1A17",
+        "info": "Keep in sync with --ink in theme-2.css."
+      }
+    ]
+  },
+  {
+    "name": "Buy panel & story copy",
+    "settings": [
+      {
+        "type": "text",
+        "id": "founder_name",
+        "label": "Founder name",
+        "default": "Chris Krebs",
+        "info": "Signature on the story and about sections."
+      },
+      {
+        "type": "text",
+        "id": "founder_role",
+        "label": "Founder role",
+        "default": "Maker, Ready Eddie"
+      },
+      {
+        "type": "text",
+        "id": "shipping_line",
+        "label": "Shipping line",
+        "default": "Ships in 2 business days",
+        "info": "First reassurance line under the buy button."
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_note",
+        "label": "Free shipping note",
+        "default": "Free shipping on all U.S. orders",
+        "info": "Second reassurance line; also the fallback for the hero ship badge."
+      },
+      {
+        "type": "text",
+        "id": "returns_line",
+        "label": "Returns line",
+        "default": "Love it or return it within 30 days",
+        "info": "Third reassurance line under the buy button."
+      }
+    ]
+  },
+  {
     "name": "SEO & Verification",
     "settings": [
       {
