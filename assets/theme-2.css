@@ -310,12 +310,12 @@
     .hero .container { position: relative; }
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
       gap: 56px;
       align-items: center;
     }
 
-    /* ───────── Product stage (left) ───────── */
+    /* ───────── Product stage (right) ───────── */
     .product-stage {
       position: relative;
       display: flex;
@@ -512,7 +512,7 @@
     .product-frame .mark-bl { bottom: 14px; left: 16px; }
     .product-frame .mark-br { bottom: 14px; right: 16px; }
 
-    /* ───────── Buy panel (right) ───────── */
+    /* ───────── Buy panel (left) ───────── */
     .buy-panel {
       display: flex;
       flex-direction: column;
@@ -2193,16 +2193,3 @@
     @media (max-width: 560px) {
       .about-founder { flex-direction: column; align-items: flex-start; }
     }
-
-    /* Stale-page-cache compatibility: old cached HTML nests the demo button
-       inside the photo frame. Pin it to the bottom of the photo, centered.
-       Fresh markup renders the button as a sibling, so this never matches. */
-    .product-frame .video-trigger {
-      position: absolute;
-      left: 50%;
-      bottom: 14px;
-      top: auto;
-      transform: translateX(-50%);
-      z-index: 3;
-    }
-    .product-frame .video-trigger:hover { transform: translateX(-50%) scale(1.04); }
